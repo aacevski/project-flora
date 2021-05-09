@@ -34,9 +34,9 @@ namespace FloraWarehouseManagement.Forms
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbConfirmPassword = new System.Windows.Forms.TextBox();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.tbUsername = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,9 +51,9 @@ namespace FloraWarehouseManagement.Forms
             // gbRegister
             // 
             this.gbRegister.Controls.Add(this.pnlButtons);
-            this.gbRegister.Controls.Add(this.textBox3);
-            this.gbRegister.Controls.Add(this.textBox2);
-            this.gbRegister.Controls.Add(this.textBox1);
+            this.gbRegister.Controls.Add(this.tbConfirmPassword);
+            this.gbRegister.Controls.Add(this.tbPassword);
+            this.gbRegister.Controls.Add(this.tbUsername);
             this.gbRegister.Controls.Add(this.label3);
             this.gbRegister.Controls.Add(this.label2);
             this.gbRegister.Controls.Add(this.label1);
@@ -100,26 +100,26 @@ namespace FloraWarehouseManagement.Forms
             this.btnRegister.UseVisualStyleBackColor = false;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
-            // textBox3
+            // tbConfirmPassword
             // 
-            this.textBox3.Location = new System.Drawing.Point(179, 124);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(186, 26);
-            this.textBox3.TabIndex = 5;
+            this.tbConfirmPassword.Location = new System.Drawing.Point(179, 124);
+            this.tbConfirmPassword.Name = "tbConfirmPassword";
+            this.tbConfirmPassword.Size = new System.Drawing.Size(186, 26);
+            this.tbConfirmPassword.TabIndex = 5;
             // 
-            // textBox2
+            // tbPassword
             // 
-            this.textBox2.Location = new System.Drawing.Point(179, 92);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(186, 26);
-            this.textBox2.TabIndex = 4;
+            this.tbPassword.Location = new System.Drawing.Point(179, 92);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(186, 26);
+            this.tbPassword.TabIndex = 4;
             // 
-            // textBox1
+            // tbUsername
             // 
-            this.textBox1.Location = new System.Drawing.Point(179, 60);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(186, 26);
-            this.textBox1.TabIndex = 3;
+            this.tbUsername.Location = new System.Drawing.Point(179, 60);
+            this.tbUsername.Name = "tbUsername";
+            this.tbUsername.Size = new System.Drawing.Size(186, 26);
+            this.tbUsername.TabIndex = 3;
             // 
             // label3
             // 
@@ -200,12 +200,12 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.Panel pnlLogo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbUsername;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnRegister;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbConfirmPassword;
+        private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Panel pnlButtons;
     }
