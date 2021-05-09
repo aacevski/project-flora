@@ -33,13 +33,13 @@ namespace FloraWarehouseManagement
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlLogo = new System.Windows.Forms.Panel();
             this.gbLogin = new System.Windows.Forms.GroupBox();
+            this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.tbUsername = new System.Windows.Forms.TextBox();
-            this.pnlButtons = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlLogo.SuspendLayout();
             this.gbLogin.SuspendLayout();
@@ -78,6 +78,15 @@ namespace FloraWarehouseManagement
             this.gbLogin.TabIndex = 2;
             this.gbLogin.TabStop = false;
             this.gbLogin.Text = "Најава";
+            // 
+            // pnlButtons
+            // 
+            this.pnlButtons.Controls.Add(this.btnLogin);
+            this.pnlButtons.Controls.Add(this.btnRegister);
+            this.pnlButtons.Location = new System.Drawing.Point(24, 151);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(317, 58);
+            this.pnlButtons.TabIndex = 6;
             // 
             // btnLogin
             // 
@@ -142,15 +151,6 @@ namespace FloraWarehouseManagement
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(161, 26);
             this.tbUsername.TabIndex = 0;
-            // 
-            // pnlButtons
-            // 
-            this.pnlButtons.Controls.Add(this.btnLogin);
-            this.pnlButtons.Controls.Add(this.btnRegister);
-            this.pnlButtons.Location = new System.Drawing.Point(24, 151);
-            this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(317, 58);
-            this.pnlButtons.TabIndex = 6;
             // 
             // LoginForm
             // 

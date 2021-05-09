@@ -31,6 +31,7 @@ namespace FloraWarehouseManagement.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegisterForm));
             this.gbRegister = new System.Windows.Forms.GroupBox();
+            this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -41,11 +42,10 @@ namespace FloraWarehouseManagement.Forms
             this.label1 = new System.Windows.Forms.Label();
             this.pnlLogo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pnlButtons = new System.Windows.Forms.Panel();
             this.gbRegister.SuspendLayout();
+            this.pnlButtons.SuspendLayout();
             this.pnlLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.pnlButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbRegister
@@ -64,6 +64,15 @@ namespace FloraWarehouseManagement.Forms
             this.gbRegister.TabIndex = 0;
             this.gbRegister.TabStop = false;
             this.gbRegister.Text = "Регистрација на нов корисник";
+            // 
+            // pnlButtons
+            // 
+            this.pnlButtons.Controls.Add(this.btnCancel);
+            this.pnlButtons.Controls.Add(this.btnRegister);
+            this.pnlButtons.Location = new System.Drawing.Point(30, 218);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(313, 83);
+            this.pnlButtons.TabIndex = 8;
             // 
             // btnCancel
             // 
@@ -159,15 +168,6 @@ namespace FloraWarehouseManagement.Forms
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // pnlButtons
-            // 
-            this.pnlButtons.Controls.Add(this.btnCancel);
-            this.pnlButtons.Controls.Add(this.btnRegister);
-            this.pnlButtons.Location = new System.Drawing.Point(30, 218);
-            this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(313, 83);
-            this.pnlButtons.TabIndex = 8;
-            // 
             // RegisterForm
             // 
             this.AcceptButton = this.btnRegister;
@@ -177,6 +177,7 @@ namespace FloraWarehouseManagement.Forms
             this.ClientSize = new System.Drawing.Size(408, 522);
             this.Controls.Add(this.pnlLogo);
             this.Controls.Add(this.gbRegister);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(424, 561);
             this.Name = "RegisterForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -185,9 +186,9 @@ namespace FloraWarehouseManagement.Forms
             this.SizeChanged += new System.EventHandler(this.RegisterForm_SizeChanged);
             this.gbRegister.ResumeLayout(false);
             this.gbRegister.PerformLayout();
+            this.pnlButtons.ResumeLayout(false);
             this.pnlLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.pnlButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
