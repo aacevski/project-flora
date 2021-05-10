@@ -86,6 +86,7 @@ namespace FloraWarehouseManagement.Forms
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Откажи";
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnRegister
             // 

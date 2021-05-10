@@ -68,7 +68,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Utilities\AddUserSingleton.cs" />
     <Compile Include="Classes\Utilities\CenterControlSingleton.cs" />
+    <Compile Include="Classes\Utilities\CheckUserExistsSingleton.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -33,16 +33,28 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory);
-            SQLiteConnection connection = new SQLiteConnection(@"data source=" + AppDomain.CurrentDomain.BaseDirectory + @"Database\db.db");
-            connection.Open();
-            string query = "INSERT INTO User(Username, Password) VALUES(@Username, @Password)";
-            SQLiteCommand command = new SQLiteCommand(query, connection);
-            command.Parameters.AddWithValue("Username", tbUsername.Text);
-            command.Parameters.AddWithValue("Password", tbPassword.Text);
-            DataTable userTable = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-            adapter.Fill(userTable);
+            int userExists = CheckUserExistsSingleton.Instance.UserExists(tbUsername.Text);
+
+            if(userExists < 1)
+            {
+                try
+                {
+                    AddUserSingleton.Instance.AddUser(tbUsername.Text, tbPassword.Text);
+                }
+                finally
+                {
+                    MessageBox.Show("Регистрацијата е успешна!", "Регистрација", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            } else
+            {
+                MessageBox.Show("Тоа корисничко име веќе постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
