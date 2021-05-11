@@ -33,7 +33,7 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            int userExists = CheckUserExistsSingleton.Instance.UserExists(tbUsername.Text);
+            int userExists = CheckCredentialsSingleton.Instance.CheckUsername(tbUsername.Text);
 
             if(userExists < 1)
             {
@@ -43,7 +43,20 @@ namespace FloraWarehouseManagement.Forms
                 }
                 finally
                 {
-                    MessageBox.Show("Регистрацијата е успешна!", "Регистрација", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if 
+                    (
+                        MessageBox.Show
+                        (
+                            "Регистрацијата е успешна!",
+                            "Регистрација",
+                             MessageBoxButtons.OK,
+                             MessageBoxIcon.Information
+                        )
+                        == DialogResult.OK
+                    )
+                    {
+                        this.Close();
+                    }
                 }
 
             } else

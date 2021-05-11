@@ -29,6 +29,7 @@ namespace FloraWarehouseManagement
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlLogo = new System.Windows.Forms.Panel();
@@ -40,10 +41,14 @@ namespace FloraWarehouseManagement
             this.label1 = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.tbUsername = new System.Windows.Forms.TextBox();
+            this.errProviderUsername = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errProviderPassword = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlLogo.SuspendLayout();
             this.gbLogin.SuspendLayout();
             this.pnlButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderUsername)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderPassword)).BeginInit();
             this.SuspendLayout();
             // 
             // pbLogo
@@ -143,6 +148,7 @@ namespace FloraWarehouseManagement
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(161, 26);
             this.tbPassword.TabIndex = 1;
+            this.tbPassword.TextChanged += new System.EventHandler(this.tbPassword_TextChanged);
             // 
             // tbUsername
             // 
@@ -151,6 +157,15 @@ namespace FloraWarehouseManagement
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(161, 26);
             this.tbUsername.TabIndex = 0;
+            this.tbUsername.TextChanged += new System.EventHandler(this.tbUsername_TextChanged);
+            // 
+            // errProviderUsername
+            // 
+            this.errProviderUsername.ContainerControl = this;
+            // 
+            // errProviderPassword
+            // 
+            this.errProviderPassword.ContainerControl = this;
             // 
             // LoginForm
             // 
@@ -175,6 +190,8 @@ namespace FloraWarehouseManagement
             this.gbLogin.ResumeLayout(false);
             this.gbLogin.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderUsername)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderPassword)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -191,6 +208,8 @@ namespace FloraWarehouseManagement
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlButtons;
+        private System.Windows.Forms.ErrorProvider errProviderUsername;
+        private System.Windows.Forms.ErrorProvider errProviderPassword;
     }
 }
 

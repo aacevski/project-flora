@@ -60,13 +60,72 @@ namespace FloraWarehouseManagement
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Click!");
+            CheckForEmptyString();
+            CheckCredentials(tbUsername.Text, tbPassword.Text);
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
             Form registracija = new RegisterForm();
             registracija.ShowDialog();
+        }
+
+        private void tbUsername_TextChanged(object sender, EventArgs e)
+        {
+            errProviderUsername.SetError(tbUsername, null);
+        }
+
+        private void tbPassword_TextChanged(object sender, EventArgs e)
+        {
+            errProviderPassword.SetError(tbPassword, null);
+        }
+
+        private void CheckForEmptyString()
+        {
+            if (tbUsername.Text == "")
+            {
+                errProviderUsername.SetError(tbUsername, "Внесете валидно корисничко име.");
+            }
+            else
+            {
+                errProviderUsername.SetError(tbUsername, null);
+            }
+
+            if (tbPassword.Text == "")
+            {
+                errProviderPassword.SetError(tbPassword, "Внесете валидна лозинка.");
+            }
+            else
+            {
+                errProviderPassword.SetError(tbPassword, null);
+            }
+        }
+
+        private void CheckCredentials(string username, string password)
+        {
+            int userExists = CheckCredentialsSingleton.Instance.CheckUsername(username);
+
+            if (userExists < 1)
+            {
+                errProviderUsername.SetError(tbUsername, "Корисничкото име не постои.");
+                return;
+            }
+            else
+            {
+                errProviderUsername.SetError(tbUsername, null);
+            }
+
+            int check = CheckCredentialsSingleton.Instance.CheckUsernameAndPassword(username, password);
+
+            if (check < 1)
+            {
+                errProviderPassword.SetError(tbPassword, "Погрешна лозинка.");
+            }
+            else
+            {
+                MessageBox.Show("Успешно логирани");
+            }
+
         }
     }
 }
