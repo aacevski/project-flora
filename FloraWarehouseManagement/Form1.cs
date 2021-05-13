@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using FloraWarehouseManagement.Forms;
 using FloraWarehouseManagement.Classes.Utilities;
 
@@ -22,19 +23,14 @@ namespace FloraWarehouseManagement
         private void Form1_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-            CenterControlSingleton.Instance.CenterControl(pnlButtons);
+            AlignControls.CenterControlHorizontal(pnlButtons);
         }
 
         private void LoginForm_SizeChanged(object sender, EventArgs e)
         {
-            CenterControlSingleton.Instance.CenterControl(pnlLogo);
-            CenterControlSingleton.Instance.CenterControl(gbLogin);
+            AlignControls.CenterControlHorizontal(pnlLogo);
+            AlignControls.CenterControlHorizontal(gbLogin);
         }
-
-/*        private void CenterControl(Control ctrlToCenter)
-        {
-            ctrlToCenter.Left = (ctrlToCenter.Parent.Width - ctrlToCenter.Width) / 2;
-        }*/
 
         private void LoginForm_KeyUp(object sender, KeyEventArgs e)
         {
@@ -60,8 +56,14 @@ namespace FloraWarehouseManagement
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            CheckForEmptyString();
-            CheckCredentials(tbUsername.Text, tbPassword.Text);
+
+            if (CheckForEmptyString() && CheckCredentials(tbUsername.Text, tbPassword.Text))
+            {
+                this.Hide();
+                Form mainMenu = new Forms.MainMenu();
+                mainMenu.Closed += (s, args) => this.Close();
+                mainMenu.Show();
+            } 
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -80,11 +82,12 @@ namespace FloraWarehouseManagement
             errProviderPassword.SetError(tbPassword, null);
         }
 
-        private void CheckForEmptyString()
+        private bool CheckForEmptyString()
         {
             if (tbUsername.Text == "")
             {
                 errProviderUsername.SetError(tbUsername, "Внесете валидно корисничко име.");
+                return false;
             }
             else
             {
@@ -94,38 +97,39 @@ namespace FloraWarehouseManagement
             if (tbPassword.Text == "")
             {
                 errProviderPassword.SetError(tbPassword, "Внесете валидна лозинка.");
+                return false;
             }
             else
             {
                 errProviderPassword.SetError(tbPassword, null);
             }
+
+            return true;
         }
 
-        private void CheckCredentials(string username, string password)
+        private bool CheckCredentials(string username, string password)
         {
-            int userExists = CheckCredentialsSingleton.Instance.CheckUsername(username);
+            int userExists = Classes.Utilities.CheckCredentials.CheckUsername(username);
 
             if (userExists < 1)
             {
                 errProviderUsername.SetError(tbUsername, "Корисничкото име не постои.");
-                return;
+                return false;
             }
             else
             {
                 errProviderUsername.SetError(tbUsername, null);
             }
 
-            int check = CheckCredentialsSingleton.Instance.CheckUsernameAndPassword(username, password);
+            int check = Classes.Utilities.CheckCredentials.CheckUsernameAndPassword(username, password);
 
             if (check < 1)
             {
                 errProviderPassword.SetError(tbPassword, "Погрешна лозинка.");
-            }
-            else
-            {
-                MessageBox.Show("Успешно логирани");
+                return false;
             }
 
+            return true;
         }
     }
 }

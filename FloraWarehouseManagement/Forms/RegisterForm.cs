@@ -22,18 +22,18 @@ namespace FloraWarehouseManagement.Forms
 
         private void RegisterForm_Load(object sender, EventArgs e)
         {
-            CenterControlSingleton.Instance.CenterControl(pnlLogo);
-            CenterControlSingleton.Instance.CenterControl(pnlButtons);
+            AlignControls.CenterControlHorizontal(pnlLogo);
+            AlignControls.CenterControlHorizontal(pnlButtons);
         }
 
         private void RegisterForm_SizeChanged(object sender, EventArgs e)
         {
-            CenterControlSingleton.Instance.CenterControl(pnlLogo);
+            AlignControls.CenterControlHorizontal(pnlLogo);
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            int userExists = CheckCredentialsSingleton.Instance.CheckUsername(tbUsername.Text);
+            int userExists = CheckCredentials.CheckUsername(tbUsername.Text);
 
             if(userExists < 1)
             {

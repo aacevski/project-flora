@@ -173,13 +173,13 @@ namespace FloraWarehouseManagement
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1264, 627);
+            this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.gbLogin);
             this.Controls.Add(this.pnlLogo);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MinimumSize = new System.Drawing.Size(1280, 629);
+            this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "LoginForm";
             this.Text = "Најава";
             this.Load += new System.EventHandler(this.Form1_Load);

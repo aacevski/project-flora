@@ -7,12 +7,11 @@ using System.Data.SQLite;
 
 namespace FloraWarehouseManagement.Classes.Utilities
 {
-    public class CheckCredentialsSingleton
+    public class CheckCredentials
     {
-        public static CheckCredentialsSingleton Instance { get; } = new CheckCredentialsSingleton();
-        public CheckCredentialsSingleton() { }
+        public CheckCredentials() { }
 
-        public int CheckUsername(string Username)
+        public static int CheckUsername(string Username)
         {
             int userExists;
             SQLiteConnection connection = new SQLiteConnection(@"data source=" + AppDomain.CurrentDomain.BaseDirectory + @"Database\db.db");
@@ -24,7 +23,7 @@ namespace FloraWarehouseManagement.Classes.Utilities
             return userExists;
         }
 
-        public int CheckUsernameAndPassword(string Username, string Password)
+        public static int CheckUsernameAndPassword(string Username, string Password)
         {
             int userExists;
             SQLiteConnection connection = new SQLiteConnection(@"data source=" + AppDomain.CurrentDomain.BaseDirectory + @"Database\db.db");
