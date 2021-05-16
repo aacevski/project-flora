@@ -29,5 +29,13 @@ namespace FloraWarehouseManagement.Forms
         {
             AlignControls.CenterControl(pnlMenuButtons);
         }
+
+        private void btnProducts_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form products = new Products();
+            products.Closed += (s, args) => this.Close();
+            products.Show();
+        }
     }
 }
