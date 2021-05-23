@@ -32,7 +32,7 @@ namespace FloraWarehouseManagement.Forms
             this.WindowState = FormWindowState.Maximized;
             SQLiteConnection con = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
 
-            string query = "SELECT * from Products";
+            string query = "SELECT Code, Product, Measurement, TaxGroup, GroupCode, HelpCode, Latin, Origin, Description FROM Products";
             SQLiteCommand cmd = new SQLiteCommand(query, con);
 
             DataTable dt = new DataTable();
@@ -101,7 +101,7 @@ namespace FloraWarehouseManagement.Forms
                 SQLiteConnection con = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
 
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter();
-                string sqlSelectAll = "SELECT * from Products";
+                string sqlSelectAll = "SELECT Code, Product, Measurement, TaxGroup, GroupCode, HelpCode, Latin, Origin, Description FROM Products";
                 adapter.SelectCommand = new SQLiteCommand(sqlSelectAll, con);
                 DataTable table = new DataTable();
                 adapter.Fill(table);
