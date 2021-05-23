@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Utilities\ProductFunctions.cs" />
     <Compile Include="Classes\Utilities\AddUserSingleton.cs" />
     <Compile Include="Classes\Utilities\AlignControls.cs" />
     <Compile Include="Classes\Utilities\CheckCredentials.cs" />

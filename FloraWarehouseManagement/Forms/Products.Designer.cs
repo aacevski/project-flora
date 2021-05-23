@@ -32,10 +32,16 @@ namespace FloraWarehouseManagement.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Products));
             this.pnlControls = new System.Windows.Forms.Panel();
             this.gbButtons = new System.Windows.Forms.GroupBox();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cbByName = new System.Windows.Forms.CheckBox();
+            this.cbByCode = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.pnlFilter = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,13 +62,7 @@ namespace FloraWarehouseManagement.Forms
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cbDDV = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.cbByCode = new System.Windows.Forms.CheckBox();
-            this.cbByName = new System.Windows.Forms.CheckBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbSearch = new System.Windows.Forms.TextBox();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
-            this.pnlFilter = new System.Windows.Forms.Panel();
             this.pnlControls.SuspendLayout();
             this.gbButtons.SuspendLayout();
             this.gbProductInfo.SuspendLayout();
@@ -102,6 +102,55 @@ namespace FloraWarehouseManagement.Forms
             this.gbButtons.TabStop = false;
             this.gbButtons.Move += new System.EventHandler(this.Products_SizeChanged);
             // 
+            // tbSearch
+            // 
+            this.tbSearch.Location = new System.Drawing.Point(13, 254);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(286, 26);
+            this.tbSearch.TabIndex = 26;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(9, 231);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(130, 20);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "Пребарување:";
+            // 
+            // cbByName
+            // 
+            this.cbByName.AutoSize = true;
+            this.cbByName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbByName.Location = new System.Drawing.Point(127, 197);
+            this.cbByName.Name = "cbByName";
+            this.cbByName.Size = new System.Drawing.Size(104, 24);
+            this.cbByName.TabIndex = 27;
+            this.cbByName.Text = "по артикл";
+            this.cbByName.UseVisualStyleBackColor = true;
+            // 
+            // cbByCode
+            // 
+            this.cbByCode.AutoSize = true;
+            this.cbByCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbByCode.Location = new System.Drawing.Point(13, 197);
+            this.cbByCode.Name = "cbByCode";
+            this.cbByCode.Size = new System.Drawing.Size(105, 24);
+            this.cbByCode.TabIndex = 26;
+            this.cbByCode.Text = "по шифра";
+            this.cbByCode.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(9, 174);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(126, 20);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Филтрирање:";
+            // 
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.Color.White;
@@ -137,6 +186,7 @@ namespace FloraWarehouseManagement.Forms
             this.btnNew.TabIndex = 0;
             this.btnNew.Text = "Нов";
             this.btnNew.UseVisualStyleBackColor = false;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // btnSave
             // 
@@ -149,6 +199,14 @@ namespace FloraWarehouseManagement.Forms
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Сними";
             this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // pnlFilter
+            // 
+            this.pnlFilter.Location = new System.Drawing.Point(13, 197);
+            this.pnlFilter.Name = "pnlFilter";
+            this.pnlFilter.Size = new System.Drawing.Size(218, 24);
+            this.pnlFilter.TabIndex = 29;
             // 
             // label3
             // 
@@ -287,6 +345,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.tbProductNameLatin.Location = new System.Drawing.Point(292, 97);
             this.tbProductNameLatin.Name = "tbProductNameLatin";
+            this.tbProductNameLatin.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tbProductNameLatin.Size = new System.Drawing.Size(145, 22);
             this.tbProductNameLatin.TabIndex = 17;
             // 
@@ -366,70 +425,15 @@ namespace FloraWarehouseManagement.Forms
             this.cbDDV.Text = "Со ДДВ";
             this.cbDDV.UseVisualStyleBackColor = true;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(9, 174);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(126, 20);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Филтрирање:";
-            // 
-            // cbByCode
-            // 
-            this.cbByCode.AutoSize = true;
-            this.cbByCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbByCode.Location = new System.Drawing.Point(13, 197);
-            this.cbByCode.Name = "cbByCode";
-            this.cbByCode.Size = new System.Drawing.Size(105, 24);
-            this.cbByCode.TabIndex = 26;
-            this.cbByCode.Text = "по шифра";
-            this.cbByCode.UseVisualStyleBackColor = true;
-            // 
-            // cbByName
-            // 
-            this.cbByName.AutoSize = true;
-            this.cbByName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbByName.Location = new System.Drawing.Point(127, 197);
-            this.cbByName.Name = "cbByName";
-            this.cbByName.Size = new System.Drawing.Size(104, 24);
-            this.cbByName.TabIndex = 27;
-            this.cbByName.Text = "по артикл";
-            this.cbByName.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(9, 231);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(130, 20);
-            this.label11.TabIndex = 28;
-            this.label11.Text = "Пребарување:";
-            // 
-            // tbSearch
-            // 
-            this.tbSearch.Location = new System.Drawing.Point(13, 254);
-            this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(286, 26);
-            this.tbSearch.TabIndex = 26;
-            // 
             // dgvProducts
             // 
+            this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProducts.BackgroundColor = System.Drawing.Color.White;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProducts.Location = new System.Drawing.Point(0, 354);
+            this.dgvProducts.Location = new System.Drawing.Point(0, 355);
             this.dgvProducts.Name = "dgvProducts";
-            this.dgvProducts.Size = new System.Drawing.Size(974, 315);
+            this.dgvProducts.Size = new System.Drawing.Size(974, 330);
             this.dgvProducts.TabIndex = 1;
-            // 
-            // pnlFilter
-            // 
-            this.pnlFilter.Location = new System.Drawing.Point(13, 197);
-            this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(218, 24);
-            this.pnlFilter.TabIndex = 29;
             // 
             // Products
             // 
@@ -488,7 +492,7 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.CheckBox cbByName;
         private System.Windows.Forms.CheckBox cbByCode;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DataGridView dgvProducts;
         private System.Windows.Forms.Panel pnlFilter;
+        private System.Windows.Forms.DataGridView dgvProducts;
     }
 }
