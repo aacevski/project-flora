@@ -72,11 +72,13 @@ namespace FloraWarehouseManagement.Forms
             // 
             // btnProducts
             // 
+            this.btnProducts.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnProducts.BackgroundImage")));
+            this.btnProducts.FlatAppearance.BorderSize = 0;
+            this.btnProducts.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnProducts.Location = new System.Drawing.Point(916, 14);
             this.btnProducts.Name = "btnProducts";
             this.btnProducts.Size = new System.Drawing.Size(300, 250);
             this.btnProducts.TabIndex = 3;
-            this.btnProducts.Text = "Артикли";
             this.btnProducts.UseVisualStyleBackColor = true;
             this.btnProducts.Click += new System.EventHandler(this.btnProducts_Click);
             // 

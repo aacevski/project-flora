@@ -36,10 +36,8 @@ namespace FloraWarehouseManagement.Forms
             this.label11 = new System.Windows.Forms.Label();
             this.cbByName = new System.Windows.Forms.CheckBox();
             this.cbByCode = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.pnlFilter = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,8 +61,10 @@ namespace FloraWarehouseManagement.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.cbDDV = new System.Windows.Forms.CheckBox();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.pnlControls.SuspendLayout();
             this.gbButtons.SuspendLayout();
+            this.pnlFilter.SuspendLayout();
             this.gbProductInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.SuspendLayout();
@@ -84,14 +84,11 @@ namespace FloraWarehouseManagement.Forms
             // 
             // gbButtons
             // 
+            this.gbButtons.Controls.Add(this.btnSearch);
             this.gbButtons.Controls.Add(this.tbSearch);
             this.gbButtons.Controls.Add(this.label11);
-            this.gbButtons.Controls.Add(this.cbByName);
-            this.gbButtons.Controls.Add(this.cbByCode);
-            this.gbButtons.Controls.Add(this.label10);
             this.gbButtons.Controls.Add(this.btnEdit);
             this.gbButtons.Controls.Add(this.btnDelete);
-            this.gbButtons.Controls.Add(this.btnNew);
             this.gbButtons.Controls.Add(this.btnSave);
             this.gbButtons.Controls.Add(this.pnlFilter);
             this.gbButtons.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -106,7 +103,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.tbSearch.Location = new System.Drawing.Point(13, 254);
             this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(286, 26);
+            this.tbSearch.Size = new System.Drawing.Size(218, 26);
             this.tbSearch.TabIndex = 26;
             // 
             // label11
@@ -123,7 +120,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.cbByName.AutoSize = true;
             this.cbByName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbByName.Location = new System.Drawing.Point(127, 197);
+            this.cbByName.Location = new System.Drawing.Point(114, 0);
             this.cbByName.Name = "cbByName";
             this.cbByName.Size = new System.Drawing.Size(104, 24);
             this.cbByName.TabIndex = 27;
@@ -134,29 +131,19 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.cbByCode.AutoSize = true;
             this.cbByCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbByCode.Location = new System.Drawing.Point(13, 197);
+            this.cbByCode.Location = new System.Drawing.Point(3, 0);
             this.cbByCode.Name = "cbByCode";
             this.cbByCode.Size = new System.Drawing.Size(105, 24);
             this.cbByCode.TabIndex = 26;
             this.cbByCode.Text = "по шифра";
             this.cbByCode.UseVisualStyleBackColor = true;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(9, 174);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(126, 20);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Филтрирање:";
-            // 
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.Color.White;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(13, 81);
+            this.btnEdit.Location = new System.Drawing.Point(91, 85);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(140, 53);
             this.btnEdit.TabIndex = 2;
@@ -168,42 +155,31 @@ namespace FloraWarehouseManagement.Forms
             this.btnDelete.BackColor = System.Drawing.Color.White;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(159, 81);
+            this.btnDelete.Location = new System.Drawing.Point(91, 150);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(140, 53);
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Избриши";
             this.btnDelete.UseVisualStyleBackColor = false;
             // 
-            // btnNew
-            // 
-            this.btnNew.BackColor = System.Drawing.Color.White;
-            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNew.Location = new System.Drawing.Point(13, 22);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(140, 53);
-            this.btnNew.TabIndex = 0;
-            this.btnNew.Text = "Нов";
-            this.btnNew.UseVisualStyleBackColor = false;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.White;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(159, 22);
+            this.btnSave.Location = new System.Drawing.Point(91, 21);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(140, 53);
             this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Сними";
+            this.btnSave.Text = "Внеси";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // pnlFilter
             // 
-            this.pnlFilter.Location = new System.Drawing.Point(13, 197);
+            this.pnlFilter.Controls.Add(this.cbByCode);
+            this.pnlFilter.Controls.Add(this.cbByName);
+            this.pnlFilter.Location = new System.Drawing.Point(13, 284);
             this.pnlFilter.Name = "pnlFilter";
             this.pnlFilter.Size = new System.Drawing.Size(218, 24);
             this.pnlFilter.TabIndex = 29;
@@ -435,6 +411,15 @@ namespace FloraWarehouseManagement.Forms
             this.dgvProducts.Size = new System.Drawing.Size(974, 330);
             this.dgvProducts.TabIndex = 1;
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(237, 255);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(35, 25);
+            this.btnSearch.TabIndex = 30;
+            this.btnSearch.Text = "button1";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            // 
             // Products
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -452,6 +437,8 @@ namespace FloraWarehouseManagement.Forms
             this.pnlControls.PerformLayout();
             this.gbButtons.ResumeLayout(false);
             this.gbButtons.PerformLayout();
+            this.pnlFilter.ResumeLayout(false);
+            this.pnlFilter.PerformLayout();
             this.gbProductInfo.ResumeLayout(false);
             this.gbProductInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
@@ -485,14 +472,13 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.MaskedTextBox mtbHelpCode;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox cbByName;
         private System.Windows.Forms.CheckBox cbByCode;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Panel pnlFilter;
         private System.Windows.Forms.DataGridView dgvProducts;
+        private System.Windows.Forms.Button btnSearch;
     }
 }
