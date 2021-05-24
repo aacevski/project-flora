@@ -54,20 +54,24 @@ namespace FloraWarehouseManagement.Forms
             // 
             // btnEmployees
             // 
+            this.btnEmployees.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEmployees.BackgroundImage")));
+            this.btnEmployees.FlatAppearance.BorderSize = 0;
+            this.btnEmployees.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnEmployees.Location = new System.Drawing.Point(713, 404);
             this.btnEmployees.Name = "btnEmployees";
             this.btnEmployees.Size = new System.Drawing.Size(300, 250);
             this.btnEmployees.TabIndex = 5;
-            this.btnEmployees.Text = "Вработени";
             this.btnEmployees.UseVisualStyleBackColor = true;
             // 
             // btnClients
             // 
+            this.btnClients.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClients.BackgroundImage")));
+            this.btnClients.FlatAppearance.BorderSize = 0;
+            this.btnClients.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnClients.Location = new System.Drawing.Point(251, 404);
             this.btnClients.Name = "btnClients";
             this.btnClients.Size = new System.Drawing.Size(300, 250);
             this.btnClients.TabIndex = 4;
-            this.btnClients.Text = "Коминтенти";
             this.btnClients.UseVisualStyleBackColor = true;
             // 
             // btnProducts
@@ -84,20 +88,24 @@ namespace FloraWarehouseManagement.Forms
             // 
             // btnSales
             // 
+            this.btnSales.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSales.BackgroundImage")));
+            this.btnSales.FlatAppearance.BorderSize = 0;
+            this.btnSales.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnSales.Location = new System.Drawing.Point(483, 14);
             this.btnSales.Name = "btnSales";
             this.btnSales.Size = new System.Drawing.Size(300, 250);
             this.btnSales.TabIndex = 2;
-            this.btnSales.Text = "Продажба";
             this.btnSales.UseVisualStyleBackColor = true;
             // 
             // btnInfo
             // 
+            this.btnInfo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnInfo.BackgroundImage")));
+            this.btnInfo.FlatAppearance.BorderSize = 0;
+            this.btnInfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnInfo.Location = new System.Drawing.Point(34, 14);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Size = new System.Drawing.Size(300, 250);
             this.btnInfo.TabIndex = 1;
-            this.btnInfo.Text = "Податоци за фирма";
             this.btnInfo.UseVisualStyleBackColor = true;
             // 
             // MainMenu

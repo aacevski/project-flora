@@ -122,5 +122,16 @@ namespace FloraWarehouseManagement.Forms
                 MessageBox.Show("Тоа артикл веќе постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Products_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Hide();
+                Form mainMenu = new Forms.MainMenu();
+                mainMenu.Closed += (s, args) => this.Close();
+                mainMenu.Show();
+            }
+        }
     }
 }
