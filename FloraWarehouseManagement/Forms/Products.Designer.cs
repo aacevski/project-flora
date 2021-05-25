@@ -39,8 +39,6 @@ namespace FloraWarehouseManagement.Forms
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.pnlFilter = new System.Windows.Forms.Panel();
-            this.cbByCode = new System.Windows.Forms.CheckBox();
-            this.cbByName = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -62,6 +60,8 @@ namespace FloraWarehouseManagement.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.cbDDV = new System.Windows.Forms.CheckBox();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.rbtnCode = new System.Windows.Forms.RadioButton();
+            this.rbtnProduct = new System.Windows.Forms.RadioButton();
             this.pnlControls.SuspendLayout();
             this.gbButtons.SuspendLayout();
             this.pnlFilter.SuspendLayout();
@@ -109,6 +109,7 @@ namespace FloraWarehouseManagement.Forms
             this.btnSearch.Size = new System.Drawing.Size(26, 26);
             this.btnSearch.TabIndex = 30;
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // tbSearch
             // 
@@ -138,6 +139,7 @@ namespace FloraWarehouseManagement.Forms
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "Промени";
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
@@ -150,6 +152,7 @@ namespace FloraWarehouseManagement.Forms
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Избриши";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSave
             // 
@@ -166,34 +169,12 @@ namespace FloraWarehouseManagement.Forms
             // 
             // pnlFilter
             // 
-            this.pnlFilter.Controls.Add(this.cbByCode);
-            this.pnlFilter.Controls.Add(this.cbByName);
+            this.pnlFilter.Controls.Add(this.rbtnProduct);
+            this.pnlFilter.Controls.Add(this.rbtnCode);
             this.pnlFilter.Location = new System.Drawing.Point(13, 284);
             this.pnlFilter.Name = "pnlFilter";
             this.pnlFilter.Size = new System.Drawing.Size(218, 24);
             this.pnlFilter.TabIndex = 29;
-            // 
-            // cbByCode
-            // 
-            this.cbByCode.AutoSize = true;
-            this.cbByCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbByCode.Location = new System.Drawing.Point(3, 0);
-            this.cbByCode.Name = "cbByCode";
-            this.cbByCode.Size = new System.Drawing.Size(105, 24);
-            this.cbByCode.TabIndex = 26;
-            this.cbByCode.Text = "по шифра";
-            this.cbByCode.UseVisualStyleBackColor = true;
-            // 
-            // cbByName
-            // 
-            this.cbByName.AutoSize = true;
-            this.cbByName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbByName.Location = new System.Drawing.Point(114, 0);
-            this.cbByName.Name = "cbByName";
-            this.cbByName.Size = new System.Drawing.Size(104, 24);
-            this.cbByName.TabIndex = 27;
-            this.cbByName.Text = "по артикл";
-            this.cbByName.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -423,6 +404,29 @@ namespace FloraWarehouseManagement.Forms
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.Size = new System.Drawing.Size(974, 330);
             this.dgvProducts.TabIndex = 1;
+            this.dgvProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellClick);
+            // 
+            // rbtnCode
+            // 
+            this.rbtnCode.AutoSize = true;
+            this.rbtnCode.Location = new System.Drawing.Point(0, 0);
+            this.rbtnCode.Name = "rbtnCode";
+            this.rbtnCode.Size = new System.Drawing.Size(104, 24);
+            this.rbtnCode.TabIndex = 31;
+            this.rbtnCode.TabStop = true;
+            this.rbtnCode.Text = "по шифра";
+            this.rbtnCode.UseVisualStyleBackColor = true;
+            // 
+            // rbtnProduct
+            // 
+            this.rbtnProduct.AutoSize = true;
+            this.rbtnProduct.Location = new System.Drawing.Point(112, 0);
+            this.rbtnProduct.Name = "rbtnProduct";
+            this.rbtnProduct.Size = new System.Drawing.Size(103, 24);
+            this.rbtnProduct.TabIndex = 32;
+            this.rbtnProduct.TabStop = true;
+            this.rbtnProduct.Text = "по артикл";
+            this.rbtnProduct.UseVisualStyleBackColor = true;
             // 
             // Products
             // 
@@ -481,10 +485,10 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox cbByName;
-        private System.Windows.Forms.CheckBox cbByCode;
         private System.Windows.Forms.Panel pnlFilter;
         private System.Windows.Forms.DataGridView dgvProducts;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.RadioButton rbtnProduct;
+        private System.Windows.Forms.RadioButton rbtnCode;
     }
 }

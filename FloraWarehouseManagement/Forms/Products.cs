@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,13 +11,13 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 
 using FloraWarehouseManagement.Classes.Utilities;
-using System.IO;
 
 namespace FloraWarehouseManagement.Forms
 {
     public partial class Products : Form
     {
         private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
 
         public Products()
         {
@@ -27,20 +28,20 @@ namespace FloraWarehouseManagement.Forms
         {
             dgvProducts.Height = this.Height;
             dgvProducts.Width = this.Width;
-
-
             this.WindowState = FormWindowState.Maximized;
-            SQLiteConnection con = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
 
-            string query = "SELECT Code, Product, Measurement, TaxGroup, GroupCode, HelpCode, Latin, Origin, Description FROM Products";
-            SQLiteCommand cmd = new SQLiteCommand(query, con);
+            DisplayData();
+        }
 
+        public void DisplayData()
+        {
+            SQLiteCommand cmd = new SQLiteCommand("SELECT Code, Product, Measurement, TaxGroup, GroupCode, HelpCode, Latin, Origin, Description FROM Products", connection);
+            connection.Open();
             DataTable dt = new DataTable();
-
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
             adapter.Fill(dt);
-
             dgvProducts.DataSource = dt;
+            connection.Close();
         }
 
         private void Products_SizeChanged(object sender, EventArgs e)
@@ -94,16 +95,7 @@ namespace FloraWarehouseManagement.Forms
 
                 ProductFunctions.Instance.AddProduct(mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbProductNameLatin.Text, tbOrigin.Text, tbDescription.Text);
 
-                SQLiteConnection con = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
-
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter();
-                string sqlSelectAll = "SELECT Code, Product, Measurement, TaxGroup, GroupCode, HelpCode, Latin, Origin, Description FROM Products";
-                adapter.SelectCommand = new SQLiteCommand(sqlSelectAll, con);
-                DataTable table = new DataTable();
-                adapter.Fill(table);
-                BindingSource bSource = new BindingSource();
-                bSource.DataSource = table;
-                dgvProducts.DataSource = bSource;
+                DisplayData();
 
                 MessageBox.Show
                 (
@@ -128,6 +120,68 @@ namespace FloraWarehouseManagement.Forms
                 mainMenu.Closed += (s, args) => this.Close();
                 mainMenu.Show();
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if(rbtnCode.Checked)
+            {
+
+               
+            }
+
+            else if(rbtnProduct.Checked)
+            {
+             
+            }
+            
+            else
+            {
+                MessageBox.Show("Одберете барем еден вид на филтрирање, по шифра или по артикл!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int productExists = ProductFunctions.Instance.ProductExists(mtbCode.Text);
+
+            if (productExists == 1)
+            {
+
+                ProductFunctions.Instance.DeleteProduct(mtbCode.Text);
+                DisplayData();
+
+                MessageBox.Show
+                (
+                    "Артиклот е успешно избришан!",
+                    "Избриши",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Information
+                );
+            }
+            else
+            {
+                MessageBox.Show("Тоа артикл не постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgvProducts_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = this.dgvProducts.Rows[e.RowIndex];
+            mtbCode.Text = row.Cells[0].Value.ToString();
+            tbProductName.Text = row.Cells[1].Value.ToString();
+            cbUnit.SelectedIndex = cbUnit.FindString(row.Cells[2].Value.ToString());
+            cbTaxGroup.SelectedIndex = cbTaxGroup.FindString(row.Cells[3].Value.ToString());
+            mtbGroupCode.Text = row.Cells[4].Value.ToString(); 
+            mtbHelpCode.Text = row.Cells[5].Value.ToString(); 
+            tbProductNameLatin.Text = row.Cells[6].Value.ToString(); 
+            tbOrigin.Text = row.Cells[7].Value.ToString();
+            tbDescription.Text = tbOrigin.Text = row.Cells[8].Value.ToString();
         }
     }
 }

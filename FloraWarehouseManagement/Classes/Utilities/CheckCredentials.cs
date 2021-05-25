@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using System.Data;
+using System.Windows.Forms;
 using System.IO;
 
 namespace FloraWarehouseManagement.Classes.Utilities
@@ -19,10 +21,11 @@ namespace FloraWarehouseManagement.Classes.Utilities
             int userExists;
             SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
             connection.Open();
-            string checkIfExistsQuery = "SELECT EXISTS(SELECT 1 FROM User WHERE Username=@Username)";
-            SQLiteCommand command = new SQLiteCommand(checkIfExistsQuery, connection);
+            SQLiteCommand command = new SQLiteCommand("SELECT EXISTS(SELECT 1 FROM User WHERE Username=@Username)", connection);
             command.Parameters.AddWithValue("Username", Username);
+            command.ExecuteNonQuery();
             userExists = Convert.ToInt32(command.ExecuteScalar());
+            connection.Close();
             return userExists;
         }
 
@@ -31,11 +34,12 @@ namespace FloraWarehouseManagement.Classes.Utilities
             int userExists;
             SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
             connection.Open();
-            string checkIfExistsQuery = "SELECT EXISTS(SELECT 1 FROM User WHERE Username=@Username AND Password=@Password)";
-            SQLiteCommand command = new SQLiteCommand(checkIfExistsQuery, connection);
+            SQLiteCommand command = new SQLiteCommand("SELECT EXISTS(SELECT 1 FROM User WHERE Username=@Username AND Password=@Password)", connection);
             command.Parameters.AddWithValue("Username", Username);
             command.Parameters.AddWithValue("Password", Password);
+            command.ExecuteNonQuery();
             userExists = Convert.ToInt32(command.ExecuteScalar());
+            connection.Close();
             return userExists;
         }
     }

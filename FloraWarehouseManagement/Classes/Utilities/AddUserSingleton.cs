@@ -1,11 +1,15 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Data.SQLite;
-using System.Data;
-using System.IO;
+
 
 namespace FloraWarehouseManagement.Classes.Utilities
 {
@@ -18,16 +22,27 @@ namespace FloraWarehouseManagement.Classes.Utilities
 
         public AddUserSingleton() { }
 
+        public void DisplayData()
+        {
+            SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
+            SQLiteCommand cmd = new SQLiteCommand("SELECT * from User", connection);
+            connection.Open();
+            DataTable dt = new DataTable();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+            adapter.Fill(dt);
+            connection.Close();
+        }
+
         public void AddUser(string Username, string Password)
         {
             SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
-            string addUserQuery = "INSERT INTO User(Username, Password) VALUES(@Username, @Password)";
-            SQLiteCommand addUserCommand = new SQLiteCommand(addUserQuery, connection);
-            addUserCommand.Parameters.AddWithValue("Username", Username);
-            addUserCommand.Parameters.AddWithValue("Password", Password);
-            DataTable userTable = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(addUserCommand);
-            adapter.Fill(userTable);
+            SQLiteCommand command = new SQLiteCommand("INSERT INTO User(Username, Password) VALUES(@Username, @Password)", connection);
+            connection.Open();
+            command.Parameters.AddWithValue("@Username", Username);
+            command.Parameters.AddWithValue("@Password", Password);
+            command.ExecuteNonQuery();
+            connection.Close();
+            DisplayData();
         }
     }
 }
