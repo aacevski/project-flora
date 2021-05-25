@@ -85,10 +85,6 @@ namespace FloraWarehouseManagement.Forms
             }
         }
 
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             int productExists = ProductFunctions.Instance.ProductExists(mtbCode.Text);
