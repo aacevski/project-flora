@@ -39,7 +39,7 @@ namespace FloraWarehouseManagement.Forms
             {
                 try
                 {
-                    AddUserSingleton.Instance.AddUser(tbUsername.Text, tbPassword.Text);
+                    AddUser.Register(tbUsername.Text, tbPassword.Text);
                 }
                 finally
                 {

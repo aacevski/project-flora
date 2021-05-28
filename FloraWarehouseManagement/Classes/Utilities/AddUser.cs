@@ -13,16 +13,14 @@ using System.Data.SQLite;
 
 namespace FloraWarehouseManagement.Classes.Utilities
 {
-    public class AddUserSingleton
+    public class AddUser
     {
         private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        //public static AddUserSingleton Instance { get; } = new AddUserSingleton();
 
+        public AddUser() { }
 
-        public static AddUserSingleton Instance { get; } = new AddUserSingleton();
-
-        public AddUserSingleton() { }
-
-        public void DisplayData()
+        public static void DisplayData()
         {
             SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
             SQLiteCommand cmd = new SQLiteCommand("SELECT * from User", connection);
@@ -33,7 +31,7 @@ namespace FloraWarehouseManagement.Classes.Utilities
             connection.Close();
         }
 
-        public void AddUser(string Username, string Password)
+        public static void Register(string Username, string Password)
         {
             SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
             SQLiteCommand command = new SQLiteCommand("INSERT INTO User(Username, Password) VALUES(@Username, @Password)", connection);

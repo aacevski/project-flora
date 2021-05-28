@@ -35,7 +35,7 @@ namespace FloraWarehouseManagement.Forms
 
         public void DisplayData()
         {
-            SQLiteCommand cmd = new SQLiteCommand("SELECT Code, Product, Measurement, TaxGroup, GroupCode, HelpCode, Latin, Origin, Description FROM Products", connection);
+            SQLiteCommand cmd = new SQLiteCommand("SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Латиница, Потекло, Забелешка FROM Products", connection);
             connection.Open();
             DataTable dt = new DataTable();
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
@@ -172,16 +172,19 @@ namespace FloraWarehouseManagement.Forms
 
         private void dgvProducts_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = this.dgvProducts.Rows[e.RowIndex];
-            mtbCode.Text = row.Cells[0].Value.ToString();
-            tbProductName.Text = row.Cells[1].Value.ToString();
-            cbUnit.SelectedIndex = cbUnit.FindString(row.Cells[2].Value.ToString());
-            cbTaxGroup.SelectedIndex = cbTaxGroup.FindString(row.Cells[3].Value.ToString());
-            mtbGroupCode.Text = row.Cells[4].Value.ToString(); 
-            mtbHelpCode.Text = row.Cells[5].Value.ToString(); 
-            tbProductNameLatin.Text = row.Cells[6].Value.ToString(); 
-            tbOrigin.Text = row.Cells[7].Value.ToString();
-            tbDescription.Text = tbOrigin.Text = row.Cells[8].Value.ToString();
+            if (e.RowIndex != -1)
+            {
+                DataGridViewRow row = this.dgvProducts.Rows[e.RowIndex];
+                mtbCode.Text = row.Cells[0].Value.ToString();
+                tbProductName.Text = row.Cells[1].Value.ToString();
+                cbUnit.SelectedIndex = cbUnit.FindString(row.Cells[2].Value.ToString());
+                cbTaxGroup.SelectedIndex = cbTaxGroup.FindString(row.Cells[3].Value.ToString());
+                mtbGroupCode.Text = row.Cells[4].Value.ToString();
+                mtbHelpCode.Text = row.Cells[5].Value.ToString();
+                tbProductNameLatin.Text = row.Cells[6].Value.ToString();
+                tbOrigin.Text = row.Cells[7].Value.ToString();
+                tbDescription.Text = tbOrigin.Text = row.Cells[8].Value.ToString();
+            } 
         }
     }
 }

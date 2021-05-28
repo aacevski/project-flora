@@ -32,8 +32,33 @@ namespace FloraWarehouseManagement.Classes.Utilities
 
         public void AddProduct(string Code, string Product, string Measurement, string TaxGroup, string GroupCode, string HelpCode, string Latin, string Origin, string Description)
         {
-            SQLiteCommand command = new SQLiteCommand("INSERT INTO Products(Code, Product, Measurement, TaxGroup, GroupCode, HelpCode, Latin, Origin, Description) VALUES(@Code, @Product, @Measurement, @TaxGroup, @GroupCode, @HelpCode, @Latin, @Origin, @Description)", connection);
+            SQLiteCommand command = new SQLiteCommand
+                (
+                "INSERT INTO Products" +
+                "(Шифра, " +
+                "Артикл, " +
+                "Мерка, " +
+                "Даночна_група, " +
+                "Групна_шифра, " +
+                "Помошна_шифра, " +
+                "Латиница, " +
+                "Потекло, " +
+                "Забелешка) " +
+
+                "VALUES" +
+                "(@Code, " +
+                "@Product, " +
+                "@Measurement, " +
+                "@TaxGroup, " +
+                "@GroupCode, " +
+                "@HelpCode, " +
+                "@Latin, " +
+                "@Origin, " +
+                "@Description)", 
+                connection);
+
             connection.Open();
+
             command.Parameters.AddWithValue("Code", Code);
             command.Parameters.AddWithValue("Product", Product);
             command.Parameters.AddWithValue("Measurement", Measurement);
@@ -43,8 +68,10 @@ namespace FloraWarehouseManagement.Classes.Utilities
             command.Parameters.AddWithValue("Latin", Latin);
             command.Parameters.AddWithValue("Origin", Origin);
             command.Parameters.AddWithValue("Description", Description);
+
             command.ExecuteNonQuery();
             connection.Close();
+
             DisplayData();
         }
 
@@ -52,17 +79,18 @@ namespace FloraWarehouseManagement.Classes.Utilities
         {
             int productExists;
             connection.Open();
-            string checkIfExistsQuery = "SELECT EXISTS(SELECT 1 FROM Products WHERE Code=@Code)";
+            string checkIfExistsQuery = "SELECT EXISTS(SELECT 1 FROM Products WHERE Шифра=@Code)";
             SQLiteCommand command = new SQLiteCommand(checkIfExistsQuery, connection);
             command.Parameters.AddWithValue("Code", Code);
             productExists = Convert.ToInt32(command.ExecuteScalar());
             connection.Close();
+
             return productExists;
         }
 
         public void DeleteProduct(string Code)
         {
-            SQLiteCommand command = new SQLiteCommand("DELETE FROM Products WHERE Code=@Code", connection);
+            SQLiteCommand command = new SQLiteCommand("DELETE FROM Products WHERE Шифра=@Code", connection);
             connection.Open();
             command.Parameters.AddWithValue("@Code", Code);
             command.ExecuteNonQuery();

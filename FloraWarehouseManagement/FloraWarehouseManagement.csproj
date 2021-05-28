@@ -68,8 +68,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Utilities\CustomerFunctions.cs" />
     <Compile Include="Classes\Utilities\ProductFunctions.cs" />
-    <Compile Include="Classes\Utilities\AddUserSingleton.cs" />
+    <Compile Include="Classes\Utilities\AddUser.cs" />
     <Compile Include="Classes\Utilities\AlignControls.cs" />
     <Compile Include="Classes\Utilities\CheckCredentials.cs" />
     <Compile Include="Form1.cs">
@@ -77,6 +78,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Customers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Customers.Designer.cs">
+      <DependentUpon>Customers.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainMenu.cs">
       <SubType>Form</SubType>
@@ -100,6 +107,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Customers.resx">
+      <DependentUpon>Customers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>

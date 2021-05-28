@@ -37,5 +37,13 @@ namespace FloraWarehouseManagement.Forms
             products.Closed += (s, args) => this.Close();
             products.Show();
         }
+
+        private void btnClients_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form customers = new Customers();
+            customers.Closed += (s, args) => this.Close();
+            customers.Show();
+        }
     }
 }

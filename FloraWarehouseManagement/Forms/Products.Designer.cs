@@ -30,6 +30,7 @@ namespace FloraWarehouseManagement.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Products));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlControls = new System.Windows.Forms.Panel();
             this.gbButtons = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -39,6 +40,8 @@ namespace FloraWarehouseManagement.Forms
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.pnlFilter = new System.Windows.Forms.Panel();
+            this.rbtnProduct = new System.Windows.Forms.RadioButton();
+            this.rbtnCode = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -60,8 +63,6 @@ namespace FloraWarehouseManagement.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.cbDDV = new System.Windows.Forms.CheckBox();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
-            this.rbtnCode = new System.Windows.Forms.RadioButton();
-            this.rbtnProduct = new System.Windows.Forms.RadioButton();
             this.pnlControls.SuspendLayout();
             this.gbButtons.SuspendLayout();
             this.pnlFilter.SuspendLayout();
@@ -176,6 +177,28 @@ namespace FloraWarehouseManagement.Forms
             this.pnlFilter.Size = new System.Drawing.Size(218, 24);
             this.pnlFilter.TabIndex = 29;
             // 
+            // rbtnProduct
+            // 
+            this.rbtnProduct.AutoSize = true;
+            this.rbtnProduct.Location = new System.Drawing.Point(112, 0);
+            this.rbtnProduct.Name = "rbtnProduct";
+            this.rbtnProduct.Size = new System.Drawing.Size(103, 24);
+            this.rbtnProduct.TabIndex = 32;
+            this.rbtnProduct.TabStop = true;
+            this.rbtnProduct.Text = "по артикл";
+            this.rbtnProduct.UseVisualStyleBackColor = true;
+            // 
+            // rbtnCode
+            // 
+            this.rbtnCode.AutoSize = true;
+            this.rbtnCode.Location = new System.Drawing.Point(0, 0);
+            this.rbtnCode.Name = "rbtnCode";
+            this.rbtnCode.Size = new System.Drawing.Size(104, 24);
+            this.rbtnCode.TabIndex = 31;
+            this.rbtnCode.TabStop = true;
+            this.rbtnCode.Text = "по шифра";
+            this.rbtnCode.UseVisualStyleBackColor = true;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -235,6 +258,7 @@ namespace FloraWarehouseManagement.Forms
             // mtbHelpCode
             // 
             this.mtbHelpCode.AllowPromptAsInput = false;
+            this.mtbHelpCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtbHelpCode.Location = new System.Drawing.Point(294, 48);
             this.mtbHelpCode.Mask = "0000000";
             this.mtbHelpCode.Name = "mtbHelpCode";
@@ -246,6 +270,7 @@ namespace FloraWarehouseManagement.Forms
             // mtbCode
             // 
             this.mtbCode.AllowPromptAsInput = false;
+            this.mtbCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtbCode.Location = new System.Drawing.Point(25, 44);
             this.mtbCode.Mask = "0000000";
             this.mtbCode.Name = "mtbCode";
@@ -304,6 +329,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbOrigin
             // 
+            this.tbOrigin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbOrigin.Location = new System.Drawing.Point(292, 147);
             this.tbOrigin.Name = "tbOrigin";
             this.tbOrigin.Size = new System.Drawing.Size(145, 22);
@@ -311,6 +337,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbProductNameLatin
             // 
+            this.tbProductNameLatin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbProductNameLatin.Location = new System.Drawing.Point(292, 97);
             this.tbProductNameLatin.Name = "tbProductNameLatin";
             this.tbProductNameLatin.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -319,6 +346,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             // mtbGroupCode
             // 
+            this.mtbGroupCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtbGroupCode.Location = new System.Drawing.Point(25, 277);
             this.mtbGroupCode.Mask = "0000000";
             this.mtbGroupCode.Name = "mtbGroupCode";
@@ -349,6 +377,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbProductName
             // 
+            this.tbProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbProductName.Location = new System.Drawing.Point(24, 97);
             this.tbProductName.Name = "tbProductName";
             this.tbProductName.Size = new System.Drawing.Size(145, 22);
@@ -356,6 +385,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbDescription
             // 
+            this.tbDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDescription.Location = new System.Drawing.Point(292, 207);
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(293, 96);
@@ -400,33 +430,19 @@ namespace FloraWarehouseManagement.Forms
             this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProducts.BackgroundColor = System.Drawing.Color.White;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProducts.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProducts.Location = new System.Drawing.Point(0, 355);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.Size = new System.Drawing.Size(974, 330);
             this.dgvProducts.TabIndex = 1;
             this.dgvProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellClick);
-            // 
-            // rbtnCode
-            // 
-            this.rbtnCode.AutoSize = true;
-            this.rbtnCode.Location = new System.Drawing.Point(0, 0);
-            this.rbtnCode.Name = "rbtnCode";
-            this.rbtnCode.Size = new System.Drawing.Size(104, 24);
-            this.rbtnCode.TabIndex = 31;
-            this.rbtnCode.TabStop = true;
-            this.rbtnCode.Text = "по шифра";
-            this.rbtnCode.UseVisualStyleBackColor = true;
-            // 
-            // rbtnProduct
-            // 
-            this.rbtnProduct.AutoSize = true;
-            this.rbtnProduct.Location = new System.Drawing.Point(112, 0);
-            this.rbtnProduct.Name = "rbtnProduct";
-            this.rbtnProduct.Size = new System.Drawing.Size(103, 24);
-            this.rbtnProduct.TabIndex = 32;
-            this.rbtnProduct.TabStop = true;
-            this.rbtnProduct.Text = "по артикл";
-            this.rbtnProduct.UseVisualStyleBackColor = true;
             // 
             // Products
             // 
