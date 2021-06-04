@@ -16,6 +16,7 @@ namespace FloraWarehouseManagement.Forms
     {
         public MainMenu()
         {
+            DoubleBuffered = true;
             InitializeComponent();
         }
 
@@ -23,6 +24,7 @@ namespace FloraWarehouseManagement.Forms
         {
             this.WindowState = FormWindowState.Maximized;
             AlignControls.CenterControl(pnlMenuButtons);
+            pnlMenuButtons.BackColor = Color.FromArgb(0, 88, 44, 55);
         }
 
         private void MainMenu_SizeChanged(object sender, EventArgs e)
@@ -44,6 +46,14 @@ namespace FloraWarehouseManagement.Forms
             Form customers = new Customers();
             customers.Closed += (s, args) => this.Close();
             customers.Show();
+        }
+
+        private void btnInfo_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form info = new Information();
+            info.Closed += (s, args) => this.Close();
+            info.Show();
         }
     }
 }

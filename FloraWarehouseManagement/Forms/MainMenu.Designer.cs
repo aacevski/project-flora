@@ -41,6 +41,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             // pnlMenuButtons
             // 
+            this.pnlMenuButtons.BackColor = System.Drawing.SystemColors.Menu;
             this.pnlMenuButtons.Controls.Add(this.btnEmployees);
             this.pnlMenuButtons.Controls.Add(this.btnClients);
             this.pnlMenuButtons.Controls.Add(this.btnProducts);
@@ -108,11 +109,13 @@ namespace FloraWarehouseManagement.Forms
             this.btnInfo.Size = new System.Drawing.Size(300, 250);
             this.btnInfo.TabIndex = 1;
             this.btnInfo.UseVisualStyleBackColor = true;
+            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.pnlMenuButtons);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

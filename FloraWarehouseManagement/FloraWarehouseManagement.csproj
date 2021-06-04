@@ -68,7 +68,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CompanyInfo.cs" />
     <Compile Include="Classes\Utilities\CustomerFunctions.cs" />
+    <Compile Include="Classes\Utilities\EnumeratorForControls.cs" />
     <Compile Include="Classes\Utilities\ProductFunctions.cs" />
     <Compile Include="Classes\Utilities\AddUser.cs" />
     <Compile Include="Classes\Utilities\AlignControls.cs" />
@@ -84,6 +86,12 @@
     </Compile>
     <Compile Include="Forms\Customers.Designer.cs">
       <DependentUpon>Customers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Information.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Information.Designer.cs">
+      <DependentUpon>Information.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainMenu.cs">
       <SubType>Form</SubType>
@@ -110,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Customers.resx">
       <DependentUpon>Customers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Information.resx">
+      <DependentUpon>Information.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
@@ -148,6 +159,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CompanyInfo\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
