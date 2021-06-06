@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 
+using FloraWarehouseManagement.Classes;
 using FloraWarehouseManagement.Classes.Utilities;
 
 namespace FloraWarehouseManagement.Forms
@@ -18,6 +19,8 @@ namespace FloraWarehouseManagement.Forms
     {
         private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
         SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
+        private IEnumerable<TextBox> textBoxes;
+        private Product Product;
 
         public Products()
         {
@@ -29,6 +32,9 @@ namespace FloraWarehouseManagement.Forms
             dgvProducts.Height = this.Height;
             dgvProducts.Width = this.Width;
             this.WindowState = FormWindowState.Maximized;
+
+            textBoxes = EnumeratorForControls.GetChildControls<TextBox>(gbProductInfo);
+            Product = new Product();
 
             DisplayData();
         }
@@ -47,10 +53,8 @@ namespace FloraWarehouseManagement.Forms
         private void Products_SizeChanged(object sender, EventArgs e)
         {
             pnlControls.Width = this.Width;
-
             dgvProducts.Height = this.Height;
             dgvProducts.Width = this.Width;
-
         }
 
         private void mtbCode_Click(object sender, EventArgs e)
@@ -143,7 +147,16 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            
+            ProductFunctions.Instance.EditProduct(Product.Code, mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbProductNameLatin.Text, tbOrigin.Text, tbDescription.Text);
+            Product.Code = mtbCode.Text;
+            MessageBox.Show
+               (
+                   "Артиклот е успешно избришан!",
+                   "Избриши",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+               );
+            DisplayData();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -183,7 +196,17 @@ namespace FloraWarehouseManagement.Forms
                 mtbHelpCode.Text = row.Cells[5].Value.ToString();
                 tbProductNameLatin.Text = row.Cells[6].Value.ToString();
                 tbOrigin.Text = row.Cells[7].Value.ToString();
-                tbDescription.Text = tbOrigin.Text = row.Cells[8].Value.ToString();
+                tbDescription.Text = row.Cells[8].Value.ToString();
+            
+                Product.Code = row.Cells[0].Value.ToString();
+                Product.Name = row.Cells[1].Value.ToString();
+                Product.Measurement = row.Cells[2].Value.ToString();
+                Product.TaxGroup = row.Cells[3].Value.ToString();
+                Product.GroupCode = row.Cells[4].Value.ToString();
+                Product.SecondaryCode = row.Cells[5].Value.ToString();
+                Product.LatinName = row.Cells[6].Value.ToString();
+                Product.Origin = row.Cells[7].Value.ToString();
+                Product.Description = row.Cells[8].Value.ToString();
             } 
         }
     }

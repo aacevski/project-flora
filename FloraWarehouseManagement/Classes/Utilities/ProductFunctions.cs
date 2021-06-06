@@ -75,6 +75,42 @@ namespace FloraWarehouseManagement.Classes.Utilities
             DisplayData();
         }
 
+        public void EditProduct(string OldCode, string Code, string Product, string Measurement, string TaxGroup, string GroupCode, string HelpCode, string Latin, string Origin, string Description)
+        {
+            SQLiteCommand command = new SQLiteCommand
+                (
+                "UPDATE Products SET " +
+                "Шифра = @Code, " +
+                "Артикл = @Product, " +
+                "Мерка = @Measurement, " +
+                "Даночна_група = @TaxGroup, " +
+                "Групна_шифра = @GroupCode, " +
+                "Помошна_шифра = @HelpCode, " +
+                "Латиница = @Latin, " +
+                "Потекло = @Origin, " +
+                "Забелешка = @Description " +
+                "WHERE Шифра = @OldCode",
+                connection);
+
+            connection.Open();
+
+            command.Parameters.AddWithValue("@Code", Code);
+            command.Parameters.AddWithValue("@Product", Product);
+            command.Parameters.AddWithValue("@Measurement", Measurement);
+            command.Parameters.AddWithValue("@TaxGroup", TaxGroup);
+            command.Parameters.AddWithValue("@GroupCode", GroupCode);
+            command.Parameters.AddWithValue("@HelpCode", HelpCode);
+            command.Parameters.AddWithValue("@Latin", Latin);
+            command.Parameters.AddWithValue("@Origin", Origin);
+            command.Parameters.AddWithValue("@Description", Description);
+            command.Parameters.AddWithValue("@OldCode", OldCode);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+
+            DisplayData();
+        }
+
         public int ProductExists(string Code)
         {
             int productExists;
