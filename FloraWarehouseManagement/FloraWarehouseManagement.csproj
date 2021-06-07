@@ -112,6 +112,24 @@
     <Compile Include="Forms\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Sales\OutgoingInvoices\OutgoingInvoices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sales\OutgoingInvoices\OutgoingInvoices.Designer.cs">
+      <DependentUpon>OutgoingInvoices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Sales\PaymentOperations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sales\PaymentOperations.Designer.cs">
+      <DependentUpon>PaymentOperations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Sales\SalesMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sales\SalesMain.Designer.cs">
+      <DependentUpon>SalesMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -131,6 +149,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sales\OutgoingInvoices\OutgoingInvoices.resx">
+      <DependentUpon>OutgoingInvoices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sales\PaymentOperations.resx">
+      <DependentUpon>PaymentOperations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sales\SalesMain.resx">
+      <DependentUpon>SalesMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

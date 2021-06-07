@@ -124,5 +124,9 @@ namespace FloraWarehouseManagement.Forms
             tbBankNum3.Text = CompanyInfo.BankNum3;
         }
 
+        private void Information_SizeChanged(object sender, EventArgs e)
+        {
+            AlignControls.CenterControl(gbInfo);
+        }
     }
 }

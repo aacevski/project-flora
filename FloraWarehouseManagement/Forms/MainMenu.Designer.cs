@@ -98,6 +98,7 @@ namespace FloraWarehouseManagement.Forms
             this.btnSales.Size = new System.Drawing.Size(300, 250);
             this.btnSales.TabIndex = 2;
             this.btnSales.UseVisualStyleBackColor = true;
+            this.btnSales.Click += new System.EventHandler(this.btnSales_Click);
             // 
             // btnInfo
             // 

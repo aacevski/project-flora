@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using FloraWarehouseManagement.Classes.Utilities;
+using FloraWarehouseManagement.Forms.Sales;
 
 namespace FloraWarehouseManagement.Forms
 {
@@ -54,6 +55,12 @@ namespace FloraWarehouseManagement.Forms
             Form info = new Information();
             info.Closed += (s, args) => this.Close();
             info.Show();
+        }
+
+        private void btnSales_Click(object sender, EventArgs e)
+        {
+            Form salesMain = new SalesMain();
+            salesMain.Show();
         }
     }
 }
