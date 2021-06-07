@@ -126,19 +126,30 @@ namespace FloraWarehouseManagement.Forms
             }
         }
 
+        public void FilterProducts(string FilterType, string FilterProperty)
+        {
+            SQLiteCommand cmd = new SQLiteCommand($"SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Латиница, Потекло, Забелешка FROM Products WHERE {FilterType} = @FilterProperty", connection);
+            cmd.Parameters.AddWithValue("FilterProperty", FilterProperty);
+            connection.Open();
+            DataTable dt = new DataTable();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+            adapter.Fill(dt);
+            dgvProducts.DataSource = dt;
+            connection.Close();
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if(rbtnCode.Checked)
             {
-
-               
+                FilterProducts("Шифра", tbSearch.Text);
             }
 
             else if(rbtnProduct.Checked)
             {
-             
+                FilterProducts("Артикл", tbSearch.Text);
             }
-            
+
             else
             {
                 MessageBox.Show("Одберете барем еден вид на филтрирање, по шифра или по артикл!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -151,8 +162,8 @@ namespace FloraWarehouseManagement.Forms
             Product.Code = mtbCode.Text;
             MessageBox.Show
                (
-                   "Артиклот е успешно избришан!",
-                   "Избриши",
+                   "Артиклот е успешно променет!",
+                   "Промени",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                );
@@ -197,17 +208,25 @@ namespace FloraWarehouseManagement.Forms
                 tbProductNameLatin.Text = row.Cells[6].Value.ToString();
                 tbOrigin.Text = row.Cells[7].Value.ToString();
                 tbDescription.Text = row.Cells[8].Value.ToString();
-            
-                Product.Code = row.Cells[0].Value.ToString();
-                Product.Name = row.Cells[1].Value.ToString();
-                Product.Measurement = row.Cells[2].Value.ToString();
-                Product.TaxGroup = row.Cells[3].Value.ToString();
-                Product.GroupCode = row.Cells[4].Value.ToString();
-                Product.SecondaryCode = row.Cells[5].Value.ToString();
-                Product.LatinName = row.Cells[6].Value.ToString();
-                Product.Origin = row.Cells[7].Value.ToString();
-                Product.Description = row.Cells[8].Value.ToString();
+
+                connection.Open();
+                SQLiteCommand cmd = new SQLiteCommand("SELECT Со_ДДВ from Products WHERE Шифра = @Code", connection);
+                cmd.Parameters.AddWithValue("@Code", row.Cells[0].Value.ToString());
+                int checkedTax = Int32.Parse(cmd.ExecuteScalar().ToString());
+                connection.Close();
+
+                cbDDV.Checked = checkedTax == 1 ? true : false;
+
+                Product.SetProduct(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString(), row.Cells[4].Value.ToString(), row.Cells[5].Value.ToString(), row.Cells[6].Value.ToString(), row.Cells[7].Value.ToString(), row.Cells[8].Value.ToString(), checkedTax.ToString());
             } 
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            if(tbSearch.Text == "")
+            {
+                DisplayData();
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace FloraWarehouseManagement.Classes.Utilities
         public void DisplayData()
         {
             SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
-            SQLiteCommand cmd = new SQLiteCommand("SELECT * from User", connection);
+            SQLiteCommand cmd = new SQLiteCommand("SELECT * from Products", connection);
             connection.Open();
             DataTable dt = new DataTable();
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
@@ -134,6 +134,18 @@ namespace FloraWarehouseManagement.Classes.Utilities
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
             adapter.Fill(productTable);
             connection.Close();
+        }
+
+
+        public void FilterProducts(string FilterType, string FilterProperty) 
+        {
+            SQLiteCommand command = new SQLiteCommand
+            ("SELECT * FROM Products WHERE @FilterType = @FilterProperty", connection);
+            connection.Open();
+            command.Parameters.AddWithValue("@FilterProperty", FilterType);
+            command.ExecuteNonQuery();
+            connection.Close();
+            DisplayData();
         }
     }
 }
