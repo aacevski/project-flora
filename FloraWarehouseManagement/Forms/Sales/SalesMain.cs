@@ -24,7 +24,10 @@ namespace FloraWarehouseManagement.Forms.Sales
 
         private void btnOutgoingInvoices_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            Form outgoingInvoices = new OutgoingInvoices.OutgoingInvoices();
+            outgoingInvoices.Closed += (s, args) => this.Close();
+            outgoingInvoices.Show();
         }
 
         private void btnPaymentOperations_Click(object sender, EventArgs e)

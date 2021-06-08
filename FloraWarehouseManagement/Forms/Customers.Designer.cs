@@ -31,6 +31,7 @@ namespace FloraWarehouseManagement.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Customers));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlControls = new System.Windows.Forms.Panel();
             this.gbButtons = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -89,8 +90,9 @@ namespace FloraWarehouseManagement.Forms
             this.pnlControls.Controls.Add(this.gbProductInfo);
             this.pnlControls.Location = new System.Drawing.Point(0, 0);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(974, 388);
+            this.pnlControls.Size = new System.Drawing.Size(974, 409);
             this.pnlControls.TabIndex = 0;
+            this.pnlControls.Click += new System.EventHandler(this.pnlControls_Click);
             // 
             // gbButtons
             // 
@@ -102,10 +104,10 @@ namespace FloraWarehouseManagement.Forms
             this.gbButtons.Controls.Add(this.btnDelete);
             this.gbButtons.Controls.Add(this.btnSave);
             this.gbButtons.Controls.Add(this.pnlFilter);
-            this.gbButtons.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbButtons.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbButtons.Location = new System.Drawing.Point(640, 18);
             this.gbButtons.Name = "gbButtons";
-            this.gbButtons.Size = new System.Drawing.Size(314, 338);
+            this.gbButtons.Size = new System.Drawing.Size(314, 382);
             this.gbButtons.TabIndex = 26;
             this.gbButtons.TabStop = false;
             this.gbButtons.Move += new System.EventHandler(this.Customers_SizeChanged);
@@ -115,7 +117,7 @@ namespace FloraWarehouseManagement.Forms
             this.btnSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearch.BackgroundImage")));
             this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Location = new System.Drawing.Point(237, 254);
+            this.btnSearch.Location = new System.Drawing.Point(237, 283);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(26, 26);
             this.btnSearch.TabIndex = 30;
@@ -124,17 +126,17 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbSearch
             // 
-            this.tbSearch.Location = new System.Drawing.Point(13, 254);
+            this.tbSearch.Location = new System.Drawing.Point(13, 283);
             this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(218, 26);
+            this.tbSearch.Size = new System.Drawing.Size(218, 29);
             this.tbSearch.TabIndex = 26;
             // 
             // rbtnCode
             // 
             this.rbtnCode.AutoSize = true;
-            this.rbtnCode.Location = new System.Drawing.Point(13, 293);
+            this.rbtnCode.Location = new System.Drawing.Point(13, 322);
             this.rbtnCode.Name = "rbtnCode";
-            this.rbtnCode.Size = new System.Drawing.Size(93, 24);
+            this.rbtnCode.Size = new System.Drawing.Size(91, 25);
             this.rbtnCode.TabIndex = 31;
             this.rbtnCode.TabStop = true;
             this.rbtnCode.Text = "по назив";
@@ -143,10 +145,10 @@ namespace FloraWarehouseManagement.Forms
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(9, 231);
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(9, 260);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(130, 20);
+            this.label11.Size = new System.Drawing.Size(124, 21);
             this.label11.TabIndex = 28;
             this.label11.Text = "Пребарување:";
             // 
@@ -154,7 +156,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.btnEdit.BackColor = System.Drawing.Color.White;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Location = new System.Drawing.Point(91, 85);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(140, 53);
@@ -167,7 +169,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.btnDelete.BackColor = System.Drawing.Color.White;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Location = new System.Drawing.Point(91, 150);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(140, 53);
@@ -180,7 +182,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.btnSave.BackColor = System.Drawing.Color.White;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Location = new System.Drawing.Point(91, 21);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(140, 53);
@@ -193,7 +195,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.pnlFilter.Controls.Add(this.radioButton1);
             this.pnlFilter.Controls.Add(this.rbtnProduct);
-            this.pnlFilter.Location = new System.Drawing.Point(13, 284);
+            this.pnlFilter.Location = new System.Drawing.Point(13, 313);
             this.pnlFilter.Name = "pnlFilter";
             this.pnlFilter.Size = new System.Drawing.Size(295, 48);
             this.pnlFilter.TabIndex = 29;
@@ -203,7 +205,7 @@ namespace FloraWarehouseManagement.Forms
             this.radioButton1.AutoSize = true;
             this.radioButton1.Location = new System.Drawing.Point(187, 9);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(108, 24);
+            this.radioButton1.Size = new System.Drawing.Size(104, 25);
             this.radioButton1.TabIndex = 33;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "по дан. бр.";
@@ -214,7 +216,7 @@ namespace FloraWarehouseManagement.Forms
             this.rbtnProduct.AutoSize = true;
             this.rbtnProduct.Location = new System.Drawing.Point(99, 9);
             this.rbtnProduct.Name = "rbtnProduct";
-            this.rbtnProduct.Size = new System.Drawing.Size(85, 24);
+            this.rbtnProduct.Size = new System.Drawing.Size(82, 25);
             this.rbtnProduct.TabIndex = 32;
             this.rbtnProduct.TabStop = true;
             this.rbtnProduct.Text = "по град";
@@ -252,10 +254,10 @@ namespace FloraWarehouseManagement.Forms
             this.gbProductInfo.Controls.Add(this.label9);
             this.gbProductInfo.Controls.Add(this.tbName);
             this.gbProductInfo.Controls.Add(this.tbDescription);
-            this.gbProductInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbProductInfo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbProductInfo.Location = new System.Drawing.Point(12, 18);
             this.gbProductInfo.Name = "gbProductInfo";
-            this.gbProductInfo.Size = new System.Drawing.Size(613, 338);
+            this.gbProductInfo.Size = new System.Drawing.Size(613, 382);
             this.gbProductInfo.TabIndex = 25;
             this.gbProductInfo.TabStop = false;
             this.gbProductInfo.Text = "Податоци за коминтенти";
@@ -264,7 +266,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(447, 78);
+            this.label16.Location = new System.Drawing.Point(447, 86);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(147, 20);
             this.label16.TabIndex = 51;
@@ -272,17 +274,17 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbContactPerson2
             // 
-            this.tbContactPerson2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbContactPerson2.Location = new System.Drawing.Point(451, 101);
+            this.tbContactPerson2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbContactPerson2.Location = new System.Drawing.Point(451, 109);
             this.tbContactPerson2.Name = "tbContactPerson2";
-            this.tbContactPerson2.Size = new System.Drawing.Size(136, 22);
+            this.tbContactPerson2.Size = new System.Drawing.Size(136, 29);
             this.tbContactPerson2.TabIndex = 52;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(447, 127);
+            this.label15.Location = new System.Drawing.Point(447, 146);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(92, 20);
             this.label15.TabIndex = 49;
@@ -290,17 +292,17 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbPhone2
             // 
-            this.tbPhone2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPhone2.Location = new System.Drawing.Point(451, 150);
+            this.tbPhone2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPhone2.Location = new System.Drawing.Point(451, 169);
             this.tbPhone2.Name = "tbPhone2";
-            this.tbPhone2.Size = new System.Drawing.Size(136, 22);
+            this.tbPhone2.Size = new System.Drawing.Size(136, 29);
             this.tbPhone2.TabIndex = 50;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(292, 175);
+            this.label14.Location = new System.Drawing.Point(292, 201);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(74, 20);
             this.label14.TabIndex = 47;
@@ -308,17 +310,17 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbEmail
             // 
-            this.tbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbEmail.Location = new System.Drawing.Point(296, 198);
+            this.tbEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbEmail.Location = new System.Drawing.Point(296, 224);
             this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(166, 22);
+            this.tbEmail.Size = new System.Drawing.Size(166, 29);
             this.tbEmail.TabIndex = 48;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(292, 127);
+            this.label13.Location = new System.Drawing.Point(292, 146);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(92, 20);
             this.label13.TabIndex = 45;
@@ -326,17 +328,17 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbPhone1
             // 
-            this.tbPhone1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPhone1.Location = new System.Drawing.Point(296, 150);
+            this.tbPhone1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPhone1.Location = new System.Drawing.Point(296, 169);
             this.tbPhone1.Name = "tbPhone1";
-            this.tbPhone1.Size = new System.Drawing.Size(136, 22);
+            this.tbPhone1.Size = new System.Drawing.Size(136, 29);
             this.tbPhone1.TabIndex = 46;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(292, 78);
+            this.label12.Location = new System.Drawing.Point(292, 86);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(147, 20);
             this.label12.TabIndex = 43;
@@ -344,10 +346,10 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbContactPerson1
             // 
-            this.tbContactPerson1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbContactPerson1.Location = new System.Drawing.Point(296, 101);
+            this.tbContactPerson1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbContactPerson1.Location = new System.Drawing.Point(296, 109);
             this.tbContactPerson1.Name = "tbContactPerson1";
-            this.tbContactPerson1.Size = new System.Drawing.Size(136, 22);
+            this.tbContactPerson1.Size = new System.Drawing.Size(136, 29);
             this.tbContactPerson1.TabIndex = 44;
             // 
             // label10
@@ -362,10 +364,10 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbCity
             // 
-            this.tbCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCity.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCity.Location = new System.Drawing.Point(449, 52);
             this.tbCity.Name = "tbCity";
-            this.tbCity.Size = new System.Drawing.Size(66, 22);
+            this.tbCity.Size = new System.Drawing.Size(66, 29);
             this.tbCity.TabIndex = 42;
             // 
             // label8
@@ -380,10 +382,10 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbZipCode
             // 
-            this.tbZipCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbZipCode.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbZipCode.Location = new System.Drawing.Point(521, 52);
             this.tbZipCode.Name = "tbZipCode";
-            this.tbZipCode.Size = new System.Drawing.Size(66, 22);
+            this.tbZipCode.Size = new System.Drawing.Size(66, 29);
             this.tbZipCode.TabIndex = 40;
             // 
             // label7
@@ -398,15 +400,15 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbAddress
             // 
-            this.tbAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbAddress.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbAddress.Location = new System.Drawing.Point(296, 52);
             this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(136, 22);
+            this.tbAddress.Size = new System.Drawing.Size(136, 29);
             this.tbAddress.TabIndex = 38;
             // 
             // cbBank
             // 
-            this.cbBank.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbBank.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBank.FormattingEnabled = true;
             this.cbBank.Items.AddRange(new object[] {
             "Стопанска Банка",
@@ -419,16 +421,16 @@ namespace FloraWarehouseManagement.Forms
             "Стопанска Банка АД Битола",
             "Капитол Банка",
             "Силк Роуд Банка"});
-            this.cbBank.Location = new System.Drawing.Point(28, 295);
+            this.cbBank.Location = new System.Drawing.Point(28, 332);
             this.cbBank.Name = "cbBank";
-            this.cbBank.Size = new System.Drawing.Size(166, 24);
+            this.cbBank.Size = new System.Drawing.Size(166, 29);
             this.cbBank.TabIndex = 36;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(24, 127);
+            this.label6.Location = new System.Drawing.Point(24, 146);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 20);
             this.label6.TabIndex = 34;
@@ -436,17 +438,17 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbEMBS
             // 
-            this.tbEMBS.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbEMBS.Location = new System.Drawing.Point(28, 150);
+            this.tbEMBS.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbEMBS.Location = new System.Drawing.Point(28, 169);
             this.tbEMBS.Name = "tbEMBS";
-            this.tbEMBS.Size = new System.Drawing.Size(166, 22);
+            this.tbEMBS.Size = new System.Drawing.Size(166, 29);
             this.tbEMBS.TabIndex = 35;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(24, 78);
+            this.label5.Location = new System.Drawing.Point(24, 86);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(109, 20);
             this.label5.TabIndex = 32;
@@ -454,17 +456,17 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbTaxNum
             // 
-            this.tbTaxNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbTaxNum.Location = new System.Drawing.Point(28, 101);
+            this.tbTaxNum.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbTaxNum.Location = new System.Drawing.Point(28, 109);
             this.tbTaxNum.Name = "tbTaxNum";
-            this.tbTaxNum.Size = new System.Drawing.Size(166, 22);
+            this.tbTaxNum.Size = new System.Drawing.Size(166, 29);
             this.tbTaxNum.TabIndex = 33;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(23, 274);
+            this.label4.Location = new System.Drawing.Point(24, 311);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 20);
             this.label4.TabIndex = 30;
@@ -472,17 +474,17 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbBankNum2
             // 
-            this.tbBankNum2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBankNum2.Location = new System.Drawing.Point(28, 249);
+            this.tbBankNum2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBankNum2.Location = new System.Drawing.Point(28, 279);
             this.tbBankNum2.Name = "tbBankNum2";
-            this.tbBankNum2.Size = new System.Drawing.Size(166, 22);
+            this.tbBankNum2.Size = new System.Drawing.Size(166, 29);
             this.tbBankNum2.TabIndex = 29;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(24, 226);
+            this.label3.Location = new System.Drawing.Point(24, 256);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(154, 20);
             this.label3.TabIndex = 28;
@@ -490,17 +492,17 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbBankNum1
             // 
-            this.tbBankNum1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBankNum1.Location = new System.Drawing.Point(28, 198);
+            this.tbBankNum1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBankNum1.Location = new System.Drawing.Point(28, 224);
             this.tbBankNum1.Name = "tbBankNum1";
-            this.tbBankNum1.Size = new System.Drawing.Size(166, 22);
+            this.tbBankNum1.Size = new System.Drawing.Size(166, 29);
             this.tbBankNum1.TabIndex = 27;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(24, 175);
+            this.label1.Location = new System.Drawing.Point(24, 201);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 20);
             this.label1.TabIndex = 26;
@@ -520,7 +522,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(292, 234);
+            this.label9.Location = new System.Drawing.Point(292, 276);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(96, 20);
             this.label9.TabIndex = 24;
@@ -528,16 +530,16 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbName
             // 
-            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbName.Location = new System.Drawing.Point(28, 52);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(166, 22);
+            this.tbName.Size = new System.Drawing.Size(166, 29);
             this.tbName.TabIndex = 21;
             // 
             // tbDescription
             // 
-            this.tbDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbDescription.Location = new System.Drawing.Point(294, 257);
+            this.tbDescription.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbDescription.Location = new System.Drawing.Point(294, 299);
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(293, 62);
             this.tbDescription.TabIndex = 18;
@@ -547,20 +549,28 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.dgvCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCustomers.BackgroundColor = System.Drawing.Color.White;
-            this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCustomers.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvCustomers.Location = new System.Drawing.Point(0, 385);
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCustomers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCustomers.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvCustomers.Location = new System.Drawing.Point(0, 406);
             this.dgvCustomers.Name = "dgvCustomers";
-            this.dgvCustomers.Size = new System.Drawing.Size(974, 300);
+            this.dgvCustomers.Size = new System.Drawing.Size(974, 279);
             this.dgvCustomers.TabIndex = 1;
-            this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellClick);
+            this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellClick);
             // 
             // Customers
             // 

@@ -105,7 +105,7 @@ namespace FloraWarehouseManagement.Forms
             this.gbInfo.Controls.Add(this.label2);
             this.gbInfo.Controls.Add(this.tbName);
             this.gbInfo.Controls.Add(this.label1);
-            this.gbInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbInfo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbInfo.Location = new System.Drawing.Point(328, 31);
             this.gbInfo.Name = "gbInfo";
             this.gbInfo.Size = new System.Drawing.Size(621, 620);

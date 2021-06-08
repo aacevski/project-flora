@@ -59,35 +59,17 @@ namespace FloraWarehouseManagement.Forms
 
         private void mtbCode_Click(object sender, EventArgs e)
         {
-            PositionCursorInMaskedTextBox(mtbCode);
+            AlignControls.PositionCursorInMaskedTextBox(this, mtbCode);
         }
 
         private void mtbGroupCode_Click(object sender, EventArgs e)
         {
-            PositionCursorInMaskedTextBox(mtbGroupCode);
+            AlignControls.PositionCursorInMaskedTextBox(this, mtbGroupCode);
         }
 
         private void mtbHelpCode_Click(object sender, EventArgs e)
         {
-            PositionCursorInMaskedTextBox(mtbHelpCode);
-        }
-
-        private void PositionCursorInMaskedTextBox(MaskedTextBox mtb)
-        {
-            if (mtb == null) return;
-
-            int pos = mtb.SelectionStart;
-
-            if (pos > mtb.Text.Length)
-                this.BeginInvoke((MethodInvoker)delegate () { mtb.Select(mtb.Text.Length, 0); });
-        }
-
-        private void mtbCode_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                MessageBox.Show(mtbCode.Text);
-            }
+            AlignControls.PositionCursorInMaskedTextBox(this, mtbHelpCode);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -97,7 +79,7 @@ namespace FloraWarehouseManagement.Forms
             if (productExists < 1)
             {
 
-                ProductFunctions.Instance.AddProduct(mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbProductNameLatin.Text, tbOrigin.Text, tbDescription.Text);
+                ProductFunctions.Instance.AddProduct(mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbProductNameLatin.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0);
 
                 DisplayData();
 
@@ -120,7 +102,7 @@ namespace FloraWarehouseManagement.Forms
             if (e.KeyCode == Keys.Escape)
             {
                 this.Hide();
-                Form mainMenu = new Forms.MainMenu();
+                Form mainMenu = new MainMenu();
                 mainMenu.Closed += (s, args) => this.Close();
                 mainMenu.Show();
             }
@@ -157,9 +139,10 @@ namespace FloraWarehouseManagement.Forms
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
-        {
-            ProductFunctions.Instance.EditProduct(Product.Code, mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbProductNameLatin.Text, tbOrigin.Text, tbDescription.Text);
+        {   
+            ProductFunctions.Instance.EditProduct(Product.Code, mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbProductNameLatin.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0);
             Product.Code = mtbCode.Text;
+
             MessageBox.Show
                (
                    "Артиклот е успешно променет!",
@@ -167,6 +150,7 @@ namespace FloraWarehouseManagement.Forms
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                );
+
             DisplayData();
         }
 
@@ -210,14 +194,32 @@ namespace FloraWarehouseManagement.Forms
                 tbDescription.Text = row.Cells[8].Value.ToString();
 
                 connection.Open();
+
                 SQLiteCommand cmd = new SQLiteCommand("SELECT Со_ДДВ from Products WHERE Шифра = @Code", connection);
                 cmd.Parameters.AddWithValue("@Code", row.Cells[0].Value.ToString());
-                int checkedTax = Int32.Parse(cmd.ExecuteScalar().ToString());
+
+                string execution = null;
+                var scalar = cmd.ExecuteScalar();
+
+                if (scalar != null)
+                {
+                    execution = cmd.ExecuteScalar().ToString();
+                }
+
+                int checkedTax;
+
+                if (execution != "" && execution != null)
+                {
+                    checkedTax = int.Parse(execution);
+                    cbDDV.Checked = checkedTax == 1 ? true : false;
+                    Product.SetProduct(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString(), row.Cells[4].Value.ToString(), row.Cells[5].Value.ToString(), row.Cells[6].Value.ToString(), row.Cells[7].Value.ToString(), row.Cells[8].Value.ToString(), checkedTax.ToString());
+                }
+                else
+                {
+                    ClearTextBoxes();
+                }
+
                 connection.Close();
-
-                cbDDV.Checked = checkedTax == 1 ? true : false;
-
-                Product.SetProduct(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString(), row.Cells[4].Value.ToString(), row.Cells[5].Value.ToString(), row.Cells[6].Value.ToString(), row.Cells[7].Value.ToString(), row.Cells[8].Value.ToString(), checkedTax.ToString());
             } 
         }
 
@@ -227,6 +229,25 @@ namespace FloraWarehouseManagement.Forms
             {
                 DisplayData();
             }
+        }
+
+        private void pnlControls_Click(object sender, EventArgs e)
+        {
+            ClearTextBoxes();
+        }
+
+        private void ClearTextBoxes()
+        {
+            mtbCode.Text = "";
+            tbProductName.Text = "";
+            cbUnit.SelectedIndex = -1;
+            cbTaxGroup.SelectedIndex = -1;
+            cbDDV.Checked = true;
+            mtbGroupCode.Text = "";
+            mtbHelpCode.Text = "";
+            tbProductNameLatin.Text = "";
+            tbOrigin.Text = "";
+            tbDescription.Text = "";
         }
     }
 }

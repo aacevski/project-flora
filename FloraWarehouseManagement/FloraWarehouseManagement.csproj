@@ -72,6 +72,7 @@
     <Compile Include="Classes\Product.cs" />
     <Compile Include="Classes\Utilities\CustomerFunctions.cs" />
     <Compile Include="Classes\Utilities\EnumeratorForControls.cs" />
+    <Compile Include="Classes\Utilities\ImageFast.cs" />
     <Compile Include="Classes\Utilities\ProductFunctions.cs" />
     <Compile Include="Classes\Utilities\AddUser.cs" />
     <Compile Include="Classes\Utilities\AlignControls.cs" />
@@ -112,6 +113,13 @@
     <Compile Include="Forms\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Sales\OutgoingInvoices\Classes\CustomerInfo.cs" />
+    <Compile Include="Forms\Sales\OutgoingInvoices\CustomerPick.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sales\OutgoingInvoices\CustomerPick.Designer.cs">
+      <DependentUpon>CustomerPick.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Sales\OutgoingInvoices\OutgoingInvoices.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sales\OutgoingInvoices\CustomerPick.resx">
+      <DependentUpon>CustomerPick.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sales\OutgoingInvoices\OutgoingInvoices.resx">
       <DependentUpon>OutgoingInvoices.cs</DependentUpon>

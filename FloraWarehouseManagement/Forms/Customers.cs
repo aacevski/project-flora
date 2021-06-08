@@ -19,6 +19,7 @@ namespace FloraWarehouseManagement.Forms
         private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
         SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
 
+
         public Customers()
         {
             InitializeComponent();
@@ -47,10 +48,8 @@ namespace FloraWarehouseManagement.Forms
         private void Customers_SizeChanged(object sender, EventArgs e)
         {
             pnlControls.Width = this.Width;
-
             dgvCustomers.Height = this.Height;
             dgvCustomers.Width = this.Width;
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -82,7 +81,7 @@ namespace FloraWarehouseManagement.Forms
 
                 MessageBox.Show
                 (
-                    "Артиклот е успешно додаден!",
+                    "Коминтентот е успешно додаден!",
                     "Сними",
                      MessageBoxButtons.OK,
                      MessageBoxIcon.Information
@@ -153,7 +152,7 @@ namespace FloraWarehouseManagement.Forms
             }
         }
 
-        private void dgvProducts_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             
             if (e.RowIndex != -1)
@@ -165,7 +164,7 @@ namespace FloraWarehouseManagement.Forms
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                 adapter.Fill(dt);
 
-                if (TaxNum != "")
+                if (TaxNum != "")   // Smeni go ova, ne smee da bide prazno.
                 {
                     tbName.Text = dt.Rows[0].ItemArray[1].ToString();
                     tbTaxNum.Text = dt.Rows[0].ItemArray[2].ToString();
@@ -186,6 +185,30 @@ namespace FloraWarehouseManagement.Forms
 
                 connection.Close();
             }
+        }
+
+        private void pnlControls_Click(object sender, EventArgs e)
+        {
+            ClearTextBoxes();
+        }
+
+        private void ClearTextBoxes()
+        {
+            tbName.Text = "";
+            tbTaxNum.Text = "";
+            tbEMBS.Text = "";
+            tbBankNum1.Text = "";
+            tbBankNum2.Text = "";
+            cbBank.SelectedIndex = -1;
+            tbAddress.Text = "";
+            tbContactPerson1.Text = "";
+            tbContactPerson2.Text = "";
+            tbPhone1.Text = "";
+            tbPhone2.Text = "";
+            tbEmail.Text = "";
+            tbCity.Text = "";
+            tbZipCode.Text = "";
+            tbDescription.Text = "";
         }
     }
 }

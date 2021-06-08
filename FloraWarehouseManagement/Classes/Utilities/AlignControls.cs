@@ -21,5 +21,17 @@ namespace FloraWarehouseManagement.Classes.Utilities
             ctrlToCenter.Top = (ctrlToCenter.Parent.Height - ctrlToCenter.Height) / 2;
         }
 
+        public static void PositionCursorInMaskedTextBox(Form f, MaskedTextBox mtb)
+        {
+            if (mtb == null) return;
+
+            int pos = mtb.SelectionStart;
+
+            if (pos > mtb.Text.Length)
+            {
+                f.BeginInvoke((MethodInvoker)delegate () { mtb.Select(mtb.Text.Length, 0); });
+            }
+        }
+
     }
 }
