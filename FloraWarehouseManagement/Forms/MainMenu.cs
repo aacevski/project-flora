@@ -62,5 +62,11 @@ namespace FloraWarehouseManagement.Forms
             Form salesMain = new SalesMain();
             salesMain.Show();
         }
+
+        private void btnLogins_Click(object sender, EventArgs e)
+        {
+            Form logins = new Logins();
+            logins.Show();
+        }
     }
 }

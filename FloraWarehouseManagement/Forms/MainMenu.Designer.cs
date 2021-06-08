@@ -36,12 +36,14 @@ namespace FloraWarehouseManagement.Forms
             this.btnProducts = new System.Windows.Forms.Button();
             this.btnSales = new System.Windows.Forms.Button();
             this.btnInfo = new System.Windows.Forms.Button();
+            this.btnLogins = new System.Windows.Forms.Button();
             this.pnlMenuButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMenuButtons
             // 
             this.pnlMenuButtons.BackColor = System.Drawing.SystemColors.Menu;
+            this.pnlMenuButtons.Controls.Add(this.btnLogins);
             this.pnlMenuButtons.Controls.Add(this.btnEmployees);
             this.pnlMenuButtons.Controls.Add(this.btnClients);
             this.pnlMenuButtons.Controls.Add(this.btnProducts);
@@ -58,7 +60,7 @@ namespace FloraWarehouseManagement.Forms
             this.btnEmployees.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEmployees.BackgroundImage")));
             this.btnEmployees.FlatAppearance.BorderSize = 0;
             this.btnEmployees.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnEmployees.Location = new System.Drawing.Point(713, 404);
+            this.btnEmployees.Location = new System.Drawing.Point(483, 407);
             this.btnEmployees.Name = "btnEmployees";
             this.btnEmployees.Size = new System.Drawing.Size(300, 250);
             this.btnEmployees.TabIndex = 5;
@@ -69,7 +71,7 @@ namespace FloraWarehouseManagement.Forms
             this.btnClients.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClients.BackgroundImage")));
             this.btnClients.FlatAppearance.BorderSize = 0;
             this.btnClients.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnClients.Location = new System.Drawing.Point(251, 404);
+            this.btnClients.Location = new System.Drawing.Point(34, 404);
             this.btnClients.Name = "btnClients";
             this.btnClients.Size = new System.Drawing.Size(300, 250);
             this.btnClients.TabIndex = 4;
@@ -112,6 +114,17 @@ namespace FloraWarehouseManagement.Forms
             this.btnInfo.UseVisualStyleBackColor = true;
             this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
             // 
+            // btnLogins
+            // 
+            this.btnLogins.FlatAppearance.BorderSize = 0;
+            this.btnLogins.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnLogins.Location = new System.Drawing.Point(916, 404);
+            this.btnLogins.Name = "btnLogins";
+            this.btnLogins.Size = new System.Drawing.Size(300, 250);
+            this.btnLogins.TabIndex = 6;
+            this.btnLogins.UseVisualStyleBackColor = true;
+            this.btnLogins.Click += new System.EventHandler(this.btnLogins_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -138,5 +151,6 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.Button btnProducts;
         private System.Windows.Forms.Button btnSales;
         private System.Windows.Forms.Button btnInfo;
+        private System.Windows.Forms.Button btnLogins;
     }
 }
