@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 using FloraWarehouseManagement.Forms;
 using FloraWarehouseManagement.Classes.Utilities;
+using System.Data.SQLite;
+using System.IO;
 
 namespace FloraWarehouseManagement
 {
     public partial class LoginForm : Form
     {
+        private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
+
         public LoginForm()
         {
             InitializeComponent();
@@ -63,6 +68,22 @@ namespace FloraWarehouseManagement
                 Form mainMenu = new Forms.MainMenu();
                 mainMenu.Closed += (s, args) => this.Close();
                 mainMenu.Show();
+
+                string Time = DateTime.Now.ToString();
+                SQLiteCommand command = new SQLiteCommand
+                (
+                "INSERT INTO LoggedIn" +
+                "(Корисничко_име, " +
+                "Време)" +
+                "VALUES" +
+                "(@Username, " +
+                "@Time)",
+                connection);
+                connection.Open();
+                command.Parameters.AddWithValue("Username", tbUsername.Text);
+                command.Parameters.AddWithValue("Time", Time);
+                command.ExecuteNonQuery();
+                connection.Close();
             } 
         }
 
