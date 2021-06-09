@@ -29,9 +29,10 @@ namespace FloraWarehouseManagement.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Products));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlControls = new System.Windows.Forms.Panel();
             this.gbButtons = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -64,11 +65,19 @@ namespace FloraWarehouseManagement.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.cbDDV = new System.Windows.Forms.CheckBox();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.errorProviderCode = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderProduct = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderUnit = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderTaxGroup = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlControls.SuspendLayout();
             this.gbButtons.SuspendLayout();
             this.pnlFilter.SuspendLayout();
             this.gbProductInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderProduct)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderUnit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTaxGroup)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlControls
@@ -265,6 +274,7 @@ namespace FloraWarehouseManagement.Forms
             this.mtbCode.TabIndex = 1;
             this.mtbCode.ValidatingType = typeof(int);
             this.mtbCode.Click += new System.EventHandler(this.mtbCode_Click);
+            this.mtbCode.TextChanged += new System.EventHandler(this.mtbCode_TextChanged);
             // 
             // label2
             // 
@@ -307,6 +317,7 @@ namespace FloraWarehouseManagement.Forms
             this.cbTaxGroup.Name = "cbTaxGroup";
             this.cbTaxGroup.Size = new System.Drawing.Size(59, 28);
             this.cbTaxGroup.TabIndex = 4;
+            this.cbTaxGroup.SelectedIndexChanged += new System.EventHandler(this.cbTaxGroup_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -332,6 +343,7 @@ namespace FloraWarehouseManagement.Forms
             this.cbUnit.Name = "cbUnit";
             this.cbUnit.Size = new System.Drawing.Size(59, 28);
             this.cbUnit.TabIndex = 3;
+            this.cbUnit.SelectedIndexChanged += new System.EventHandler(this.cbUnit_SelectedIndexChanged);
             // 
             // tbOrigin
             // 
@@ -388,6 +400,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbProductName.Name = "tbProductName";
             this.tbProductName.Size = new System.Drawing.Size(145, 22);
             this.tbProductName.TabIndex = 2;
+            this.tbProductName.TextChanged += new System.EventHandler(this.tbProductName_TextChanged);
             // 
             // tbDescription
             // 
@@ -435,28 +448,48 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProducts.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProducts.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProducts.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvProducts.Location = new System.Drawing.Point(0, 355);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.Size = new System.Drawing.Size(974, 330);
             this.dgvProducts.TabIndex = 1;
             this.dgvProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellClick);
+            // 
+            // errorProviderCode
+            // 
+            this.errorProviderCode.ContainerControl = this;
+            this.errorProviderCode.RightToLeft = true;
+            // 
+            // errorProviderProduct
+            // 
+            this.errorProviderProduct.ContainerControl = this;
+            this.errorProviderProduct.RightToLeft = true;
+            // 
+            // errorProviderUnit
+            // 
+            this.errorProviderUnit.ContainerControl = this;
+            this.errorProviderUnit.RightToLeft = true;
+            // 
+            // errorProviderTaxGroup
+            // 
+            this.errorProviderTaxGroup.ContainerControl = this;
+            this.errorProviderTaxGroup.RightToLeft = true;
             // 
             // Products
             // 
@@ -481,6 +514,10 @@ namespace FloraWarehouseManagement.Forms
             this.gbProductInfo.ResumeLayout(false);
             this.gbProductInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderProduct)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderUnit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderTaxGroup)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -519,5 +556,9 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.RadioButton rbtnProduct;
         private System.Windows.Forms.RadioButton rbtnCode;
+        private System.Windows.Forms.ErrorProvider errorProviderCode;
+        private System.Windows.Forms.ErrorProvider errorProviderProduct;
+        private System.Windows.Forms.ErrorProvider errorProviderUnit;
+        private System.Windows.Forms.ErrorProvider errorProviderTaxGroup;
     }
 }

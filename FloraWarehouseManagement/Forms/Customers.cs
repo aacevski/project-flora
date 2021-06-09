@@ -56,9 +56,11 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (tbTaxNum.Text == "")
+            if (tbTaxNum.Text == "" || tbAddress.Text == "" || tbCity.Text == "" || tbName.Text == "")
             {
-                errorProviderTaxNum.SetError(tbTaxNum, "Задолжително внесете даночен број.");
+                errorProviderTaxNum.SetError(tbTaxNum, "Задолжително внесете даночен број");
+                errorProviderAddress.SetError(tbAddress, "Задолжително внесете адреса и град");
+                errorProviderName.SetError(tbName, "Задолжително внесете назив на коминтент");
             }
             else
             {
@@ -269,6 +271,21 @@ namespace FloraWarehouseManagement.Forms
             {
                 Search();
             }
+        }
+
+        private void tbName_TextChanged(object sender, EventArgs e)
+        {
+            errorProviderName.SetError(tbName, null);
+        }
+
+        private void tbAddress_TextChanged(object sender, EventArgs e)
+        {
+            errorProviderAddress.SetError(tbAddress, null);
+        }
+
+        private void tbCity_TextChanged(object sender, EventArgs e)
+        {
+            errorProviderAddress.SetError(tbCity, null);
         }
     }
 }

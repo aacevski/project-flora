@@ -74,26 +74,36 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            int productExists = ProductFunctions.Instance.ProductExists(mtbCode.Text);
-
-            if (productExists < 1)
+            if (mtbCode.Text == "" || tbProductName.Text == "" || cbUnit.SelectedIndex == -1 || cbTaxGroup.SelectedIndex == -1)
             {
-
-                ProductFunctions.Instance.AddProduct(mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbProductNameLatin.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0);
-
-                DisplayData();
-
-                MessageBox.Show
-                (
-                    "Артиклот е успешно додаден!",
-                    "Сними",
-                     MessageBoxButtons.OK,
-                     MessageBoxIcon.Information
-                );
+                errorProviderCode.SetError(mtbCode, "Полето за шифра е задолжително");
+                errorProviderProduct.SetError(tbProductName, "Полето за назив на артиклот е задолжително");
+                errorProviderUnit.SetError(cbUnit, "Одберете единица мерка");
+                errorProviderTaxGroup.SetError(cbTaxGroup, "Одберете даночна група");
             }
             else
             {
-                MessageBox.Show("Тоа артикл веќе постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                int productExists = ProductFunctions.Instance.ProductExists(mtbCode.Text);
+
+                if (productExists < 1)
+                {
+
+                    ProductFunctions.Instance.AddProduct(mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbProductNameLatin.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0);
+
+                    DisplayData();
+
+                    MessageBox.Show
+                    (
+                        "Артиклот е успешно додаден!",
+                        "Сними",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Information
+                    );
+                }
+                else
+                {
+                    MessageBox.Show("Тој артикл веќе постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -261,5 +271,30 @@ namespace FloraWarehouseManagement.Forms
             tbDescription.Text = "";
         }
 
+        private void mtbCode_TextChanged(object sender, EventArgs e)
+        {
+            errorProviderCode.SetError(mtbCode, null);
+        }
+
+        private void tbProductName_TextChanged(object sender, EventArgs e)
+        {
+            errorProviderProduct.SetError(tbProductName, null);
+        }
+
+        private void cbUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbUnit.SelectedIndex != -1)
+            {
+                errorProviderUnit.SetError(cbUnit, null);
+            }
+        }
+
+        private void cbTaxGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbTaxGroup.SelectedIndex != -1)
+            {
+                errorProviderTaxGroup.SetError(cbTaxGroup, null);
+            }
+        }
     }
 }
