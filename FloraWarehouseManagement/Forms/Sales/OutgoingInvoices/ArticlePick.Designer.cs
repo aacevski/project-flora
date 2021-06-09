@@ -35,7 +35,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbSearch = new System.Windows.Forms.GroupBox();
             this.rbtnCode = new System.Windows.Forms.RadioButton();
-            this.rbtnName = new System.Windows.Forms.RadioButton();
+            this.rbtnProduct = new System.Windows.Forms.RadioButton();
             this.btnSearch = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.pnlControls = new System.Windows.Forms.Panel();
@@ -48,7 +48,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // gbSearch
             // 
             this.gbSearch.Controls.Add(this.rbtnCode);
-            this.gbSearch.Controls.Add(this.rbtnName);
+            this.gbSearch.Controls.Add(this.rbtnProduct);
             this.gbSearch.Controls.Add(this.btnSearch);
             this.gbSearch.Controls.Add(this.tbSearch);
             this.gbSearch.Dock = System.Windows.Forms.DockStyle.Left;
@@ -70,17 +70,17 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.rbtnCode.Text = "по шифра";
             this.rbtnCode.UseVisualStyleBackColor = true;
             // 
-            // rbtnName
+            // rbtnProduct
             // 
-            this.rbtnName.AutoSize = true;
-            this.rbtnName.Checked = true;
-            this.rbtnName.Location = new System.Drawing.Point(6, 82);
-            this.rbtnName.Name = "rbtnName";
-            this.rbtnName.Size = new System.Drawing.Size(98, 25);
-            this.rbtnName.TabIndex = 32;
-            this.rbtnName.TabStop = true;
-            this.rbtnName.Text = "по назив";
-            this.rbtnName.UseVisualStyleBackColor = true;
+            this.rbtnProduct.AutoSize = true;
+            this.rbtnProduct.Checked = true;
+            this.rbtnProduct.Location = new System.Drawing.Point(6, 82);
+            this.rbtnProduct.Name = "rbtnProduct";
+            this.rbtnProduct.Size = new System.Drawing.Size(98, 25);
+            this.rbtnProduct.TabIndex = 32;
+            this.rbtnProduct.TabStop = true;
+            this.rbtnProduct.Text = "по назив";
+            this.rbtnProduct.UseVisualStyleBackColor = true;
             // 
             // btnSearch
             // 
@@ -92,6 +92,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.btnSearch.Size = new System.Drawing.Size(24, 24);
             this.btnSearch.TabIndex = 31;
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // tbSearch
             // 
@@ -100,6 +101,8 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(207, 27);
             this.tbSearch.TabIndex = 0;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
             // 
             // pnlControls
             // 
@@ -169,7 +172,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private System.Windows.Forms.GroupBox gbSearch;
         private System.Windows.Forms.RadioButton rbtnCode;
-        private System.Windows.Forms.RadioButton rbtnName;
+        private System.Windows.Forms.RadioButton rbtnProduct;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.Panel pnlControls;

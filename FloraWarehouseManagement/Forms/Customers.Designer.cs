@@ -37,14 +37,14 @@ namespace FloraWarehouseManagement.Forms
             this.gbButtons = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
-            this.rbtnCode = new System.Windows.Forms.RadioButton();
+            this.rbtnName = new System.Windows.Forms.RadioButton();
             this.label11 = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.pnlFilter = new System.Windows.Forms.Panel();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.rbtnProduct = new System.Windows.Forms.RadioButton();
+            this.rbtnTaxNum = new System.Windows.Forms.RadioButton();
+            this.rbtnCity = new System.Windows.Forms.RadioButton();
             this.gbProductInfo = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.tbContactPerson2 = new System.Windows.Forms.TextBox();
@@ -101,7 +101,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.gbButtons.Controls.Add(this.btnSearch);
             this.gbButtons.Controls.Add(this.tbSearch);
-            this.gbButtons.Controls.Add(this.rbtnCode);
+            this.gbButtons.Controls.Add(this.rbtnName);
             this.gbButtons.Controls.Add(this.label11);
             this.gbButtons.Controls.Add(this.btnEdit);
             this.gbButtons.Controls.Add(this.btnDelete);
@@ -132,18 +132,21 @@ namespace FloraWarehouseManagement.Forms
             this.tbSearch.Location = new System.Drawing.Point(13, 283);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(218, 29);
-            this.tbSearch.TabIndex = 26;
+            this.tbSearch.TabIndex = 16;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
             // 
-            // rbtnCode
+            // rbtnName
             // 
-            this.rbtnCode.AutoSize = true;
-            this.rbtnCode.Location = new System.Drawing.Point(13, 322);
-            this.rbtnCode.Name = "rbtnCode";
-            this.rbtnCode.Size = new System.Drawing.Size(91, 25);
-            this.rbtnCode.TabIndex = 31;
-            this.rbtnCode.TabStop = true;
-            this.rbtnCode.Text = "по назив";
-            this.rbtnCode.UseVisualStyleBackColor = true;
+            this.rbtnName.AutoSize = true;
+            this.rbtnName.Checked = true;
+            this.rbtnName.Location = new System.Drawing.Point(13, 322);
+            this.rbtnName.Name = "rbtnName";
+            this.rbtnName.Size = new System.Drawing.Size(91, 25);
+            this.rbtnName.TabIndex = 31;
+            this.rbtnName.TabStop = true;
+            this.rbtnName.Text = "по назив";
+            this.rbtnName.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
@@ -196,34 +199,34 @@ namespace FloraWarehouseManagement.Forms
             // 
             // pnlFilter
             // 
-            this.pnlFilter.Controls.Add(this.radioButton1);
-            this.pnlFilter.Controls.Add(this.rbtnProduct);
+            this.pnlFilter.Controls.Add(this.rbtnTaxNum);
+            this.pnlFilter.Controls.Add(this.rbtnCity);
             this.pnlFilter.Location = new System.Drawing.Point(13, 313);
             this.pnlFilter.Name = "pnlFilter";
             this.pnlFilter.Size = new System.Drawing.Size(295, 48);
             this.pnlFilter.TabIndex = 29;
             // 
-            // radioButton1
+            // rbtnTaxNum
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(187, 9);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(104, 25);
-            this.radioButton1.TabIndex = 33;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "по дан. бр.";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbtnTaxNum.AutoSize = true;
+            this.rbtnTaxNum.Location = new System.Drawing.Point(187, 9);
+            this.rbtnTaxNum.Name = "rbtnTaxNum";
+            this.rbtnTaxNum.Size = new System.Drawing.Size(104, 25);
+            this.rbtnTaxNum.TabIndex = 33;
+            this.rbtnTaxNum.TabStop = true;
+            this.rbtnTaxNum.Text = "по дан. бр.";
+            this.rbtnTaxNum.UseVisualStyleBackColor = true;
             // 
-            // rbtnProduct
+            // rbtnCity
             // 
-            this.rbtnProduct.AutoSize = true;
-            this.rbtnProduct.Location = new System.Drawing.Point(99, 9);
-            this.rbtnProduct.Name = "rbtnProduct";
-            this.rbtnProduct.Size = new System.Drawing.Size(82, 25);
-            this.rbtnProduct.TabIndex = 32;
-            this.rbtnProduct.TabStop = true;
-            this.rbtnProduct.Text = "по град";
-            this.rbtnProduct.UseVisualStyleBackColor = true;
+            this.rbtnCity.AutoSize = true;
+            this.rbtnCity.Location = new System.Drawing.Point(99, 9);
+            this.rbtnCity.Name = "rbtnCity";
+            this.rbtnCity.Size = new System.Drawing.Size(82, 25);
+            this.rbtnCity.TabIndex = 32;
+            this.rbtnCity.TabStop = true;
+            this.rbtnCity.Text = "по град";
+            this.rbtnCity.UseVisualStyleBackColor = true;
             // 
             // gbProductInfo
             // 
@@ -281,7 +284,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbContactPerson2.Location = new System.Drawing.Point(451, 109);
             this.tbContactPerson2.Name = "tbContactPerson2";
             this.tbContactPerson2.Size = new System.Drawing.Size(136, 29);
-            this.tbContactPerson2.TabIndex = 52;
+            this.tbContactPerson2.TabIndex = 11;
             // 
             // label15
             // 
@@ -299,7 +302,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbPhone2.Location = new System.Drawing.Point(451, 169);
             this.tbPhone2.Name = "tbPhone2";
             this.tbPhone2.Size = new System.Drawing.Size(136, 29);
-            this.tbPhone2.TabIndex = 50;
+            this.tbPhone2.TabIndex = 13;
             // 
             // label14
             // 
@@ -317,7 +320,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbEmail.Location = new System.Drawing.Point(296, 224);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(166, 29);
-            this.tbEmail.TabIndex = 48;
+            this.tbEmail.TabIndex = 14;
             // 
             // label13
             // 
@@ -335,7 +338,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbPhone1.Location = new System.Drawing.Point(296, 169);
             this.tbPhone1.Name = "tbPhone1";
             this.tbPhone1.Size = new System.Drawing.Size(136, 29);
-            this.tbPhone1.TabIndex = 46;
+            this.tbPhone1.TabIndex = 12;
             // 
             // label12
             // 
@@ -353,7 +356,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbContactPerson1.Location = new System.Drawing.Point(296, 109);
             this.tbContactPerson1.Name = "tbContactPerson1";
             this.tbContactPerson1.Size = new System.Drawing.Size(136, 29);
-            this.tbContactPerson1.TabIndex = 44;
+            this.tbContactPerson1.TabIndex = 10;
             // 
             // label10
             // 
@@ -371,7 +374,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbCity.Location = new System.Drawing.Point(449, 52);
             this.tbCity.Name = "tbCity";
             this.tbCity.Size = new System.Drawing.Size(66, 29);
-            this.tbCity.TabIndex = 42;
+            this.tbCity.TabIndex = 8;
             // 
             // label8
             // 
@@ -389,7 +392,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbZipCode.Location = new System.Drawing.Point(521, 52);
             this.tbZipCode.Name = "tbZipCode";
             this.tbZipCode.Size = new System.Drawing.Size(66, 29);
-            this.tbZipCode.TabIndex = 40;
+            this.tbZipCode.TabIndex = 9;
             // 
             // label7
             // 
@@ -407,7 +410,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbAddress.Location = new System.Drawing.Point(296, 52);
             this.tbAddress.Name = "tbAddress";
             this.tbAddress.Size = new System.Drawing.Size(136, 29);
-            this.tbAddress.TabIndex = 38;
+            this.tbAddress.TabIndex = 7;
             // 
             // cbBank
             // 
@@ -427,7 +430,7 @@ namespace FloraWarehouseManagement.Forms
             this.cbBank.Location = new System.Drawing.Point(28, 332);
             this.cbBank.Name = "cbBank";
             this.cbBank.Size = new System.Drawing.Size(166, 29);
-            this.cbBank.TabIndex = 36;
+            this.cbBank.TabIndex = 6;
             // 
             // label6
             // 
@@ -445,7 +448,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbEMBS.Location = new System.Drawing.Point(28, 169);
             this.tbEMBS.Name = "tbEMBS";
             this.tbEMBS.Size = new System.Drawing.Size(166, 29);
-            this.tbEMBS.TabIndex = 35;
+            this.tbEMBS.TabIndex = 3;
             // 
             // label5
             // 
@@ -463,7 +466,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbTaxNum.Location = new System.Drawing.Point(28, 109);
             this.tbTaxNum.Name = "tbTaxNum";
             this.tbTaxNum.Size = new System.Drawing.Size(166, 29);
-            this.tbTaxNum.TabIndex = 33;
+            this.tbTaxNum.TabIndex = 2;
             this.tbTaxNum.TextChanged += new System.EventHandler(this.tbTaxNum_TextChanged);
             // 
             // label4
@@ -482,7 +485,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbBankNum2.Location = new System.Drawing.Point(28, 279);
             this.tbBankNum2.Name = "tbBankNum2";
             this.tbBankNum2.Size = new System.Drawing.Size(166, 29);
-            this.tbBankNum2.TabIndex = 29;
+            this.tbBankNum2.TabIndex = 5;
             // 
             // label3
             // 
@@ -500,7 +503,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbBankNum1.Location = new System.Drawing.Point(28, 224);
             this.tbBankNum1.Name = "tbBankNum1";
             this.tbBankNum1.Size = new System.Drawing.Size(166, 29);
-            this.tbBankNum1.TabIndex = 27;
+            this.tbBankNum1.TabIndex = 4;
             // 
             // label1
             // 
@@ -538,7 +541,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbName.Location = new System.Drawing.Point(28, 52);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(166, 29);
-            this.tbName.TabIndex = 21;
+            this.tbName.TabIndex = 1;
             // 
             // tbDescription
             // 
@@ -546,7 +549,7 @@ namespace FloraWarehouseManagement.Forms
             this.tbDescription.Location = new System.Drawing.Point(294, 299);
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(293, 62);
-            this.tbDescription.TabIndex = 18;
+            this.tbDescription.TabIndex = 15;
             this.tbDescription.Text = "";
             // 
             // dgvCustomers
@@ -625,9 +628,9 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.Panel pnlFilter;
         private System.Windows.Forms.DataGridView dgvCustomers;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.RadioButton rbtnProduct;
-        private System.Windows.Forms.RadioButton rbtnCode;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rbtnCity;
+        private System.Windows.Forms.RadioButton rbtnName;
+        private System.Windows.Forms.RadioButton rbtnTaxNum;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox tbContactPerson2;
         private System.Windows.Forms.Label label15;

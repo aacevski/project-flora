@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 
 using FloraWarehouseManagement.Classes.Utilities;
+using FloraWarehouseManagement.Classes;
 
 namespace FloraWarehouseManagement.Forms
 {
@@ -19,7 +20,7 @@ namespace FloraWarehouseManagement.Forms
         private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
         SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
 
-
+        private Customer Customer;
         public Customers()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace FloraWarehouseManagement.Forms
 
         private void Customers_Load(object sender, EventArgs e)
         {
+            Customer = new Customer();
             dgvCustomers.Height = this.Height;
             dgvCustomers.Width = this.Width;
             this.WindowState = FormWindowState.Maximized;
@@ -115,26 +117,51 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if(rbtnCode.Checked)
-            {
+            Search();
+        }
 
-               
-            }
+        private void Search ()
+        {
+            if (tbSearch.Text != "")
+            {
+                if (rbtnName.Checked)
+                {
+                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Назив", tbSearch.Text);
+                }
 
-            else if(rbtnProduct.Checked)
-            {
-             
-            }
-            
-            else
-            {
-                MessageBox.Show("Одберете барем еден вид на филтрирање, по шифра или по артикл!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else if (rbtnCity.Checked)
+                {
+                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Град", tbSearch.Text);
+                }
+
+                else if (rbtnTaxNum.Checked)
+                {
+                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Даночен_број", tbSearch.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Одберете начин на филтрирање!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            
+            if (dgvCustomers.SelectedCells.Count != 0)
+            {
+                CustomerFunctions.Instance.Edit(Customer.TaxNumber, tbName.Text, tbTaxNum.Text, tbEMBS.Text, tbBankNum1.Text, tbBankNum2.Text, cbBank.SelectedItem.ToString(), tbAddress.Text, tbCity.Text, tbZipCode.Text, tbContactPerson1.Text, tbContactPerson2.Text, tbPhone1.Text, tbPhone2.Text, tbEmail.Text, tbDescription.Text);
+                Customer.TaxNumber = tbTaxNum.Text;
+
+                MessageBox.Show
+                   (
+                       "Артиклот е успешно променет!",
+                       "Промени",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                   );
+
+                DisplayData();
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -164,7 +191,7 @@ namespace FloraWarehouseManagement.Forms
         private void dgvCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             
-            if (e.RowIndex != -1)
+            if (e.RowIndex != -1 && e.RowIndex != dgvCustomers.Rows.Count - 1)
             {
                 string TaxNum = dgvCustomers.Rows[e.RowIndex].Cells[1].Value.ToString();
                 SQLiteCommand cmd = new SQLiteCommand($"SELECT * FROM Customers WHERE Даночен_број='{TaxNum}'", connection);
@@ -173,26 +200,29 @@ namespace FloraWarehouseManagement.Forms
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                 adapter.Fill(dt);
 
-                if (TaxNum != "")   // Smeni go ova, ne smee da bide prazno.
-                {
-                    tbName.Text = dt.Rows[0].ItemArray[1].ToString();
-                    tbTaxNum.Text = dt.Rows[0].ItemArray[2].ToString();
-                    tbEMBS.Text = dt.Rows[0].ItemArray[3].ToString();
-                    tbBankNum1.Text = dt.Rows[0].ItemArray[4].ToString();
-                    tbBankNum2.Text = dt.Rows[0].ItemArray[5].ToString();
-                    cbBank.SelectedIndex = cbBank.FindString(dt.Rows[0].ItemArray[6].ToString());
-                    tbAddress.Text = dt.Rows[0].ItemArray[7].ToString();
-                    tbContactPerson1.Text = dt.Rows[0].ItemArray[8].ToString();
-                    tbContactPerson2.Text = dt.Rows[0].ItemArray[9].ToString();
-                    tbPhone1.Text = dt.Rows[0].ItemArray[10].ToString();
-                    tbPhone2.Text = dt.Rows[0].ItemArray[11].ToString();
-                    tbEmail.Text = dt.Rows[0].ItemArray[12].ToString();
-                    tbCity.Text = dt.Rows[0].ItemArray[13].ToString();
-                    tbZipCode.Text = dt.Rows[0].ItemArray[14].ToString();
-                    tbDescription.Text = dt.Rows[0].ItemArray[15].ToString();
-                }
+                tbName.Text = dt.Rows[0].ItemArray[1].ToString();
+                tbTaxNum.Text = dt.Rows[0].ItemArray[2].ToString();
+                tbEMBS.Text = dt.Rows[0].ItemArray[3].ToString();
+                tbBankNum1.Text = dt.Rows[0].ItemArray[4].ToString();
+                tbBankNum2.Text = dt.Rows[0].ItemArray[5].ToString();
+                cbBank.SelectedIndex = cbBank.FindString(dt.Rows[0].ItemArray[6].ToString());
+                tbAddress.Text = dt.Rows[0].ItemArray[7].ToString();
+                tbContactPerson1.Text = dt.Rows[0].ItemArray[8].ToString();
+                tbContactPerson2.Text = dt.Rows[0].ItemArray[9].ToString();
+                tbPhone1.Text = dt.Rows[0].ItemArray[10].ToString();
+                tbPhone2.Text = dt.Rows[0].ItemArray[11].ToString();
+                tbEmail.Text = dt.Rows[0].ItemArray[12].ToString();
+                tbCity.Text = dt.Rows[0].ItemArray[13].ToString();
+                tbZipCode.Text = dt.Rows[0].ItemArray[14].ToString();
+                tbDescription.Text = dt.Rows[0].ItemArray[15].ToString();
+
+                Customer.SetCustomer(tbName.Text, tbTaxNum.Text, tbEMBS.Text, tbBankNum1.Text, tbBankNum2.Text, cbBank.SelectedItem.ToString(), tbAddress.Text, tbCity.Text, tbZipCode.Text, tbContactPerson1.Text, tbContactPerson2.Text, tbPhone1.Text, tbPhone2.Text, tbEmail.Text, tbDescription.Text);
 
                 connection.Close();
+            }
+            else
+            {
+                ClearTextBoxes();
             }
         }
 
@@ -223,6 +253,22 @@ namespace FloraWarehouseManagement.Forms
         private void tbTaxNum_TextChanged(object sender, EventArgs e)
         {
             errorProviderTaxNum.SetError(tbTaxNum, null);
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (tbSearch.Text == "")
+            {
+                DisplayData();
+            }
+        }
+
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Search();
+            }
         }
     }
 }

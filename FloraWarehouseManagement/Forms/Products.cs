@@ -122,19 +122,30 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if(rbtnCode.Checked)
-            {
-                FilterProducts("Шифра", tbSearch.Text);
-            }
+            Search();
+        }
 
-            else if(rbtnProduct.Checked)
-            {
-                FilterProducts("Артикл", tbSearch.Text);
-            }
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            Search();
+        }
 
-            else
+        private void Search ()
+        {
+            if (tbSearch.Text != "")
             {
-                MessageBox.Show("Одберете барем еден вид на филтрирање, по шифра или по артикл!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (rbtnCode.Checked)
+                {
+                    dgvProducts.DataSource = ProductFunctions.Instance.FilterProducts("Шифра", tbSearch.Text);
+                }
+                else if (rbtnProduct.Checked)
+                {
+                    dgvProducts.DataSource = ProductFunctions.Instance.FilterProducts("Артикл", tbSearch.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Одберете начин на филтрирање!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -225,7 +236,7 @@ namespace FloraWarehouseManagement.Forms
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
-            if(tbSearch.Text == "")
+            if (tbSearch.Text == "")
             {
                 DisplayData();
             }
@@ -249,5 +260,6 @@ namespace FloraWarehouseManagement.Forms
             tbOrigin.Text = "";
             tbDescription.Text = "";
         }
+
     }
 }

@@ -117,5 +117,68 @@ namespace FloraWarehouseManagement.Classes.Utilities
             adapter.Fill(productTable);
             connection.Close();
         }
+
+        public void Edit (string OldTaxNum, string Name, string TaxNumber, string EMBS, string MainBankNumber, string SecondaryBankNumber, string Bank, string Address, string City, string ZipCode, string ContactPerson1, string ContactPerson2, string Phone1, string Phone2, string Email, string Description)
+        {
+            SQLiteCommand command = new SQLiteCommand
+                (
+                "UPDATE Customers SET " +
+                "Назив = @Name, " +
+                "Даночен_број = @TaxNumber, " +
+                "ЕМБС = @EMBS, " +
+                "Жиро_сметка = @MainBankNumber, " +
+                "Жиро_сметка_доп = @SecondaryBankNumber, " +
+                "Банка = @Bank, " +
+                "Адреса = @Address, " +
+                "Контакт_лице_1 = @ContactPerson1, " +
+                "Контакт_лице_2 = @ContactPerson2, " +
+                "Телефон_1 = @Phone1, " +
+                "Телефон_2 = @Phone2, " +
+                "Е_пошта = @Email, " +
+                "Град = @City, " +
+                "Поштенски_број = @ZipCode, " +
+                "Забелешка = @Description " +
+                "WHERE Даночен_број = @OldTaxNum",
+                connection
+                );
+
+            connection.Open();
+
+            command.Parameters.AddWithValue("@Name", Name);
+            command.Parameters.AddWithValue("@TaxNumber", TaxNumber);
+            command.Parameters.AddWithValue("@EMBS", EMBS);
+            command.Parameters.AddWithValue("@MainBankNumber", MainBankNumber);
+            command.Parameters.AddWithValue("@SecondaryBankNumber", SecondaryBankNumber);
+            command.Parameters.AddWithValue("@Bank", Bank);
+            command.Parameters.AddWithValue("@Address", Address);
+            command.Parameters.AddWithValue("@ContactPerson1", ContactPerson1);
+            command.Parameters.AddWithValue("@ContactPerson2", ContactPerson2);
+            command.Parameters.AddWithValue("@Phone1", Phone1);
+            command.Parameters.AddWithValue("@Phone2", Phone2);
+            command.Parameters.AddWithValue("@Email", Email);
+            command.Parameters.AddWithValue("@City", City);
+            command.Parameters.AddWithValue("@ZipCode", ZipCode);
+            command.Parameters.AddWithValue("@Description", Description);
+            command.Parameters.AddWithValue("@OldTaxNum", OldTaxNum);
+
+            command.ExecuteNonQuery();
+            connection.Close();
+
+            DisplayData();
+        }
+
+        public DataTable FilterCustomers(string FilterType, string FilterProperty)
+        {
+            SQLiteCommand cmd = new SQLiteCommand($"SELECT * FROM Customers WHERE {FilterType} = @FilterProperty", connection);
+            cmd.Parameters.AddWithValue("FilterProperty", FilterProperty);
+
+            connection.Open();
+            DataTable dt = new DataTable();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+            adapter.Fill(dt);
+            connection.Close();
+
+            return dt;
+        }
     }
 }

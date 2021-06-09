@@ -57,7 +57,8 @@ namespace FloraWarehouseManagement.Classes.Utilities
                 "@Origin, " +
                 "@Description, " +
                 "@TaxBool)", 
-                connection);
+                connection
+                );
 
             connection.Open();
 
@@ -94,7 +95,8 @@ namespace FloraWarehouseManagement.Classes.Utilities
                 "Забелешка = @Description, " +
                 "Со_ДДВ = @TaxBool " +
                 "WHERE Шифра = @OldCode",
-                connection);
+                connection
+                );
 
             connection.Open();
 
@@ -142,15 +144,19 @@ namespace FloraWarehouseManagement.Classes.Utilities
         }
 
 
-        public void FilterProducts(string FilterType, string FilterProperty) 
+        public DataTable FilterProducts(string FilterType, string FilterProperty) 
         {
-            SQLiteCommand command = new SQLiteCommand
-            ("SELECT * FROM Products WHERE @FilterType = @FilterProperty", connection);
+            SQLiteCommand cmd = new SQLiteCommand($"SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Латиница, Потекло, Забелешка FROM Products WHERE {FilterType} = @FilterProperty", connection);
+            cmd.Parameters.AddWithValue("FilterProperty", FilterProperty);
+            
             connection.Open();
-            command.Parameters.AddWithValue("@FilterProperty", FilterType);
-            command.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+            adapter.Fill(dt);
             connection.Close();
-            DisplayData();
+
+            return dt;
         }
+
     }
 }

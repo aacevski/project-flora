@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.Classes;
+using FloraWarehouseManagement.Classes.Utilities;
 
 namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 {
@@ -34,7 +35,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         public void DisplayData()
         {
-            SQLiteCommand cmd = new SQLiteCommand("SELECT Назив, Даночен_број, ЕМБС, Жиро_сметка, Жиро_сметка_доп, Банка, Адреса, Град, Поштенски_број, Забелешка FROM Customers", connection);
+            SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Customers", connection);
             connection.Open();
             DataTable dt = new DataTable();
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
@@ -71,6 +72,52 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             pnlControls.Width = this.Width - 50;
             dgvCustomers.Height = this.Height - 50;
             dgvCustomers.Width = this.Width - 50;
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (tbSearch.Text == "")
+            {
+                DisplayData();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            Search();
+        }
+
+        private void Search ()
+        {
+            if (tbSearch.Text != "")
+            {
+                if (rbtnName.Checked)
+                {
+                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Назив", tbSearch.Text);
+                }
+
+                else if (rbtnCity.Checked)
+                {
+                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Град", tbSearch.Text);
+                }
+
+                else if (rbtnTaxNum.Checked)
+                {
+                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Даночен_број", tbSearch.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Одберете начин на филтрирање!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Search();
+            }
         }
     }
 }

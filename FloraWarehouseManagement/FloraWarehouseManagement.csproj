@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CompanyInfo.cs" />
+    <Compile Include="Classes\Customer.cs" />
     <Compile Include="Classes\Product.cs" />
     <Compile Include="Classes\Utilities\CustomerFunctions.cs" />
     <Compile Include="Classes\Utilities\EnumeratorForControls.cs" />
