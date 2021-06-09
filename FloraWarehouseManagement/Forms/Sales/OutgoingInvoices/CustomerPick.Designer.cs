@@ -66,7 +66,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvCustomers.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvCustomers.Location = new System.Drawing.Point(12, 247);
+            this.dgvCustomers.Location = new System.Drawing.Point(12, 180);
             this.dgvCustomers.Name = "dgvCustomers";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -76,7 +76,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvCustomers.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvCustomers.Size = new System.Drawing.Size(766, 300);
+            this.dgvCustomers.Size = new System.Drawing.Size(887, 369);
             this.dgvCustomers.TabIndex = 2;
             this.dgvCustomers.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentDoubleClick);
             // 
@@ -86,7 +86,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.pnlControls.Controls.Add(this.gbSearch);
             this.pnlControls.Location = new System.Drawing.Point(12, 12);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(766, 229);
+            this.pnlControls.Size = new System.Drawing.Size(887, 162);
             this.pnlControls.TabIndex = 3;
             // 
             // gbSearch
@@ -95,10 +95,11 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.gbSearch.Controls.Add(this.rbtnName);
             this.gbSearch.Controls.Add(this.btnSearch);
             this.gbSearch.Controls.Add(this.tbSearch);
+            this.gbSearch.Dock = System.Windows.Forms.DockStyle.Left;
             this.gbSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbSearch.Location = new System.Drawing.Point(242, 24);
+            this.gbSearch.Location = new System.Drawing.Point(0, 0);
             this.gbSearch.Name = "gbSearch";
-            this.gbSearch.Size = new System.Drawing.Size(280, 180);
+            this.gbSearch.Size = new System.Drawing.Size(280, 162);
             this.gbSearch.TabIndex = 0;
             this.gbSearch.TabStop = false;
             this.gbSearch.Text = "Пребарување";
@@ -148,7 +149,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 559);
+            this.ClientSize = new System.Drawing.Size(911, 561);
             this.Controls.Add(this.pnlControls);
             this.Controls.Add(this.dgvCustomers);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -156,6 +157,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Избор на купувач";
             this.Load += new System.EventHandler(this.CustomerPick_Load);
+            this.SizeChanged += new System.EventHandler(this.CustomerPick_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.pnlControls.ResumeLayout(false);
             this.gbSearch.ResumeLayout(false);

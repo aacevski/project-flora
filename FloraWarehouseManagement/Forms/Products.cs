@@ -39,7 +39,7 @@ namespace FloraWarehouseManagement.Forms
             DisplayData();
         }
 
-        public void DisplayData()
+        private void DisplayData()
         {
             SQLiteCommand cmd = new SQLiteCommand("SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Латиница, Потекло, Забелешка FROM Products", connection);
             connection.Open();

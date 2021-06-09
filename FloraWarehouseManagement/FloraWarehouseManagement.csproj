@@ -113,12 +113,25 @@
     <Compile Include="Forms\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Sales\OutgoingInvoices\ArticlePick.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sales\OutgoingInvoices\ArticlePick.Designer.cs">
+      <DependentUpon>ArticlePick.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Sales\OutgoingInvoices\Classes\CustomerInfo.cs" />
+    <Compile Include="Forms\Sales\OutgoingInvoices\Classes\InvoiceItem.cs" />
     <Compile Include="Forms\Sales\OutgoingInvoices\CustomerPick.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Sales\OutgoingInvoices\CustomerPick.Designer.cs">
       <DependentUpon>CustomerPick.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Sales\OutgoingInvoices\InvoiceItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sales\OutgoingInvoices\InvoiceItems.Designer.cs">
+      <DependentUpon>InvoiceItems.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Sales\OutgoingInvoices\OutgoingInvoices.cs">
       <SubType>Form</SubType>
@@ -158,8 +171,14 @@
     <EmbeddedResource Include="Forms\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sales\OutgoingInvoices\ArticlePick.resx">
+      <DependentUpon>ArticlePick.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sales\OutgoingInvoices\CustomerPick.resx">
       <DependentUpon>CustomerPick.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sales\OutgoingInvoices\InvoiceItems.resx">
+      <DependentUpon>InvoiceItems.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sales\OutgoingInvoices\OutgoingInvoices.resx">
       <DependentUpon>OutgoingInvoices.cs</DependentUpon>

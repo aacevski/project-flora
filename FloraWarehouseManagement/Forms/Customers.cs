@@ -54,42 +54,51 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            int productExists = CustomerFunctions.Instance.Exists(tbTaxNum.Text);
-
-            if (productExists < 1)
+            if (tbTaxNum.Text == "")
             {
-                CustomerFunctions.Instance.Add
-                    (
-                    tbName.Text,
-                    tbTaxNum.Text,
-                    tbEMBS.Text,
-                    tbBankNum1.Text,
-                    tbBankNum2.Text,
-                    cbBank.GetItemText(cbBank.SelectedItem),
-                    tbAddress.Text,
-                    tbCity.Text,
-                    tbZipCode.Text,
-                    tbContactPerson1.Text,
-                    tbContactPerson2.Text,
-                    tbPhone1.Text,
-                    tbPhone2.Text,
-                    tbEmail.Text,
-                    tbDescription.Text
-                    );
-
-                DisplayData();
-
-                MessageBox.Show
-                (
-                    "Коминтентот е успешно додаден!",
-                    "Сними",
-                     MessageBoxButtons.OK,
-                     MessageBoxIcon.Information
-                );
+                errorProviderTaxNum.SetError(tbTaxNum, "Задолжително внесете даночен број.");
             }
             else
             {
-                MessageBox.Show("Тој коминтент веќе постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProviderTaxNum.SetError(tbTaxNum, null);
+
+                int productExists = CustomerFunctions.Instance.Exists(tbTaxNum.Text);
+
+                if (productExists < 1)
+                {
+                    CustomerFunctions.Instance.Add
+                        (
+                        tbName.Text,
+                        tbTaxNum.Text,
+                        tbEMBS.Text,
+                        tbBankNum1.Text,
+                        tbBankNum2.Text,
+                        cbBank.GetItemText(cbBank.SelectedItem),
+                        tbAddress.Text,
+                        tbCity.Text,
+                        tbZipCode.Text,
+                        tbContactPerson1.Text,
+                        tbContactPerson2.Text,
+                        tbPhone1.Text,
+                        tbPhone2.Text,
+                        tbEmail.Text,
+                        tbDescription.Text
+                        );
+
+                    DisplayData();
+
+                    MessageBox.Show
+                    (
+                        "Коминтентот е успешно додаден!",
+                        "Сними",
+                         MessageBoxButtons.OK,
+                         MessageBoxIcon.Information
+                    );
+                }
+                else
+                {
+                    MessageBox.Show("Тој коминтент веќе постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -209,6 +218,11 @@ namespace FloraWarehouseManagement.Forms
             tbCity.Text = "";
             tbZipCode.Text = "";
             tbDescription.Text = "";
+        }
+
+        private void tbTaxNum_TextChanged(object sender, EventArgs e)
+        {
+            errorProviderTaxNum.SetError(tbTaxNum, null);
         }
     }
 }

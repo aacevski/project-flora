@@ -14,63 +14,63 @@ using FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.Classes;
 
 namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 {
-    public partial class CustomerPick : Form
+    public partial class ArticlePick : Form
     {
         private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
         SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
 
-        public static CustomerInfo selectecCustomerInfo;
-
-        public CustomerPick()
+        public static InvoiceItem item;
+        public ArticlePick()
         {
-            selectecCustomerInfo = new CustomerInfo();
+            item = new InvoiceItem();
             InitializeComponent();
         }
 
-        private void CustomerPick_Load(object sender, EventArgs e)
+        private void ArticlePick_Load(object sender, EventArgs e)
         {
             DisplayData();
         }
 
-        public void DisplayData()
+        private void DisplayData()
         {
-            SQLiteCommand cmd = new SQLiteCommand("SELECT Назив, Даночен_број, ЕМБС, Жиро_сметка, Жиро_сметка_доп, Банка, Адреса, Град, Поштенски_број, Забелешка FROM Customers", connection);
+            SQLiteCommand cmd = new SQLiteCommand("SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Латиница, Потекло, Забелешка FROM Products", connection);
             connection.Open();
             DataTable dt = new DataTable();
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
             adapter.Fill(dt);
-            dgvCustomers.DataSource = dt;
+            dgvProducts.DataSource = dt;
             connection.Close();
         }
 
-        private void dgvCustomers_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvProducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
             {
-                string TaxNum = dgvCustomers.Rows[e.RowIndex].Cells[1].Value.ToString();
-                SQLiteCommand cmd = new SQLiteCommand($"SELECT * FROM Customers WHERE Даночен_број='{TaxNum}'", connection);
-                
+                string Code = dgvProducts.Rows[e.RowIndex].Cells[0].Value.ToString();
+                SQLiteCommand cmd = new SQLiteCommand($"SELECT * FROM Products WHERE Шифра='{Code}'", connection);
+
                 connection.Open();
 
                 DataTable dt = new DataTable();
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                 adapter.Fill(dt);
-
-                selectecCustomerInfo.Name = dt.Rows[0].ItemArray[1].ToString();
-                selectecCustomerInfo.Address = dt.Rows[0].ItemArray[7].ToString();
-                selectecCustomerInfo.City = dt.Rows[0].ItemArray[13].ToString();
-
+                MessageBox.Show(Code);
+                item.Code = dt.Rows[0].ItemArray[1].ToString();
+                item.Name = dt.Rows[0].ItemArray[2].ToString();
+                item.Unit = dt.Rows[0].ItemArray[3].ToString();
+                item.Tax = decimal.Parse(dt.Rows[0].ItemArray[4].ToString());
+                
                 connection.Close();
 
                 this.Close();
             }
         }
 
-        private void CustomerPick_SizeChanged(object sender, EventArgs e)
+        private void ArticlePick_SizeChanged(object sender, EventArgs e)
         {
             pnlControls.Width = this.Width - 50;
-            dgvCustomers.Height = this.Height - 50;
-            dgvCustomers.Width = this.Width - 50;
+            dgvProducts.Height = this.Height - 50;
+            dgvProducts.Width = this.Width - 50;
         }
     }
 }

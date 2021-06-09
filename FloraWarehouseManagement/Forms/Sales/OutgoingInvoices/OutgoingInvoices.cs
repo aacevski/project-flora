@@ -13,6 +13,8 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 {
     public partial class OutgoingInvoices : Form
     {
+        
+
         public OutgoingInvoices()
         {
             InitializeComponent();
@@ -22,6 +24,11 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         {
             this.WindowState = FormWindowState.Maximized;
             mtbDate.Text = DateTime.Now.ToString("dd-MM-yy", new CultureInfo("en-GB"));
+            tbValuta.Text = "60 дена";
+            tbDescription.Text = "За ненавремено плаќање пресметуваме законска затезна камата. " +
+                                 "Рекламации се примаат во рок од 8 дена по приемот на фактурата. " +
+                                 "Во случај на спор надлежен е Основниот суд во Скопје.";
+            cbDocType.SelectedIndex = 0;
         }
 
         private void OutgoingInvoices_SizeChanged(object sender, EventArgs e)
@@ -47,6 +54,17 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
                     tbCustomer.Text = CustomerPick.selectecCustomerInfo.Name;
                 }
             }
+        }
+
+        private void btnInvoiceItems_Click(object sender, EventArgs e)
+        {
+            Form invoiceItems = new InvoiceItems();
+            invoiceItems.Show();
+        }
+
+        private void tbDescription_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
