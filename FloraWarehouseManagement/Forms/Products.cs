@@ -19,7 +19,6 @@ namespace FloraWarehouseManagement.Forms
     {
         private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
         SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
-        private IEnumerable<TextBox> textBoxes;
         private Product Product;
 
         public Products()
@@ -33,7 +32,6 @@ namespace FloraWarehouseManagement.Forms
             dgvProducts.Width = this.Width;
             this.WindowState = FormWindowState.Maximized;
 
-            textBoxes = EnumeratorForControls.GetChildControls<TextBox>(gbProductInfo);
             Product = new Product();
 
             DisplayData();
