@@ -43,7 +43,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void InitDefaultSettings()
         {
-            mtbDate.Text = DateTime.Now.ToString("dd-MM-yy", new CultureInfo("en-DE"));
+            mtbDate.Text = new DateTimeOffset(2011, 6, 10, 15, 24, 16, TimeSpan.Zero).ToString(); ;
             tbValuta.Text = "60 дена";
             tbDescription.Text = "За ненавремено плаќање пресметуваме законска затезна камата. " +
                                  "Рекламации се примаат во рок од 8 дена по приемот на фактурата. " +
