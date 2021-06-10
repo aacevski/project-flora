@@ -90,13 +90,7 @@ namespace FloraWarehouseManagement.Forms
 
                     DisplayData();
 
-                    MessageBox.Show
-                    (
-                        "Артиклот е успешно додаден!",
-                        "Сними",
-                         MessageBoxButtons.OK,
-                         MessageBoxIcon.Information
-                    );
+                    MessageBox.Show("Артиклот е успешно додаден!", "Сними", MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
                 else
                 {

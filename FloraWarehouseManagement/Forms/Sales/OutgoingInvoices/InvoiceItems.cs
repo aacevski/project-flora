@@ -11,14 +11,17 @@ using System.Globalization;
 
 using FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.Classes;
 using FloraWarehouseManagement.Classes.Utilities;
-
+using System.IO;
+using System.Data.SQLite;
 
 namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 {
     public partial class InvoiceItems : Form
-    {
+    {       
+        private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
+
         private InvoiceItem item;
-        private DataTable dt;
 
         public InvoiceItems()
         {
@@ -28,8 +31,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void InvoiceItems_Load(object sender, EventArgs e)
         {
-            InitDataTable();
-            dgvInvoiceItems.DataSource = dt;
+            DisplayData();
         }
 
         private void InvoiceItems_KeyUp(object sender, KeyEventArgs e)
@@ -54,40 +56,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
                     tbPrice.Text = item.Price.ToString("N2");
                 }
             }
-        }
-
-        private void AddToDgv ()
-        {
-            dt.Rows.Add
-                (
-                item.Code,
-                item.Name,
-                item.Unit,
-                item.Tax,
-                item.Quantity,
-                Convert.ToDecimal(string.Format("{0:N2}", item.PriceWithoutTax())),
-                Convert.ToDecimal(string.Format("{0:N2}", item.GetTax())),
-                Convert.ToDecimal(string.Format("{0:N2}", item.Price)),
-                Convert.ToDecimal(string.Format("{0:N2}", item.GetTotalPriceWithoutTax())),
-                Convert.ToDecimal(string.Format("{0:N2}", item.GetTotalTax())),
-                Convert.ToDecimal(string.Format("{0:N2}", item.GetTotalPrice()))
-                );
-        }
-
-        private void InitDataTable()
-        {
-            dt = new DataTable();
-            dt.Columns.Add("Шифра", typeof(string));
-            dt.Columns.Add("Артикл", typeof(string));
-            dt.Columns.Add("Мерка", typeof(string));
-            dt.Columns.Add("Даночна ставка", typeof(decimal));
-            dt.Columns.Add("Количина", typeof(decimal));
-            dt.Columns.Add("Ед. цена", typeof(decimal));
-            dt.Columns.Add("Ед. ДДВ", typeof(decimal));
-            dt.Columns.Add("Прод. цена", typeof(decimal));
-            dt.Columns.Add("Износ", typeof(decimal));
-            dt.Columns.Add("ДДВ", typeof(decimal));
-            dt.Columns.Add("Вкупно", typeof(decimal));
         }
 
         private void nudQuantity_ValueChanged(object sender, EventArgs e)
@@ -118,7 +86,17 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            AddToDgv();
+            SQLiteCommand cmd = new SQLiteCommand("INSERT INTO InvoiceItems(Invoice_ID, Item_ID, Quantity, Price) VALUES(@Invoice_ID, @Item_ID, @Quantity, @Price)",connection);
+            cmd.Parameters.AddWithValue("Invoice_ID", OutgoingInvoices.GetInvoiceDBID());
+            cmd.Parameters.AddWithValue("Item_ID", item.Code);
+            cmd.Parameters.AddWithValue("Quantity", item.Quantity);
+            cmd.Parameters.AddWithValue("Price", item.Price);
+
+            connection.Open();
+            cmd.ExecuteNonQuery();
+            connection.Close();
+
+            DisplayData();
             ClearTextBoxes();
         }
 
@@ -141,6 +119,16 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             nudQuantity.Value = 1;
         }
 
-        // TODO IMPLEMENTIRAJ DISPLAY METOD STO KE GI PRIKAZE SITE STAVKI NA ODREDENA FAKTURA
+        private void DisplayData()
+        {
+            SQLiteCommand cmd = new SQLiteCommand($"SELECT Products.Артикл, Quantity, Price FROM InvoiceItems INNER JOIN Invoices ON Invoices.ID = InvoiceItems.Invoice_ID INNER JOIN Products ON Products.Шифра = InvoiceItems.Item_ID WHERE Invoice_ID = {OutgoingInvoices.InvoiceNumber}", connection);
+            connection.Open();
+            DataTable dt = new DataTable();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+            adapter.Fill(dt);
+            dgvInvoiceItems.DataSource = dt;
+            connection.Close();
+        }
+
     }
 }

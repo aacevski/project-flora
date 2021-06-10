@@ -11,15 +11,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.Classes;
+
 namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 {
     public partial class OutgoingInvoices : Form
     {
 
         private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-        SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
+        static SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
 
         public static int InvoiceNumber;
+        private CustomerInfo selectedCustomer;
 
         public OutgoingInvoices()
         {
@@ -29,6 +32,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private void OutgoingInvoices_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
+            selectedCustomer = new CustomerInfo();
 
             InitDefaultSettings();
             GetInvoiceNumber();
@@ -79,8 +83,15 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void btnInvoiceItems_Click(object sender, EventArgs e)
         {
-            Form invoiceItems = new InvoiceItems();
-            invoiceItems.Show();
+            if (dgvInvoices.SelectedCells.Count == 1)
+            {
+                Form invoiceItems = new InvoiceItems();
+                invoiceItems.Show();
+            }
+            else
+            {
+                MessageBox.Show("Одберете фактура.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void tbDescription_TextChanged(object sender, EventArgs e)
@@ -90,19 +101,32 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void btnNew_Click(object sender, EventArgs e)
         {
+            //TODO: dodadi gi ostanatite parametri od Invoices
+            GetInvoiceNumber();
             InvoiceNumber++;
             SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Invoices(Customer_ID, Date, InvNumber) VALUES(null, @Date, @InvoiceNumber)", connection);
             cmd.Parameters.AddWithValue("InvoiceNumber", InvoiceNumber);
             cmd.Parameters.AddWithValue("Date", mtbDate.Text);
 
             connection.Open();
-
             cmd.ExecuteNonQuery();
-
             connection.Close();
 
             ResetBoxes();
             SetInvoiceNumberTextBox();
+        }
+
+        public static int GetInvoiceDBID ()
+        {
+            int id;
+
+            SQLiteCommand cmd = new SQLiteCommand($"SELECT ID FROM Invoices WHERE InvNumber = {InvoiceNumber}", connection);
+
+            connection.Open();
+            id = int.Parse(cmd.ExecuteScalar().ToString());
+            connection.Close();
+
+            return id;
         }
 
         private void ResetBoxes ()
@@ -126,9 +150,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         public void DisplayData()
         {
-            // Kako da go prevzemam kupuvacot so toj ID sto e vo Invoices, i da gi dobijam site informacii za nego (moze da gi stavam vo
-            // klasa )
-            SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Invoices", connection);
+            SQLiteCommand cmd = new SQLiteCommand($"SELECT Customers.Назив, Date AS Дата, PRINTF('%05d/%d',InvNumber, {DateTime.Now.Year}) AS 'Број на фактура', Valuta AS Валута, TypeOfDocument AS 'Вид на документ', Description AS Забелешка, Iznos AS Износ, DDV AS ДДВ, Vkupno AS Вкупно FROM Invoices INNER JOIN Customers ON Customers.ID = Invoices.Customer_ID", connection);
             connection.Open();
             DataTable dt = new DataTable();
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
@@ -137,18 +159,8 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             connection.Close();
         }
 
-        public void TestFunc()
-        {
-            string id = GetCustomerID();
-
-            connection.Open();
-            SQLiteCommand cmd = new SQLiteCommand($"SELECT Назив FROM Customers INNER JOIN Invoices ON ({id} = Customers.ID)", connection);
-            
-            MessageBox.Show(cmd.ExecuteScalar().ToString());
-            connection.Close();
-        }
-
-        public string GetCustomerID ()
+        // MOZE DA NE TREBA
+/*        public string GetCustomerID ()
         {
             string id;
 
@@ -161,11 +173,45 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             connection.Close();
 
             return id;
-        }
+        }*/
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void dgvInvoices_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != dgvInvoices.Rows.Count - 1 && e.RowIndex != -1)
+            {
+                InvoiceNumber = int.Parse(dgvInvoices.Rows[e.RowIndex].Cells[2].Value.ToString().Substring(0,5));
+                string customerName = dgvInvoices.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+                connection.Open();
+
+                SQLiteCommand cmd = new SQLiteCommand("SELECT Назив, Адреса, Град FROM Customers WHERE Назив = @Name", connection);
+                cmd.Parameters.AddWithValue("Name", customerName);
+                DataTable dt = new DataTable();
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+                adapter.Fill(dt);
+
+                connection.Close();
+
+                selectedCustomer.Name = dt.Rows[0].ItemArray[0].ToString();
+                selectedCustomer.Address = dt.Rows[0].ItemArray[1].ToString();
+                selectedCustomer.City = dt.Rows[0].ItemArray[2].ToString();
+
+                SetInvoiceNumberTextBox();
+            }
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            if (dgvInvoices.SelectedCells.Count == 1)
+            {
+                Invoice invoiceForPrinting = new Invoice(InvoiceNumber, selectedCustomer, tbValuta.Text, tbDescription.Text, mtbDate.Text, cbDocType.SelectedItem.ToString());
+                MessageBox.Show(invoiceForPrinting.ToString());
+            }
         }
     }
 }

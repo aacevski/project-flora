@@ -390,6 +390,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.dgvInvoiceItems.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvInvoiceItems.Location = new System.Drawing.Point(12, 247);
             this.dgvInvoiceItems.Name = "dgvInvoiceItems";
+            this.dgvInvoiceItems.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

@@ -82,8 +82,10 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvInvoices.Location = new System.Drawing.Point(0, 353);
             this.dgvInvoices.Name = "dgvInvoices";
+            this.dgvInvoices.ReadOnly = true;
             this.dgvInvoices.Size = new System.Drawing.Size(974, 330);
             this.dgvInvoices.TabIndex = 3;
+            this.dgvInvoices.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoices_CellClick);
             // 
             // pnlControls
             // 
@@ -106,6 +108,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.btnPrint.TabIndex = 4;
             this.btnPrint.Text = "Печати";
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnEdit
             // 
