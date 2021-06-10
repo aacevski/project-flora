@@ -110,12 +110,13 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.pnlControls.Controls.Add(this.gbSearch);
             this.pnlControls.Location = new System.Drawing.Point(12, 12);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(760, 169);
+            this.pnlControls.Size = new System.Drawing.Size(989, 169);
             this.pnlControls.TabIndex = 4;
             // 
             // dgvProducts
             // 
             this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProducts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvProducts.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -144,7 +145,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvProducts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvProducts.Size = new System.Drawing.Size(760, 362);
+            this.dgvProducts.Size = new System.Drawing.Size(989, 362);
             this.dgvProducts.TabIndex = 5;
             this.dgvProducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellDoubleClick);
             // 
@@ -152,7 +153,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(1013, 561);
             this.Controls.Add(this.dgvProducts);
             this.Controls.Add(this.pnlControls);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

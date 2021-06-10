@@ -31,12 +31,12 @@ namespace FloraWarehouseManagement.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.pnlMenuButtons = new System.Windows.Forms.Panel();
+            this.btnLogins = new System.Windows.Forms.Button();
             this.btnEmployees = new System.Windows.Forms.Button();
             this.btnClients = new System.Windows.Forms.Button();
             this.btnProducts = new System.Windows.Forms.Button();
             this.btnSales = new System.Windows.Forms.Button();
             this.btnInfo = new System.Windows.Forms.Button();
-            this.btnLogins = new System.Windows.Forms.Button();
             this.pnlMenuButtons.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +54,18 @@ namespace FloraWarehouseManagement.Forms
             this.pnlMenuButtons.Name = "pnlMenuButtons";
             this.pnlMenuButtons.Size = new System.Drawing.Size(1280, 720);
             this.pnlMenuButtons.TabIndex = 3;
+            // 
+            // btnLogins
+            // 
+            this.btnLogins.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLogins.BackgroundImage")));
+            this.btnLogins.FlatAppearance.BorderSize = 0;
+            this.btnLogins.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnLogins.Location = new System.Drawing.Point(916, 404);
+            this.btnLogins.Name = "btnLogins";
+            this.btnLogins.Size = new System.Drawing.Size(300, 250);
+            this.btnLogins.TabIndex = 6;
+            this.btnLogins.UseVisualStyleBackColor = true;
+            this.btnLogins.Click += new System.EventHandler(this.btnLogins_Click);
             // 
             // btnEmployees
             // 
@@ -113,17 +125,6 @@ namespace FloraWarehouseManagement.Forms
             this.btnInfo.TabIndex = 1;
             this.btnInfo.UseVisualStyleBackColor = true;
             this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
-            // 
-            // btnLogins
-            // 
-            this.btnLogins.FlatAppearance.BorderSize = 0;
-            this.btnLogins.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnLogins.Location = new System.Drawing.Point(916, 404);
-            this.btnLogins.Name = "btnLogins";
-            this.btnLogins.Size = new System.Drawing.Size(300, 250);
-            this.btnLogins.TabIndex = 6;
-            this.btnLogins.UseVisualStyleBackColor = true;
-            this.btnLogins.Click += new System.EventHandler(this.btnLogins_Click);
             // 
             // MainMenu
             // 

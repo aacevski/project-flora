@@ -7,8 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 using FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.Classes;
+using FloraWarehouseManagement.Classes.Utilities;
+
 
 namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 {
@@ -48,6 +51,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
                     tbName.Text = item.Name;
                     tbTax.Text = item.Tax.ToString();
                     tbUnit.Text = item.Unit;
+                    tbPrice.Text = item.Price.ToString("N2");
                 }
             }
         }
@@ -95,7 +99,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         {
             if (!string.IsNullOrEmpty(tbPrice.Text))
             {
-                item.Price = int.Parse(tbPrice.Text);
+                item.Price = decimal.Parse(tbPrice.Text, NumberStyles.Currency);
             }
 
             UpdateTextBoxes();
@@ -103,22 +107,13 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void tbPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-
-            // only allow one decimal point
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
+            ProductFunctions.Instance.AcceptNumbersOnly(sender, e);
         }
 
         private void UpdateTextBoxes()
         {
-            tbEdCena.Text = string.Format("{0:F2}", item.PriceWithoutTax());
-            tbEdDDV.Text = string.Format("{0:F2}", item.GetTax());
+            tbEdCena.Text = string.Format("{0:N2}", item.PriceWithoutTax());
+            tbEdDDV.Text = string.Format("{0:N2}", item.GetTax());
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -143,7 +138,9 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             tbEdCena.Text = "";
             tbEdDDV.Text = "";  
             tbTax.Text = "";
-            nudQuantity.Value = 0;
+            nudQuantity.Value = 1;
         }
+
+        // TODO IMPLEMENTIRAJ DISPLAY METOD STO KE GI PRIKAZE SITE STAVKI NA ODREDENA FAKTURA
     }
 }

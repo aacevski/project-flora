@@ -95,7 +95,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.pnlControls.Controls.Add(this.label1);
             this.pnlControls.Location = new System.Drawing.Point(12, 12);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(760, 229);
+            this.pnlControls.Size = new System.Drawing.Size(975, 229);
             this.pnlControls.TabIndex = 4;
             // 
             // btnDelete
@@ -220,11 +220,26 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // nudQuantity
             // 
             this.nudQuantity.Location = new System.Drawing.Point(101, 94);
+            this.nudQuantity.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nudQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nudQuantity.Name = "nudQuantity";
             this.nudQuantity.Size = new System.Drawing.Size(78, 20);
             this.nudQuantity.TabIndex = 13;
             this.nudQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nudQuantity.ThousandsSeparator = true;
+            this.nudQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nudQuantity.ValueChanged += new System.EventHandler(this.nudQuantity_ValueChanged);
             // 
             // label8
@@ -352,6 +367,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // dgvInvoiceItems
             // 
             this.dgvInvoiceItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvInvoiceItems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvInvoiceItems.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -382,14 +398,14 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvInvoiceItems.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvInvoiceItems.Size = new System.Drawing.Size(760, 302);
+            this.dgvInvoiceItems.Size = new System.Drawing.Size(975, 302);
             this.dgvInvoiceItems.TabIndex = 3;
             // 
             // InvoiceItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(999, 561);
             this.Controls.Add(this.dgvInvoiceItems);
             this.Controls.Add(this.pnlControls);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

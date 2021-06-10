@@ -35,7 +35,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         public void DisplayData()
         {
-            SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Customers", connection);
+            SQLiteCommand cmd = new SQLiteCommand("SELECT Назив, Даночен_број, ЕМБС, Жиро_сметка, Жиро_сметка_доп, Банка, Адреса, Град, Поштенски_број, Забелешка FROM Customers", connection);
             connection.Open();
             DataTable dt = new DataTable();
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);

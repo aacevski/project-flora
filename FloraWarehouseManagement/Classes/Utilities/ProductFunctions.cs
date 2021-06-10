@@ -30,7 +30,7 @@ namespace FloraWarehouseManagement.Classes.Utilities
             connection.Close();
         }
 
-        public void AddProduct(string Code, string Product, string Measurement, string TaxGroup, string GroupCode, string HelpCode, string Latin, string Origin, string Description, int TaxBool)
+        public void AddProduct(string Code, string Product, string Measurement, string TaxGroup, string GroupCode, string HelpCode, string Price, string Origin, string Description, int TaxBool, string Quantity)
         {
             SQLiteCommand command = new SQLiteCommand
                 (
@@ -41,10 +41,11 @@ namespace FloraWarehouseManagement.Classes.Utilities
                 "Даночна_група, " +
                 "Групна_шифра, " +
                 "Помошна_шифра, " +
-                "Латиница, " +
+                "Цена, " +
                 "Потекло, " +
                 "Забелешка, " +
-                "Со_ДДВ)" +
+                "Со_ДДВ, " +
+                "Залиха) " +
 
                 "VALUES" +
                 "(@Code, " +
@@ -53,10 +54,11 @@ namespace FloraWarehouseManagement.Classes.Utilities
                 "@TaxGroup, " +
                 "@GroupCode, " +
                 "@HelpCode, " +
-                "@Latin, " +
+                "@Price, " +
                 "@Origin, " +
                 "@Description, " +
-                "@TaxBool)", 
+                "@TaxBool, " +
+                "@Quantity)", 
                 connection
                 );
 
@@ -68,10 +70,11 @@ namespace FloraWarehouseManagement.Classes.Utilities
             command.Parameters.AddWithValue("TaxGroup", TaxGroup);
             command.Parameters.AddWithValue("GroupCode", GroupCode);
             command.Parameters.AddWithValue("HelpCode", HelpCode);
-            command.Parameters.AddWithValue("Latin", Latin);
+            command.Parameters.AddWithValue("Price", Price);
             command.Parameters.AddWithValue("Origin", Origin);
             command.Parameters.AddWithValue("Description", Description);
             command.Parameters.AddWithValue("TaxBool", TaxBool);
+            command.Parameters.AddWithValue("Quantity", Quantity);
 
             command.ExecuteNonQuery();
             connection.Close();
@@ -79,7 +82,7 @@ namespace FloraWarehouseManagement.Classes.Utilities
             DisplayData();
         }
 
-        public void EditProduct(string OldCode, string Code, string Product, string Measurement, string TaxGroup, string GroupCode, string HelpCode, string Latin, string Origin, string Description, int TaxBool)
+        public void EditProduct(string OldCode, string Code, string Product, string Measurement, string TaxGroup, string GroupCode, string HelpCode, string Price, string Origin, string Description, int TaxBool, string Quantity)
         {
             SQLiteCommand command = new SQLiteCommand
                 (
@@ -90,10 +93,11 @@ namespace FloraWarehouseManagement.Classes.Utilities
                 "Даночна_група = @TaxGroup, " +
                 "Групна_шифра = @GroupCode, " +
                 "Помошна_шифра = @HelpCode, " +
-                "Латиница = @Latin, " +
+                "Цена = @Price, " +
                 "Потекло = @Origin, " +
                 "Забелешка = @Description, " +
-                "Со_ДДВ = @TaxBool " +
+                "Со_ДДВ = @TaxBool, " +
+                "Залиха = @Quantity " +
                 "WHERE Шифра = @OldCode",
                 connection
                 );
@@ -106,10 +110,11 @@ namespace FloraWarehouseManagement.Classes.Utilities
             command.Parameters.AddWithValue("@TaxGroup", TaxGroup);
             command.Parameters.AddWithValue("@GroupCode", GroupCode);
             command.Parameters.AddWithValue("@HelpCode", HelpCode);
-            command.Parameters.AddWithValue("@Latin", Latin);
+            command.Parameters.AddWithValue("@Price", Price);
             command.Parameters.AddWithValue("@Origin", Origin);
             command.Parameters.AddWithValue("@Description", Description);
             command.Parameters.AddWithValue("@TaxBool", TaxBool);
+            command.Parameters.AddWithValue("@Quantity", Quantity);
             command.Parameters.AddWithValue("@OldCode", OldCode);
 
             command.ExecuteNonQuery();
@@ -146,7 +151,7 @@ namespace FloraWarehouseManagement.Classes.Utilities
 
         public DataTable FilterProducts(string FilterType, string FilterProperty) 
         {
-            SQLiteCommand cmd = new SQLiteCommand($"SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Латиница, Потекло, Забелешка FROM Products WHERE {FilterType} = @FilterProperty", connection);
+            SQLiteCommand cmd = new SQLiteCommand($"SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Цена, Потекло, Забелешка, Залиха FROM Products WHERE {FilterType} = @FilterProperty", connection);
             cmd.Parameters.AddWithValue("FilterProperty", FilterProperty);
             
             connection.Open();
@@ -156,6 +161,19 @@ namespace FloraWarehouseManagement.Classes.Utilities
             connection.Close();
 
             return dt;
+        }
+
+        public void AcceptNumbersOnly(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
         }
 
     }

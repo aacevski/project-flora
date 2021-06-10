@@ -39,7 +39,7 @@ namespace FloraWarehouseManagement.Forms
 
         private void DisplayData()
         {
-            SQLiteCommand cmd = new SQLiteCommand("SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Латиница, Потекло, Забелешка FROM Products", connection);
+            SQLiteCommand cmd = new SQLiteCommand("SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Цена, Потекло, Забелешка, Залиха FROM Products", connection);
             connection.Open();
             DataTable dt = new DataTable();
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
@@ -86,7 +86,7 @@ namespace FloraWarehouseManagement.Forms
                 if (productExists < 1)
                 {
 
-                    ProductFunctions.Instance.AddProduct(mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbProductNameLatin.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0);
+                    ProductFunctions.Instance.AddProduct(mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbPrice.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0, tbQuantity.Text);
 
                     DisplayData();
 
@@ -118,7 +118,7 @@ namespace FloraWarehouseManagement.Forms
 
         public void FilterProducts(string FilterType, string FilterProperty)
         {
-            SQLiteCommand cmd = new SQLiteCommand($"SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Латиница, Потекло, Забелешка FROM Products WHERE {FilterType} = @FilterProperty", connection);
+            SQLiteCommand cmd = new SQLiteCommand($"SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Цена, Потекло, Забелешка, Залиха FROM Products WHERE {FilterType} = @FilterProperty", connection);
             cmd.Parameters.AddWithValue("FilterProperty", FilterProperty);
             connection.Open();
             DataTable dt = new DataTable();
@@ -159,7 +159,7 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnEdit_Click(object sender, EventArgs e)
         {   
-            ProductFunctions.Instance.EditProduct(Product.Code, mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbProductNameLatin.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0);
+            ProductFunctions.Instance.EditProduct(Product.Code, mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbPrice.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0, tbQuantity.Text);
             Product.Code = mtbCode.Text;
 
             MessageBox.Show
@@ -208,9 +208,10 @@ namespace FloraWarehouseManagement.Forms
                 cbTaxGroup.SelectedIndex = cbTaxGroup.FindString(row.Cells[3].Value.ToString());
                 mtbGroupCode.Text = row.Cells[4].Value.ToString();
                 mtbHelpCode.Text = row.Cells[5].Value.ToString();
-                tbProductNameLatin.Text = row.Cells[6].Value.ToString();
+                tbPrice.Text = row.Cells[6].Value.ToString();
                 tbOrigin.Text = row.Cells[7].Value.ToString();
                 tbDescription.Text = row.Cells[8].Value.ToString();
+                tbQuantity.Text = row.Cells[9].Value.ToString();
 
                 connection.Open();
 
@@ -231,7 +232,7 @@ namespace FloraWarehouseManagement.Forms
                 {
                     checkedTax = int.Parse(execution);
                     cbDDV.Checked = checkedTax == 1 ? true : false;
-                    Product.SetProduct(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString(), row.Cells[4].Value.ToString(), row.Cells[5].Value.ToString(), row.Cells[6].Value.ToString(), row.Cells[7].Value.ToString(), row.Cells[8].Value.ToString(), checkedTax.ToString());
+                    Product.SetProduct(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString(), row.Cells[4].Value.ToString(), row.Cells[5].Value.ToString(), row.Cells[6].Value.ToString(), row.Cells[7].Value.ToString(), row.Cells[8].Value.ToString(), row.Cells[9].Value.ToString(), checkedTax.ToString());
                 }
                 else
                 {
@@ -264,9 +265,10 @@ namespace FloraWarehouseManagement.Forms
             cbDDV.Checked = true;
             mtbGroupCode.Text = "";
             mtbHelpCode.Text = "";
-            tbProductNameLatin.Text = "";
+            tbPrice.Text = "";
             tbOrigin.Text = "";
             tbDescription.Text = "";
+            tbQuantity.Text = "";
         }
 
         private void mtbCode_TextChanged(object sender, EventArgs e)
@@ -293,6 +295,16 @@ namespace FloraWarehouseManagement.Forms
             {
                 errorProviderTaxGroup.SetError(cbTaxGroup, null);
             }
+        }
+
+        private void tbPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ProductFunctions.Instance.AcceptNumbersOnly(sender, e);
+        }
+
+        private void tbQuantity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ProductFunctions.Instance.AcceptNumbersOnly(sender, e);
         }
     }
 }

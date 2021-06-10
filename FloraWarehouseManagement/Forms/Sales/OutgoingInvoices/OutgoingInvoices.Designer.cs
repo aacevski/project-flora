@@ -33,13 +33,17 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OutgoingInvoices));
             this.dgvInvoices = new System.Windows.Forms.DataGridView();
             this.pnlControls = new System.Windows.Forms.Panel();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
             this.gbInvoiceInfo = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbTotalPrice = new System.Windows.Forms.TextBox();
+            this.tbTax = new System.Windows.Forms.TextBox();
+            this.tbPriceWithoutTax = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -65,6 +69,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // dgvInvoices
             // 
             this.dgvInvoices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvInvoices.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvInvoices.BackgroundColor = System.Drawing.Color.White;
             this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -83,20 +88,62 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // pnlControls
             // 
             this.pnlControls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(186)))), ((int)(((byte)(65)))));
+            this.pnlControls.Controls.Add(this.btnPrint);
+            this.pnlControls.Controls.Add(this.btnEdit);
+            this.pnlControls.Controls.Add(this.btnSave);
+            this.pnlControls.Controls.Add(this.btnNew);
             this.pnlControls.Controls.Add(this.gbInvoiceInfo);
             this.pnlControls.Location = new System.Drawing.Point(0, -2);
             this.pnlControls.Name = "pnlControls";
             this.pnlControls.Size = new System.Drawing.Size(974, 355);
             this.pnlControls.TabIndex = 2;
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(691, 141);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
+            this.btnPrint.TabIndex = 4;
+            this.btnPrint.Text = "Печати";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(691, 96);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEdit.TabIndex = 3;
+            this.btnEdit.Text = "Промени";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(691, 71);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "Сними";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(691, 45);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(75, 23);
+            this.btnNew.TabIndex = 1;
+            this.btnNew.Text = "Нова";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
             // gbInvoiceInfo
             // 
             this.gbInvoiceInfo.Controls.Add(this.label13);
             this.gbInvoiceInfo.Controls.Add(this.label12);
             this.gbInvoiceInfo.Controls.Add(this.label11);
-            this.gbInvoiceInfo.Controls.Add(this.textBox3);
-            this.gbInvoiceInfo.Controls.Add(this.textBox2);
-            this.gbInvoiceInfo.Controls.Add(this.textBox1);
+            this.gbInvoiceInfo.Controls.Add(this.tbTotalPrice);
+            this.gbInvoiceInfo.Controls.Add(this.tbTax);
+            this.gbInvoiceInfo.Controls.Add(this.tbPriceWithoutTax);
             this.gbInvoiceInfo.Controls.Add(this.label10);
             this.gbInvoiceInfo.Controls.Add(this.label9);
             this.gbInvoiceInfo.Controls.Add(this.label8);
@@ -153,32 +200,32 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.label11.TabIndex = 20;
             this.label11.Text = "ден.";
             // 
-            // textBox3
+            // tbTotalPrice
             // 
-            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(438, 119);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(140, 29);
-            this.textBox3.TabIndex = 19;
+            this.tbTotalPrice.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbTotalPrice.Location = new System.Drawing.Point(438, 119);
+            this.tbTotalPrice.Name = "tbTotalPrice";
+            this.tbTotalPrice.ReadOnly = true;
+            this.tbTotalPrice.Size = new System.Drawing.Size(140, 29);
+            this.tbTotalPrice.TabIndex = 19;
             // 
-            // textBox2
+            // tbTax
             // 
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(438, 78);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(140, 29);
-            this.textBox2.TabIndex = 18;
+            this.tbTax.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbTax.Location = new System.Drawing.Point(438, 78);
+            this.tbTax.Name = "tbTax";
+            this.tbTax.ReadOnly = true;
+            this.tbTax.Size = new System.Drawing.Size(140, 29);
+            this.tbTax.TabIndex = 18;
             // 
-            // textBox1
+            // tbPriceWithoutTax
             // 
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(438, 31);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(140, 29);
-            this.textBox1.TabIndex = 17;
+            this.tbPriceWithoutTax.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPriceWithoutTax.Location = new System.Drawing.Point(438, 31);
+            this.tbPriceWithoutTax.Name = "tbPriceWithoutTax";
+            this.tbPriceWithoutTax.ReadOnly = true;
+            this.tbPriceWithoutTax.Size = new System.Drawing.Size(140, 29);
+            this.tbPriceWithoutTax.TabIndex = 17;
             // 
             // label10
             // 
@@ -401,11 +448,15 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbTotalPrice;
+        private System.Windows.Forms.TextBox tbTax;
+        private System.Windows.Forms.TextBox tbPriceWithoutTax;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnNew;
     }
 }

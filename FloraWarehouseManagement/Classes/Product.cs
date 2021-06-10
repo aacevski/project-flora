@@ -15,11 +15,12 @@ namespace FloraWarehouseManagement.Classes
         public string TaxGroup { get; set; }
         public string GroupCode { get; set; }
         public string SecondaryCode { get; set; }
-        public string LatinName { get; set; }
+        public string Price { get; set; }
         public string Origin { get; set; }
         public string Description { get; set; }     
-        public string WithTax { get; set; } 
-        
+        public string WithTax { get; set; }
+        public string Quantity { get; set; }
+
         public void SetProduct(params string[] properties)
         {
             Code = properties[0];
@@ -28,10 +29,11 @@ namespace FloraWarehouseManagement.Classes
             TaxGroup = properties[3];
             GroupCode = properties[4];
             SecondaryCode = properties[5];
-            LatinName = properties[6];
+            Price = properties[6];
             Origin = properties[7];
             Description = properties[8];
-            WithTax = properties[9];
+            Quantity = properties[9];
+            WithTax = properties[10];
         }
     }
 }

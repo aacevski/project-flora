@@ -23,32 +23,10 @@ namespace FloraWarehouseManagement.Forms
         {
             InitializeComponent();
         }
-        
-
-        private void Products_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.Hide();
-                Form mainMenu = new MainMenu();
-                mainMenu.Closed += (s, args) => this.Close();
-                mainMenu.Show();
-            }
-        }
 
         private void Logins_Load(object sender, EventArgs e)
         {
-            dgvLogins.Height = this.Height;
-            dgvLogins.Width = this.Width;
-            this.WindowState = FormWindowState.Maximized;
             DisplayData();
-            AlignControls.CenterControlHorizontal(pnlHeader);
-        }
-
-        private void Logins_SizeChanged(object sender, EventArgs e)
-        {
-            dgvLogins.Height = this.Height;
-            dgvLogins.Width = this.Width;
         }
 
         private void DisplayData()
@@ -60,6 +38,14 @@ namespace FloraWarehouseManagement.Forms
             adapter.Fill(dt);
             dgvLogins.DataSource = dt;
             connection.Close();
+        }
+
+        private void Logins_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }

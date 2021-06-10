@@ -34,7 +34,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void DisplayData()
         {
-            SQLiteCommand cmd = new SQLiteCommand("SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Латиница, Потекло, Забелешка FROM Products", connection);
+            SQLiteCommand cmd = new SQLiteCommand("SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Цена, Потекло, Забелешка, Залиха FROM Products", connection);
             connection.Open();
             DataTable dt = new DataTable();
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
@@ -60,6 +60,16 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
                 item.Name = dt.Rows[0].ItemArray[2].ToString();
                 item.Unit = dt.Rows[0].ItemArray[3].ToString();
                 item.Tax = decimal.Parse(dt.Rows[0].ItemArray[4].ToString());
+
+                if (dt.Rows[0].ItemArray[7].ToString() != "")   // Цената на артиклот земена од база
+                {
+                    item.Price = decimal.Parse(dt.Rows[0].ItemArray[7].ToString());
+                }
+
+                if (dt.Rows[0].ItemArray[11].ToString() != "")  // Залихата на артиклот земена од база
+                {
+                    item.Quantity = decimal.Parse(dt.Rows[0].ItemArray[11].ToString());
+                }
                 
                 connection.Close();
 

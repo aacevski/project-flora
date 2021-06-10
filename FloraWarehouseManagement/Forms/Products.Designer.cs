@@ -31,8 +31,8 @@ namespace FloraWarehouseManagement.Forms
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Products));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlControls = new System.Windows.Forms.Panel();
             this.gbButtons = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -45,6 +45,8 @@ namespace FloraWarehouseManagement.Forms
             this.rbtnProduct = new System.Windows.Forms.RadioButton();
             this.rbtnCode = new System.Windows.Forms.RadioButton();
             this.gbProductInfo = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.tbQuantity = new System.Windows.Forms.TextBox();
             this.mtbHelpCode = new System.Windows.Forms.MaskedTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.mtbCode = new System.Windows.Forms.MaskedTextBox();
@@ -55,7 +57,7 @@ namespace FloraWarehouseManagement.Forms
             this.label9 = new System.Windows.Forms.Label();
             this.cbUnit = new System.Windows.Forms.ComboBox();
             this.tbOrigin = new System.Windows.Forms.TextBox();
-            this.tbProductNameLatin = new System.Windows.Forms.TextBox();
+            this.tbPrice = new System.Windows.Forms.TextBox();
             this.mtbGroupCode = new System.Windows.Forms.MaskedTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -214,6 +216,8 @@ namespace FloraWarehouseManagement.Forms
             // 
             // gbProductInfo
             // 
+            this.gbProductInfo.Controls.Add(this.label10);
+            this.gbProductInfo.Controls.Add(this.tbQuantity);
             this.gbProductInfo.Controls.Add(this.mtbHelpCode);
             this.gbProductInfo.Controls.Add(this.label3);
             this.gbProductInfo.Controls.Add(this.mtbCode);
@@ -224,7 +228,7 @@ namespace FloraWarehouseManagement.Forms
             this.gbProductInfo.Controls.Add(this.label9);
             this.gbProductInfo.Controls.Add(this.cbUnit);
             this.gbProductInfo.Controls.Add(this.tbOrigin);
-            this.gbProductInfo.Controls.Add(this.tbProductNameLatin);
+            this.gbProductInfo.Controls.Add(this.tbPrice);
             this.gbProductInfo.Controls.Add(this.mtbGroupCode);
             this.gbProductInfo.Controls.Add(this.label8);
             this.gbProductInfo.Controls.Add(this.label6);
@@ -240,6 +244,26 @@ namespace FloraWarehouseManagement.Forms
             this.gbProductInfo.TabIndex = 25;
             this.gbProductInfo.TabStop = false;
             this.gbProductInfo.Text = "Податоци за артикл";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(373, 92);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(64, 20);
+            this.label10.TabIndex = 27;
+            this.label10.Text = "Залиха";
+            // 
+            // tbQuantity
+            // 
+            this.tbQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbQuantity.Location = new System.Drawing.Point(375, 116);
+            this.tbQuantity.Name = "tbQuantity";
+            this.tbQuantity.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbQuantity.Size = new System.Drawing.Size(62, 22);
+            this.tbQuantity.TabIndex = 26;
+            this.tbQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQuantity_KeyPress);
             // 
             // mtbHelpCode
             // 
@@ -353,14 +377,15 @@ namespace FloraWarehouseManagement.Forms
             this.tbOrigin.Size = new System.Drawing.Size(145, 22);
             this.tbOrigin.TabIndex = 8;
             // 
-            // tbProductNameLatin
+            // tbPrice
             // 
-            this.tbProductNameLatin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbProductNameLatin.Location = new System.Drawing.Point(294, 116);
-            this.tbProductNameLatin.Name = "tbProductNameLatin";
-            this.tbProductNameLatin.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbProductNameLatin.Size = new System.Drawing.Size(145, 22);
-            this.tbProductNameLatin.TabIndex = 7;
+            this.tbPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPrice.Location = new System.Drawing.Point(294, 116);
+            this.tbPrice.Name = "tbPrice";
+            this.tbPrice.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tbPrice.Size = new System.Drawing.Size(71, 22);
+            this.tbPrice.TabIndex = 7;
+            this.tbPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrice_KeyPress);
             // 
             // mtbGroupCode
             // 
@@ -379,9 +404,9 @@ namespace FloraWarehouseManagement.Forms
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(288, 92);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(84, 20);
+            this.label8.Size = new System.Drawing.Size(48, 20);
             this.label8.TabIndex = 16;
-            this.label8.Text = "Латиница";
+            this.label8.Text = "Цена";
             // 
             // label6
             // 
@@ -404,7 +429,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             // tbDescription
             // 
-            this.tbDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDescription.Location = new System.Drawing.Point(292, 223);
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(293, 85);
@@ -447,24 +472,25 @@ namespace FloraWarehouseManagement.Forms
             // dgvProducts
             // 
             this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProducts.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvProducts.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProducts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProducts.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProducts.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProducts.Location = new System.Drawing.Point(0, 355);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.Size = new System.Drawing.Size(974, 330);
@@ -532,7 +558,7 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.ComboBox cbTaxGroup;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox tbDescription;
-        private System.Windows.Forms.TextBox tbProductNameLatin;
+        private System.Windows.Forms.TextBox tbPrice;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbOrigin;
         private System.Windows.Forms.Label label7;
@@ -560,5 +586,7 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.ErrorProvider errorProviderProduct;
         private System.Windows.Forms.ErrorProvider errorProviderUnit;
         private System.Windows.Forms.ErrorProvider errorProviderTaxGroup;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox tbQuantity;
     }
 }
