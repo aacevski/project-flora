@@ -12,6 +12,7 @@ using FloraWarehouseManagement.Forms;
 using FloraWarehouseManagement.Classes.Utilities;
 using System.Data.SQLite;
 using System.IO;
+using System.Globalization;
 
 namespace FloraWarehouseManagement
 {
@@ -69,7 +70,9 @@ namespace FloraWarehouseManagement
                 mainMenu.Closed += (s, args) => this.Close();
                 mainMenu.Show();
 
-                string Time = DateTime.Now.ToString();
+                DateTime date = DateTime.Now;
+                string Time = date.ToString("HH:mm:ss - dd MMM, yyyy");
+
                 SQLiteCommand command = new SQLiteCommand
                 (
                 "INSERT INTO LoggedIn" +
