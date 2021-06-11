@@ -26,6 +26,8 @@ namespace FloraWarehouseManagement.Forms
             this.WindowState = FormWindowState.Maximized;
             AlignControls.CenterControl(pnlMenuButtons);
             pnlMenuButtons.BackColor = Color.FromArgb(0, 88, 44, 55);
+
+            Information.Open(); // Loading the company info
         }
 
         private void MainMenu_SizeChanged(object sender, EventArgs e)

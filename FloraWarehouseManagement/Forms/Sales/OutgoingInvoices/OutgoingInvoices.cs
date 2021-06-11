@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.Classes;
+using FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.CrystalReport;
 
 namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 {
@@ -43,7 +44,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void InitDefaultSettings()
         {
-            mtbDate.Text = new DateTimeOffset(2011, 6, 10, 15, 24, 16, TimeSpan.Zero).ToString(); ;
+            mtbDate.Text = DateTime.Now.ToString("dd.MM.yy", CultureInfo.GetCultureInfo("en-DE"));
             tbValuta.Text = "60 дена";
             tbDescription.Text = "За ненавремено плаќање пресметуваме законска затезна камата. " +
                                  "Рекламации се примаат во рок од 8 дена по приемот на фактурата. " +
@@ -210,8 +211,30 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             if (dgvInvoices.SelectedCells.Count == 1)
             {
                 Invoice invoiceForPrinting = new Invoice(InvoiceNumber, selectedCustomer, tbValuta.Text, tbDescription.Text, mtbDate.Text, cbDocType.SelectedItem.ToString());
-                MessageBox.Show(invoiceForPrinting.ToString());
+                invoiceForPrinting.InvoiceItems = GetInvoiceItemsForInvoice();
+
+                Form print = new PrintForm(invoiceForPrinting);
+                print.ShowDialog();
             }
+        }
+
+        private List<InvoiceItem> GetInvoiceItemsForInvoice()
+        {
+            SQLiteCommand cmd = new SQLiteCommand($"SELECT Products.Шифра, Products.Артикл, Products.Мерка, Products.Даночна_група, Quantity, Price FROM InvoiceItems INNER JOIN Products ON Products.Шифра = InvoiceItems.Item_ID WHERE Invoice_ID = {InvoiceNumber}", connection);
+            connection.Open();
+            DataTable dt = new DataTable();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+            adapter.Fill(dt);
+            connection.Close();
+
+            List<InvoiceItem> items = new List<InvoiceItem>();
+
+            for (int i = 0; i < dt.Rows.Count; ++i)
+            {
+                items.Add(new InvoiceItem(dt.Rows[i].ItemArray[0].ToString(), dt.Rows[i].ItemArray[1].ToString(), dt.Rows[i].ItemArray[2].ToString(), decimal.Parse(dt.Rows[i].ItemArray[3].ToString()), decimal.Parse(dt.Rows[i].ItemArray[4].ToString()), decimal.Parse(dt.Rows[i].ItemArray[5].ToString())));
+            }
+
+            return items;
         }
     }
 }

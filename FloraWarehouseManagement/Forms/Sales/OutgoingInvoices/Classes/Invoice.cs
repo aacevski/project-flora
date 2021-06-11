@@ -8,13 +8,13 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.Classes
 {
     public class Invoice
     {
-        private int InvoiceID { get; set; }  // Бројот на фактурата
-        private CustomerInfo CustomerInfo { get; set; } // ID на коминтент во базата
-        private List<InvoiceItem> InvoiceItems { get; set; }
-        private string Valuta { get; set; }
-        private string Description { get; set; }
-        private string Date { get; set; }
-        private string DocType { get;set; }
+        public int InvoiceID { get; set; } // Бројот на фактурата
+        public CustomerInfo CustomerInfo { get; set; } // ID на коминтент во базата
+        public List<InvoiceItem> InvoiceItems { get; set; }
+        public string Valuta { get; set; }
+        public string Description { get; set; }
+        public string Date { get; set; }
+        public string DocType { get; set; }
 
         public Invoice (int InvoiceID, CustomerInfo CustomerInfo, string Valuta, string Description, string Date, string DocType)
         {
@@ -24,16 +24,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.Classes
             this.Description = Description;
             this.Date = Date;
             this.DocType = DocType;
-        }
-
-        public void SetInvoiceItems ()
-        {
-
-        }
-
-        public override string ToString()
-        {
-            return string.Format("{0} {1} {2} {3} {4}", InvoiceID, CustomerInfo.Name, Valuta, Description, Date);
         }
 
     }

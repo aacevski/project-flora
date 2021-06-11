@@ -19,8 +19,8 @@ namespace FloraWarehouseManagement.Forms
     public partial class Information : Form
     {
         private IEnumerable<TextBox> textBoxes;
-        private CompanyInfo CompanyInfo;
-        private readonly string saveFolder = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\CompanyInfo\";
+        public static CompanyInfo CompanyInfo;
+        private static readonly string saveFolder = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\CompanyInfo\";
 
         public Information()
         {
@@ -93,7 +93,7 @@ namespace FloraWarehouseManagement.Forms
             }
         }
 
-        private void Open ()
+        public static void Open ()
         {
             string fileName = saveFolder + @"info.ci";
             using (FileStream fs = new FileStream(fileName, FileMode.Open))

@@ -80,7 +80,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void UpdateTextBoxes()
         {
-            tbEdCena.Text = string.Format("{0:N2}", item.PriceWithoutTax());
+            tbEdCena.Text = string.Format("{0:N2}", item.GetPriceWithoutTax());
             tbEdDDV.Text = string.Format("{0:N2}", item.GetTax());
         }
 
