@@ -81,6 +81,7 @@
     <Compile Include="Classes\Utilities\CustomerFunctions.cs" />
     <Compile Include="Classes\Utilities\EnumeratorForControls.cs" />
     <Compile Include="Classes\Utilities\ImageFast.cs" />
+    <Compile Include="Classes\Utilities\InvoiceFunctions.cs" />
     <Compile Include="Classes\Utilities\ProductFunctions.cs" />
     <Compile Include="Classes\Utilities\AddUser.cs" />
     <Compile Include="Classes\Utilities\AlignControls.cs" />

@@ -36,22 +36,26 @@ namespace FloraWarehouseManagement.Forms.Sales
             // 
             // btnOutgoingInvoices
             // 
-            this.btnOutgoingInvoices.Location = new System.Drawing.Point(51, 49);
+            this.btnOutgoingInvoices.BackColor = System.Drawing.Color.White;
+            this.btnOutgoingInvoices.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOutgoingInvoices.Location = new System.Drawing.Point(41, 49);
             this.btnOutgoingInvoices.Name = "btnOutgoingInvoices";
-            this.btnOutgoingInvoices.Size = new System.Drawing.Size(128, 33);
+            this.btnOutgoingInvoices.Size = new System.Drawing.Size(150, 33);
             this.btnOutgoingInvoices.TabIndex = 0;
             this.btnOutgoingInvoices.Text = "Излезни фактури";
-            this.btnOutgoingInvoices.UseVisualStyleBackColor = true;
+            this.btnOutgoingInvoices.UseVisualStyleBackColor = false;
             this.btnOutgoingInvoices.Click += new System.EventHandler(this.btnOutgoingInvoices_Click);
             // 
             // btnPaymentOperations
             // 
-            this.btnPaymentOperations.Location = new System.Drawing.Point(51, 88);
+            this.btnPaymentOperations.BackColor = System.Drawing.Color.White;
+            this.btnPaymentOperations.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPaymentOperations.Location = new System.Drawing.Point(41, 88);
             this.btnPaymentOperations.Name = "btnPaymentOperations";
-            this.btnPaymentOperations.Size = new System.Drawing.Size(128, 33);
+            this.btnPaymentOperations.Size = new System.Drawing.Size(150, 33);
             this.btnPaymentOperations.TabIndex = 2;
             this.btnPaymentOperations.Text = "Платен промет";
-            this.btnPaymentOperations.UseVisualStyleBackColor = true;
+            this.btnPaymentOperations.UseVisualStyleBackColor = false;
             this.btnPaymentOperations.Click += new System.EventHandler(this.btnPaymentOperations_Click);
             // 
             // SalesMain

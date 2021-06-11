@@ -202,6 +202,8 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
                 selectedCustomer.Address = dt.Rows[0].ItemArray[1].ToString();
                 selectedCustomer.City = dt.Rows[0].ItemArray[2].ToString();
 
+                tbCustomer.Text = selectedCustomer.Name;
+
                 SetInvoiceNumberTextBox();
             }
         }

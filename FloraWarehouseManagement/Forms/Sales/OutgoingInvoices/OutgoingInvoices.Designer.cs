@@ -30,6 +30,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OutgoingInvoices));
             this.dgvInvoices = new System.Windows.Forms.DataGridView();
             this.pnlControls = new System.Windows.Forms.Panel();
@@ -71,15 +72,23 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.dgvInvoices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvInvoices.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvInvoices.BackgroundColor = System.Drawing.Color.White;
-            this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvInvoices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvInvoices.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvInvoices.Location = new System.Drawing.Point(0, 353);
             this.dgvInvoices.Name = "dgvInvoices";
             this.dgvInvoices.ReadOnly = true;
@@ -90,10 +99,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // pnlControls
             // 
             this.pnlControls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(186)))), ((int)(((byte)(65)))));
-            this.pnlControls.Controls.Add(this.btnPrint);
-            this.pnlControls.Controls.Add(this.btnEdit);
-            this.pnlControls.Controls.Add(this.btnSave);
-            this.pnlControls.Controls.Add(this.btnNew);
             this.pnlControls.Controls.Add(this.gbInvoiceInfo);
             this.pnlControls.Location = new System.Drawing.Point(0, -2);
             this.pnlControls.Name = "pnlControls";
@@ -102,45 +107,58 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(691, 141);
+            this.btnPrint.BackColor = System.Drawing.Color.White;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.Location = new System.Drawing.Point(655, 237);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(75, 23);
+            this.btnPrint.Size = new System.Drawing.Size(105, 45);
             this.btnPrint.TabIndex = 4;
             this.btnPrint.Text = "Печати";
-            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.UseVisualStyleBackColor = false;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(691, 96);
+            this.btnEdit.BackColor = System.Drawing.Color.White;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Location = new System.Drawing.Point(655, 133);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEdit.Size = new System.Drawing.Size(105, 45);
             this.btnEdit.TabIndex = 3;
             this.btnEdit.Text = "Промени";
-            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.UseVisualStyleBackColor = false;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(691, 71);
+            this.btnSave.BackColor = System.Drawing.Color.White;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Location = new System.Drawing.Point(655, 82);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(105, 45);
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Сними";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(691, 45);
+            this.btnNew.BackColor = System.Drawing.Color.White;
+            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNew.Location = new System.Drawing.Point(655, 31);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(75, 23);
+            this.btnNew.Size = new System.Drawing.Size(105, 45);
             this.btnNew.TabIndex = 1;
             this.btnNew.Text = "Нова";
-            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // gbInvoiceInfo
             // 
+            this.gbInvoiceInfo.Controls.Add(this.btnNew);
+            this.gbInvoiceInfo.Controls.Add(this.btnSave);
+            this.gbInvoiceInfo.Controls.Add(this.btnEdit);
+            this.gbInvoiceInfo.Controls.Add(this.btnPrint);
             this.gbInvoiceInfo.Controls.Add(this.label13);
             this.gbInvoiceInfo.Controls.Add(this.label12);
             this.gbInvoiceInfo.Controls.Add(this.label11);
@@ -168,7 +186,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.gbInvoiceInfo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbInvoiceInfo.Location = new System.Drawing.Point(12, 14);
             this.gbInvoiceInfo.Name = "gbInvoiceInfo";
-            this.gbInvoiceInfo.Size = new System.Drawing.Size(618, 335);
+            this.gbInvoiceInfo.Size = new System.Drawing.Size(802, 335);
             this.gbInvoiceInfo.TabIndex = 0;
             this.gbInvoiceInfo.TabStop = false;
             this.gbInvoiceInfo.Text = "Податоци за документот";

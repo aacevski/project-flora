@@ -35,6 +35,7 @@ namespace FloraWarehouseManagement.Forms
             Product = new Product();
 
             DisplayData();
+            SetColumnsWidth();
         }
 
         private void DisplayData()
@@ -53,6 +54,17 @@ namespace FloraWarehouseManagement.Forms
             pnlControls.Width = this.Width;
             dgvProducts.Height = this.Height;
             dgvProducts.Width = this.Width;
+        }
+
+        private void SetColumnsWidth()
+        {
+            dgvProducts.Columns[0].Width = 85;
+            dgvProducts.Columns[1].Width = 300;
+            dgvProducts.Columns[2].Width = 75;
+            dgvProducts.Columns[3].Width = 75;
+            dgvProducts.Columns[4].Width = 130;
+            dgvProducts.Columns[5].Width = 160;
+            dgvProducts.Columns[6].Width = 75;
         }
 
         private void mtbCode_Click(object sender, EventArgs e)

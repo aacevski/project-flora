@@ -566,7 +566,7 @@ namespace FloraWarehouseManagement.Forms
             this.dgvCustomers.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -583,6 +583,7 @@ namespace FloraWarehouseManagement.Forms
             this.dgvCustomers.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCustomers.Location = new System.Drawing.Point(0, 406);
             this.dgvCustomers.Name = "dgvCustomers";
+            this.dgvCustomers.ReadOnly = true;
             this.dgvCustomers.Size = new System.Drawing.Size(974, 279);
             this.dgvCustomers.TabIndex = 1;
             this.dgvCustomers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellClick);

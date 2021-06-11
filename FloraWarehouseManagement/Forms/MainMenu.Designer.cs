@@ -134,11 +134,13 @@ namespace FloraWarehouseManagement.Forms
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.pnlMenuButtons);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "MainMenu";
             this.Text = "Главно мени";
             this.Load += new System.EventHandler(this.MainMenu_Load);
             this.SizeChanged += new System.EventHandler(this.MainMenu_SizeChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainMenu_KeyDown);
             this.pnlMenuButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 

@@ -70,5 +70,21 @@ namespace FloraWarehouseManagement.Forms
             Form logins = new Logins();
             logins.Show();
         }
+
+        private void MainMenu_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                DialogResult dr = MessageBox.Show("Дали сакате да се одлогирате?", "Одлогирање", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dr == DialogResult.Yes)
+                {
+                    this.Hide();
+                    Form login = new LoginForm();
+                    login.Closed += (s, args) => this.Close();
+                    login.Show();
+                }
+            }
+        }
     }
 }
