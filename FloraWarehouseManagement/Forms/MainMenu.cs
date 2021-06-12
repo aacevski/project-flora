@@ -86,5 +86,11 @@ namespace FloraWarehouseManagement.Forms
                 }
             }
         }
+
+        private void btnEmployees_Click(object sender, EventArgs e)
+        {
+            Form employees = new Employees();
+            employees.Show();
+        }
     }
 }

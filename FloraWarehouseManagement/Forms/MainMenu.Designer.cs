@@ -77,6 +77,7 @@ namespace FloraWarehouseManagement.Forms
             this.btnEmployees.Size = new System.Drawing.Size(300, 250);
             this.btnEmployees.TabIndex = 5;
             this.btnEmployees.UseVisualStyleBackColor = true;
+            this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
             // 
             // btnClients
             // 
