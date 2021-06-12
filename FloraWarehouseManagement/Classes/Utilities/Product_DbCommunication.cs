@@ -10,27 +10,11 @@ using System.IO;
 
 namespace FloraWarehouseManagement.Classes.Utilities
 {
-    public class ProductFunctions
+    public class Product_DbCommunication : DbCommunication
     {
-        private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-        SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
+        public Product_DbCommunication() { }
 
-        public static ProductFunctions Instance { get; } = new ProductFunctions();
-
-        public ProductFunctions() { }
-
-        public void DisplayData()
-        {
-            SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
-            SQLiteCommand cmd = new SQLiteCommand("SELECT * from Products", connection);
-            connection.Open();
-            DataTable dt = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-            adapter.Fill(dt);
-            connection.Close();
-        }
-
-        public void AddProduct(string Code, string Product, string Measurement, string TaxGroup, string GroupCode, string HelpCode, string Price, string Origin, string Description, int TaxBool, string Quantity)
+        public static void AddProduct (string Code, string Product, string Measurement, string TaxGroup, string GroupCode, string HelpCode, string Price, string Origin, string Description, int TaxBool, string Quantity)
         {
             SQLiteCommand command = new SQLiteCommand
                 (
@@ -78,11 +62,9 @@ namespace FloraWarehouseManagement.Classes.Utilities
 
             command.ExecuteNonQuery();
             connection.Close();
-
-            DisplayData();
         }
 
-        public void EditProduct(string OldCode, string Code, string Product, string Measurement, string TaxGroup, string GroupCode, string HelpCode, string Price, string Origin, string Description, int TaxBool, string Quantity)
+        public static void EditProduct (string OldCode, string Code, string Product, string Measurement, string TaxGroup, string GroupCode, string HelpCode, string Price, string Origin, string Description, int TaxBool, string Quantity)
         {
             SQLiteCommand command = new SQLiteCommand
                 (
@@ -119,37 +101,9 @@ namespace FloraWarehouseManagement.Classes.Utilities
 
             command.ExecuteNonQuery();
             connection.Close();
-
-            DisplayData();
         }
 
-        public int ProductExists(string Code)
-        {
-            int productExists;
-            connection.Open();
-            string checkIfExistsQuery = "SELECT EXISTS(SELECT 1 FROM Products WHERE Шифра=@Code)";
-            SQLiteCommand command = new SQLiteCommand(checkIfExistsQuery, connection);
-            command.Parameters.AddWithValue("Code", Code);
-            productExists = Convert.ToInt32(command.ExecuteScalar());
-            connection.Close();
-
-            return productExists;
-        }
-
-        public void DeleteProduct(string Code)
-        {
-            SQLiteCommand command = new SQLiteCommand("DELETE FROM Products WHERE Шифра=@Code", connection);
-            connection.Open();
-            command.Parameters.AddWithValue("@Code", Code);
-            command.ExecuteNonQuery();
-            DataTable productTable = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-            adapter.Fill(productTable);
-            connection.Close();
-        }
-
-
-        public DataTable FilterProducts(string FilterType, string FilterProperty) 
+        public static DataTable FilterProducts(string FilterType, string FilterProperty) 
         {
             SQLiteCommand cmd = new SQLiteCommand($"SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Цена, Потекло, Забелешка, Залиха FROM Products WHERE {FilterType} = @FilterProperty", connection);
             cmd.Parameters.AddWithValue("FilterProperty", FilterProperty);
@@ -163,17 +117,51 @@ namespace FloraWarehouseManagement.Classes.Utilities
             return dt;
         }
 
-        public void AcceptNumbersOnly(object sender, KeyPressEventArgs e)
+        public static int CheckIfProductIsWithTax (string code)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
+            SQLiteCommand cmd = new SQLiteCommand($"SELECT Со_ДДВ from Products WHERE Шифра = {code}", connection);
+            int result = -1;
 
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            connection.Open();
+            object scalar = cmd.ExecuteScalar();
+
+            if (scalar != null && (!string.IsNullOrEmpty(scalar.ToString())))
             {
-                e.Handled = true;
+                result = int.Parse(scalar.ToString());
             }
+            connection.Close();
+
+            return result;
+        }
+
+        public static decimal GetProductQuantity (string code)
+        {
+            decimal quantity = -1.00m;
+
+            SQLiteCommand cmd = new SQLiteCommand("SELECT Залиха from Products WHERE Шифра = @code", connection);
+            cmd.Parameters.AddWithValue("code", code);
+
+            connection.Open();
+            object scalar = cmd.ExecuteScalar();
+
+            if (scalar != null && (!string.IsNullOrEmpty(scalar.ToString())))
+            {
+                quantity = decimal.Parse(scalar.ToString());
+            }
+            connection.Close();
+
+            return quantity;
+        }
+
+        public static void DecreaseQuantity(decimal num, string code)
+        {
+            SQLiteCommand cmd = new SQLiteCommand("UPDATE Products SET Залиха=@Quantity WHERE Шифра=@code", connection);
+            cmd.Parameters.AddWithValue("Quantity", num);
+            cmd.Parameters.AddWithValue("code", code);
+
+            connection.Open();
+            cmd.ExecuteNonQuery();
+            connection.Close();
         }
 
     }

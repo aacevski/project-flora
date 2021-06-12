@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 using FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.Classes;
 using FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.CrystalReport;
+using FloraWarehouseManagement.Classes.Utilities;
 
 namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 {
@@ -23,6 +24,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         static SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
 
         public static int InvoiceNumber;
+        public static int InvoiceCounter;
         private CustomerInfo selectedCustomer;
 
         public OutgoingInvoices()
@@ -54,6 +56,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void SetInvoiceNumberTextBox ()
         {
+            tbInvCounter.Text = (InvoiceCounter + 1).ToString();
             mtbInvoiceNum.Text = string.Format("{0:00000}/{1}", InvoiceNumber, DateTime.Now.Year);
         }
 
@@ -103,18 +106,38 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private void btnNew_Click(object sender, EventArgs e)
         {
             //TODO: dodadi gi ostanatite parametri od Invoices
-            GetInvoiceNumber();
-            InvoiceNumber++;
-            SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Invoices(Customer_ID, Date, InvNumber) VALUES(null, @Date, @InvoiceNumber)", connection);
-            cmd.Parameters.AddWithValue("InvoiceNumber", InvoiceNumber);
-            cmd.Parameters.AddWithValue("Date", mtbDate.Text);
+            if (tbCustomer.Text != "")
+            {
+                GetInvoiceNumber();
+                InvoiceCounter++;
+                SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Invoices(Customer_ID, Date, InvNumber, Valuta, TypeOfDocument, Description) VALUES(@Customer_ID, @Date, @InvoiceNumber, @Valuta, @TypeOfDocument, @Description)", connection);
+                cmd.Parameters.AddWithValue("Customer_ID", Customer_DbCommunication.GetCustomerDBID(CustomerPick.selectecCustomerInfo.Name));
+                cmd.Parameters.AddWithValue("InvoiceNumber", InvoiceCounter);
+                cmd.Parameters.AddWithValue("Date", mtbDate.Text);
+                cmd.Parameters.AddWithValue("Valuta", tbValuta.Text);
+                cmd.Parameters.AddWithValue("TypeOfDocument", cbDocType.SelectedItem.ToString());
+                cmd.Parameters.AddWithValue("Description", tbDescription.Text);
 
-            connection.Open();
-            cmd.ExecuteNonQuery();
-            connection.Close();
 
-            ResetBoxes();
-            SetInvoiceNumberTextBox();
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();   
+
+                DisplayData();
+
+                ResetBoxes();
+                SetInvoiceNumberTextBox();
+            }
+            else
+            {
+                MessageBox.Show
+                (
+                    "Одберете купувач (F1).",
+                    "Грешка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
         public static int GetInvoiceDBID ()
@@ -144,7 +167,18 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             connection.Open();
 
             SQLiteCommand cmd = new SQLiteCommand("SELECT InvNumber FROM Invoices ORDER BY ID DESC LIMIT 1", connection);
-            InvoiceNumber = int.Parse(cmd.ExecuteScalar().ToString());
+            var num = cmd.ExecuteScalar();
+
+            object scalar = cmd.ExecuteScalar();
+
+            if (scalar != null && (!string.IsNullOrEmpty(scalar.ToString())))
+            {
+                InvoiceCounter = int.Parse(scalar.ToString());
+            }
+           else
+            {
+                InvoiceCounter = 0;
+            }
 
             connection.Close();
         }
@@ -159,22 +193,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             dgvInvoices.DataSource = dt;
             connection.Close();
         }
-
-        // MOZE DA NE TREBA
-/*        public string GetCustomerID ()
-        {
-            string id;
-
-            connection.Open();
-            
-            SQLiteCommand cmd = new SQLiteCommand("SELECT ID FROM Customers WHERE Назив = @Name", connection);
-            cmd.Parameters.AddWithValue("Name", CustomerPick.selectecCustomerInfo.Name);
-            id = cmd.ExecuteScalar().ToString();
-
-            connection.Close();
-
-            return id;
-        }*/
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -237,6 +255,12 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             }
 
             return items;
+        }
+
+        private void pnlControls_Click(object sender, EventArgs e)
+        {
+            ResetBoxes();
+            SetInvoiceNumberTextBox();
         }
     }
 }

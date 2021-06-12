@@ -17,9 +17,8 @@ namespace FloraWarehouseManagement.Forms
 {
     public partial class Products : Form
     {
-        private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-        SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
         private Product Product;
+        private readonly string SearchQuery = "SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Цена, Потекло, Забелешка, Залиха FROM Products";
 
         public Products()
         {
@@ -34,19 +33,8 @@ namespace FloraWarehouseManagement.Forms
 
             Product = new Product();
 
-            DisplayData();
+            UpdateTable();
             SetColumnsWidth();
-        }
-
-        private void DisplayData()
-        {
-            SQLiteCommand cmd = new SQLiteCommand("SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Цена, Потекло, Забелешка, Залиха FROM Products", connection);
-            connection.Open();
-            DataTable dt = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-            adapter.Fill(dt);
-            dgvProducts.DataSource = dt;
-            connection.Close();
         }
 
         private void Products_SizeChanged(object sender, EventArgs e)
@@ -93,20 +81,29 @@ namespace FloraWarehouseManagement.Forms
             }
             else
             {
-                int productExists = ProductFunctions.Instance.ProductExists(mtbCode.Text);
-
-                if (productExists < 1)
+                if (DbCommunication.Exists("Products", "Шифра", mtbCode.Text) < 1)
                 {
 
-                    ProductFunctions.Instance.AddProduct(mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbPrice.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0, tbQuantity.Text);
+                    Product_DbCommunication.AddProduct(mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbPrice.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0, tbQuantity.Text);
+                    UpdateTable();
 
-                    DisplayData();
-
-                    MessageBox.Show("Артиклот е успешно додаден!", "Сними", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show
+                    (
+                        "Артиклот е успешно додаден!", 
+                        "Сними", 
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
                 }
                 else
                 {
-                    MessageBox.Show("Тој артикл веќе постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show
+                    (
+                        "Тој артикл веќе постои!", 
+                        "Грешка", 
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Error
+                    );
                 }
             }
         }
@@ -120,18 +117,6 @@ namespace FloraWarehouseManagement.Forms
                 mainMenu.Closed += (s, args) => this.Close();
                 mainMenu.Show();
             }
-        }
-
-        public void FilterProducts(string FilterType, string FilterProperty)
-        {
-            SQLiteCommand cmd = new SQLiteCommand($"SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Цена, Потекло, Забелешка, Залиха FROM Products WHERE {FilterType} = @FilterProperty", connection);
-            cmd.Parameters.AddWithValue("FilterProperty", FilterProperty);
-            connection.Open();
-            DataTable dt = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-            adapter.Fill(dt);
-            dgvProducts.DataSource = dt;
-            connection.Close();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -150,11 +135,11 @@ namespace FloraWarehouseManagement.Forms
             {
                 if (rbtnCode.Checked)
                 {
-                    dgvProducts.DataSource = ProductFunctions.Instance.FilterProducts("Шифра", tbSearch.Text);
+                    dgvProducts.DataSource = Product_DbCommunication.FilterProducts("Шифра", tbSearch.Text);
                 }
                 else if (rbtnProduct.Checked)
                 {
-                    dgvProducts.DataSource = ProductFunctions.Instance.FilterProducts("Артикл", tbSearch.Text);
+                    dgvProducts.DataSource = Product_DbCommunication.FilterProducts("Артикл", tbSearch.Text);
                 }
                 else
                 {
@@ -165,29 +150,27 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnEdit_Click(object sender, EventArgs e)
         {   
-            ProductFunctions.Instance.EditProduct(Product.Code, mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbPrice.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0, tbQuantity.Text);
+            Product_DbCommunication.EditProduct(Product.Code, mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbPrice.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0, tbQuantity.Text);
             Product.Code = mtbCode.Text;
 
             MessageBox.Show
-               (
-                   "Артиклот е успешно променет!",
-                   "Промени",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-               );
+            (
+                "Артиклот е успешно променет!",
+                "Промени",
+                 MessageBoxButtons.OK,
+                 MessageBoxIcon.Information
+            );
 
-            DisplayData();
+            UpdateTable();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int productExists = ProductFunctions.Instance.ProductExists(mtbCode.Text);
-
-            if (productExists == 1)
+            if (DbCommunication.Exists("Products", "Шифра", mtbCode.Text) == 1)
             {
 
-                ProductFunctions.Instance.DeleteProduct(mtbCode.Text);
-                DisplayData();
+                DbCommunication.Delete("Products", "Шифра", mtbCode.Text);
+                UpdateTable();
 
                 MessageBox.Show
                 (
@@ -199,13 +182,20 @@ namespace FloraWarehouseManagement.Forms
             }
             else
             {
-                MessageBox.Show("Тоа артикл не постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show
+                    (
+                    "Тоа артикл не постои!", 
+                    "Грешка", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error
+                    );
             }
         }
 
         private void dgvProducts_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            // If a valid row is selected       If the last row is not selected (because it's empty)
+            if (e.RowIndex != -1 && e.RowIndex != dgvProducts.Rows.Count - 1)
             {
                 DataGridViewRow row = this.dgvProducts.Rows[e.RowIndex];
                 mtbCode.Text = row.Cells[0].Value.ToString();
@@ -219,41 +209,22 @@ namespace FloraWarehouseManagement.Forms
                 tbDescription.Text = row.Cells[8].Value.ToString();
                 tbQuantity.Text = row.Cells[9].Value.ToString();
 
-                connection.Open();
+                int checkedTax = Product_DbCommunication.CheckIfProductIsWithTax(mtbCode.Text);
+                cbDDV.Checked = checkedTax == 1 ? true : false;
+                Product.SetProduct(mtbCode.Text, tbProductName.Text, cbUnit.SelectedItem.ToString(), cbTaxGroup.SelectedItem.ToString(), mtbGroupCode.Text, mtbHelpCode.Text, tbPrice.Text, tbOrigin.Text, tbDescription.Text, tbQuantity.Text, checkedTax.ToString());
+            }
+            else
+            {
+                ClearTextBoxes();
+            }
 
-                SQLiteCommand cmd = new SQLiteCommand("SELECT Со_ДДВ from Products WHERE Шифра = @Code", connection);
-                cmd.Parameters.AddWithValue("@Code", row.Cells[0].Value.ToString());
-
-                string execution = null;
-                var scalar = cmd.ExecuteScalar();
-
-                if (scalar != null)
-                {
-                    execution = cmd.ExecuteScalar().ToString();
-                }
-
-                int checkedTax;
-
-                if (execution != "" && execution != null)
-                {
-                    checkedTax = int.Parse(execution);
-                    cbDDV.Checked = checkedTax == 1 ? true : false;
-                    Product.SetProduct(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString(), row.Cells[3].Value.ToString(), row.Cells[4].Value.ToString(), row.Cells[5].Value.ToString(), row.Cells[6].Value.ToString(), row.Cells[7].Value.ToString(), row.Cells[8].Value.ToString(), row.Cells[9].Value.ToString(), checkedTax.ToString());
-                }
-                else
-                {
-                    ClearTextBoxes();
-                }
-
-                connection.Close();
-            } 
         }
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
             if (tbSearch.Text == "")
             {
-                DisplayData();
+                UpdateTable();
             }
         }
 
@@ -305,12 +276,17 @@ namespace FloraWarehouseManagement.Forms
 
         private void tbPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ProductFunctions.Instance.AcceptNumbersOnly(sender, e);
+            RegexFunctions.AcceptNumbersOnly(sender, e);
         }
 
         private void tbQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ProductFunctions.Instance.AcceptNumbersOnly(sender, e);
+            RegexFunctions.AcceptNumbersOnly(sender, e);
+        }
+
+        private void UpdateTable()
+        {
+            dgvProducts.DataSource = DbCommunication.DisplayData(SearchQuery);
         }
     }
 }

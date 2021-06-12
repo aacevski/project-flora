@@ -17,10 +17,10 @@ namespace FloraWarehouseManagement.Forms
 {
     public partial class Customers : Form
     {
-        private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-        SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
-
         private Customer Customer;
+        // This search query is for the main data to be displayed in the data table
+        private readonly string SearchQuery = "SELECT Назив, Даночен_број, ЕМБС, Жиро_сметка, Жиро_сметка_доп, Банка, Адреса, Град, Поштенски_број, Забелешка FROM Customers";
+       
         public Customers()
         {
             InitializeComponent();
@@ -33,18 +33,7 @@ namespace FloraWarehouseManagement.Forms
             dgvCustomers.Width = this.Width;
             this.WindowState = FormWindowState.Maximized;
 
-            DisplayData();
-        }
-
-        public void DisplayData()
-        {
-            SQLiteCommand cmd = new SQLiteCommand("SELECT Назив, Даночен_број, ЕМБС, Жиро_сметка, Жиро_сметка_доп, Банка, Адреса, Град, Поштенски_број, Забелешка FROM Customers", connection);
-            connection.Open();
-            DataTable dt = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-            adapter.Fill(dt);
-            dgvCustomers.DataSource = dt;
-            connection.Close();
+            UpdateTable();
         }
 
         private void Customers_SizeChanged(object sender, EventArgs e)
@@ -65,12 +54,10 @@ namespace FloraWarehouseManagement.Forms
             else
             {
                 errorProviderTaxNum.SetError(tbTaxNum, null);
-
-                int productExists = CustomerFunctions.Instance.Exists(tbTaxNum.Text);
-
-                if (productExists < 1)
+                //DbCommunication.Exists("Customers", "Даночен_број", tbTaxNum.Text)
+                if (DbCommunication.Exists("Customers", "Даночен_број", tbTaxNum.Text) < 1)
                 {
-                    CustomerFunctions.Instance.Add
+                    Customer_DbCommunication.AddCustomer
                         (
                         tbName.Text,
                         tbTaxNum.Text,
@@ -89,7 +76,7 @@ namespace FloraWarehouseManagement.Forms
                         tbDescription.Text
                         );
 
-                    DisplayData();
+                    UpdateTable();
 
                     MessageBox.Show
                     (
@@ -101,7 +88,13 @@ namespace FloraWarehouseManagement.Forms
                 }
                 else
                 {
-                    MessageBox.Show("Тој коминтент веќе постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show
+                    (
+                        "Тој коминтент веќе постои!", 
+                        "Грешка", 
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Error
+                    );
                 }
             }
         }
@@ -128,30 +121,34 @@ namespace FloraWarehouseManagement.Forms
             {
                 if (rbtnName.Checked)
                 {
-                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Назив", tbSearch.Text);
+                    dgvCustomers.DataSource = Customer_DbCommunication.FilterCustomers("Назив", tbSearch.Text);
                 }
-
                 else if (rbtnCity.Checked)
                 {
-                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Град", tbSearch.Text);
+                    dgvCustomers.DataSource = Customer_DbCommunication.FilterCustomers("Град", tbSearch.Text);
                 }
-
                 else if (rbtnTaxNum.Checked)
                 {
-                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Даночен_број", tbSearch.Text);
+                    dgvCustomers.DataSource = Customer_DbCommunication.FilterCustomers("Даночен_број", tbSearch.Text);
                 }
                 else
                 {
-                    MessageBox.Show("Одберете начин на филтрирање!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show
+                    (
+                        "Одберете начин на филтрирање!", 
+                        "Грешка", 
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.Error
+                    );
                 }
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (dgvCustomers.SelectedCells.Count != 0)
+            if (dgvCustomers.SelectedCells.Count == 1)
             {
-                CustomerFunctions.Instance.Edit(Customer.TaxNumber, tbName.Text, tbTaxNum.Text, tbEMBS.Text, tbBankNum1.Text, tbBankNum2.Text, cbBank.SelectedItem.ToString(), tbAddress.Text, tbCity.Text, tbZipCode.Text, tbContactPerson1.Text, tbContactPerson2.Text, tbPhone1.Text, tbPhone2.Text, tbEmail.Text, tbDescription.Text);
+                Customer_DbCommunication.EditCustomer(Customer.TaxNumber, tbName.Text, tbTaxNum.Text, tbEMBS.Text, tbBankNum1.Text, tbBankNum2.Text, cbBank.SelectedItem.ToString(), tbAddress.Text, tbCity.Text, tbZipCode.Text, tbContactPerson1.Text, tbContactPerson2.Text, tbPhone1.Text, tbPhone2.Text, tbEmail.Text, tbDescription.Text);
                 Customer.TaxNumber = tbTaxNum.Text;
 
                 MessageBox.Show
@@ -162,19 +159,18 @@ namespace FloraWarehouseManagement.Forms
                         MessageBoxIcon.Information
                    );
 
-                DisplayData();
+                UpdateTable();
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnDelete_Click (object sender, EventArgs e)
         {
-            int productExists = CustomerFunctions.Instance.Exists(tbTaxNum.Text);
 
-            if (productExists == 1)
+            if (DbCommunication.Exists("Customers", "Даночен_број", tbTaxNum.Text) == 1)
             {
 
-                CustomerFunctions.Instance.Delete(tbTaxNum.Text);
-                DisplayData();
+                DbCommunication.Delete("Customers", "Даночен_број", tbTaxNum.Text);
+                UpdateTable();
 
                 MessageBox.Show
                 (
@@ -186,21 +182,25 @@ namespace FloraWarehouseManagement.Forms
             }
             else
             {
-                MessageBox.Show("Тој коминтент не постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show
+                (
+                    "Тој коминтент не постои!", 
+                    "Грешка", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error
+                );
             }
+
         }
 
-        private void dgvCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvCustomers_CellClick (object sender, DataGridViewCellEventArgs e)
         {
-            
+            // If a valid row is selected       If the last row is not selected (because it's empty)
             if (e.RowIndex != -1 && e.RowIndex != dgvCustomers.Rows.Count - 1)
             {
                 string TaxNum = dgvCustomers.Rows[e.RowIndex].Cells[1].Value.ToString();
-                SQLiteCommand cmd = new SQLiteCommand($"SELECT * FROM Customers WHERE Даночен_број='{TaxNum}'", connection);
-                connection.Open();
-                DataTable dt = new DataTable();
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-                adapter.Fill(dt);
+                string query = $"SELECT * FROM Customers WHERE Даночен_број='{TaxNum}'";
+                DataTable dt = DbCommunication.DisplayData(query);
 
                 tbName.Text = dt.Rows[0].ItemArray[1].ToString();
                 tbTaxNum.Text = dt.Rows[0].ItemArray[2].ToString();
@@ -219,8 +219,6 @@ namespace FloraWarehouseManagement.Forms
                 tbDescription.Text = dt.Rows[0].ItemArray[15].ToString();
 
                 Customer.SetCustomer(tbName.Text, tbTaxNum.Text, tbEMBS.Text, tbBankNum1.Text, tbBankNum2.Text, cbBank.SelectedItem.ToString(), tbAddress.Text, tbCity.Text, tbZipCode.Text, tbContactPerson1.Text, tbContactPerson2.Text, tbPhone1.Text, tbPhone2.Text, tbEmail.Text, tbDescription.Text);
-
-                connection.Close();
             }
             else
             {
@@ -228,7 +226,7 @@ namespace FloraWarehouseManagement.Forms
             }
         }
 
-        private void pnlControls_Click(object sender, EventArgs e)
+        private void pnlControls_Click (object sender, EventArgs e)
         {
             ClearTextBoxes();
         }
@@ -252,20 +250,20 @@ namespace FloraWarehouseManagement.Forms
             tbDescription.Text = "";
         }
 
-        private void tbTaxNum_TextChanged(object sender, EventArgs e)
+        private void tbTaxNum_TextChanged (object sender, EventArgs e)
         {
             errorProviderTaxNum.SetError(tbTaxNum, null);
         }
 
-        private void tbSearch_TextChanged(object sender, EventArgs e)
+        private void tbSearch_TextChanged (object sender, EventArgs e)
         {
             if (tbSearch.Text == "")
             {
-                DisplayData();
+                UpdateTable();
             }
         }
 
-        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        private void tbSearch_KeyDown (object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -273,19 +271,24 @@ namespace FloraWarehouseManagement.Forms
             }
         }
 
-        private void tbName_TextChanged(object sender, EventArgs e)
+        private void tbName_TextChanged (object sender, EventArgs e)
         {
             errorProviderName.SetError(tbName, null);
         }
 
-        private void tbAddress_TextChanged(object sender, EventArgs e)
+        private void tbAddress_TextChanged (object sender, EventArgs e)
         {
             errorProviderAddress.SetError(tbAddress, null);
         }
 
-        private void tbCity_TextChanged(object sender, EventArgs e)
+        private void tbCity_TextChanged (object sender, EventArgs e)
         {
             errorProviderAddress.SetError(tbCity, null);
+        }
+
+        private void UpdateTable ()
+        {
+            dgvCustomers.DataSource = Customer_DbCommunication.DisplayData(SearchQuery);
         }
     }
 }

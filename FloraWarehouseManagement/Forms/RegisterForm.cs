@@ -61,7 +61,13 @@ namespace FloraWarehouseManagement.Forms
 
             } else
             {
-                MessageBox.Show("Тоа корисничко име веќе постои!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show
+                (
+                    "Тоа корисничко име веќе постои!", 
+                    "Грешка", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error
+                );
             }
         }
 

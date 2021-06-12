@@ -86,6 +86,13 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         {
             Search();
         }
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Search();
+            }
+        }
 
         private void Search ()
         {
@@ -93,30 +100,22 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             {
                 if (rbtnName.Checked)
                 {
-                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Назив", tbSearch.Text);
+                    dgvCustomers.DataSource = Customer_DbCommunication.FilterCustomers("Назив", tbSearch.Text);
                 }
 
                 else if (rbtnCity.Checked)
                 {
-                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Град", tbSearch.Text);
+                    dgvCustomers.DataSource = Customer_DbCommunication.FilterCustomers("Град", tbSearch.Text);
                 }
 
                 else if (rbtnTaxNum.Checked)
                 {
-                    dgvCustomers.DataSource = CustomerFunctions.Instance.FilterCustomers("Даночен_број", tbSearch.Text);
+                    dgvCustomers.DataSource = Customer_DbCommunication.FilterCustomers("Даночен_број", tbSearch.Text);
                 }
                 else
                 {
                     MessageBox.Show("Одберете начин на филтрирање!", "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-        }
-
-        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Search();
             }
         }
     }

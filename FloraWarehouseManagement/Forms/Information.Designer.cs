@@ -32,7 +32,6 @@ namespace FloraWarehouseManagement.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Information));
             this.gbInfo = new System.Windows.Forms.GroupBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
             this.tbBankNum3 = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.tbBank3 = new System.Windows.Forms.TextBox();
@@ -72,7 +71,6 @@ namespace FloraWarehouseManagement.Forms
             // 
             this.gbInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(186)))), ((int)(((byte)(65)))));
             this.gbInfo.Controls.Add(this.btnSave);
-            this.gbInfo.Controls.Add(this.btnEdit);
             this.gbInfo.Controls.Add(this.tbBankNum3);
             this.gbInfo.Controls.Add(this.label16);
             this.gbInfo.Controls.Add(this.tbBank3);
@@ -116,9 +114,8 @@ namespace FloraWarehouseManagement.Forms
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.White;
-            this.btnSave.Enabled = false;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Location = new System.Drawing.Point(398, 530);
+            this.btnSave.Location = new System.Drawing.Point(399, 529);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(141, 53);
             this.btnSave.TabIndex = 33;
@@ -126,24 +123,11 @@ namespace FloraWarehouseManagement.Forms
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnEdit
-            // 
-            this.btnEdit.BackColor = System.Drawing.Color.White;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Location = new System.Drawing.Point(398, 530);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(141, 53);
-            this.btnEdit.TabIndex = 32;
-            this.btnEdit.Text = "Промени";
-            this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
             // tbBankNum3
             // 
             this.tbBankNum3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbBankNum3.Location = new System.Drawing.Point(345, 451);
             this.tbBankNum3.Name = "tbBankNum3";
-            this.tbBankNum3.ReadOnly = true;
             this.tbBankNum3.Size = new System.Drawing.Size(255, 26);
             this.tbBankNum3.TabIndex = 31;
             // 
@@ -162,7 +146,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbBank3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbBank3.Location = new System.Drawing.Point(345, 398);
             this.tbBank3.Name = "tbBank3";
-            this.tbBank3.ReadOnly = true;
             this.tbBank3.Size = new System.Drawing.Size(255, 26);
             this.tbBank3.TabIndex = 29;
             // 
@@ -181,7 +164,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbBankNum2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbBankNum2.Location = new System.Drawing.Point(345, 287);
             this.tbBankNum2.Name = "tbBankNum2";
-            this.tbBankNum2.ReadOnly = true;
             this.tbBankNum2.Size = new System.Drawing.Size(255, 26);
             this.tbBankNum2.TabIndex = 27;
             // 
@@ -200,7 +182,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbBank2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbBank2.Location = new System.Drawing.Point(345, 234);
             this.tbBank2.Name = "tbBank2";
-            this.tbBank2.ReadOnly = true;
             this.tbBank2.Size = new System.Drawing.Size(255, 26);
             this.tbBank2.TabIndex = 25;
             // 
@@ -219,7 +200,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbBankNum1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbBankNum1.Location = new System.Drawing.Point(345, 123);
             this.tbBankNum1.Name = "tbBankNum1";
-            this.tbBankNum1.ReadOnly = true;
             this.tbBankNum1.Size = new System.Drawing.Size(255, 26);
             this.tbBankNum1.TabIndex = 23;
             // 
@@ -238,7 +218,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbBank1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbBank1.Location = new System.Drawing.Point(345, 70);
             this.tbBank1.Name = "tbBank1";
-            this.tbBank1.ReadOnly = true;
             this.tbBank1.Size = new System.Drawing.Size(255, 26);
             this.tbBank1.TabIndex = 21;
             // 
@@ -257,7 +236,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbZipCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbZipCode.Location = new System.Drawing.Point(22, 569);
             this.tbZipCode.Name = "tbZipCode";
-            this.tbZipCode.ReadOnly = true;
             this.tbZipCode.Size = new System.Drawing.Size(236, 26);
             this.tbZipCode.TabIndex = 19;
             // 
@@ -276,7 +254,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCity.Location = new System.Drawing.Point(22, 510);
             this.tbCity.Name = "tbCity";
-            this.tbCity.ReadOnly = true;
             this.tbCity.Size = new System.Drawing.Size(236, 26);
             this.tbCity.TabIndex = 17;
             // 
@@ -295,7 +272,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbMunicipality.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbMunicipality.Location = new System.Drawing.Point(22, 451);
             this.tbMunicipality.Name = "tbMunicipality";
-            this.tbMunicipality.ReadOnly = true;
             this.tbMunicipality.Size = new System.Drawing.Size(236, 26);
             this.tbMunicipality.TabIndex = 15;
             // 
@@ -314,7 +290,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbAddress.Location = new System.Drawing.Point(22, 398);
             this.tbAddress.Name = "tbAddress";
-            this.tbAddress.ReadOnly = true;
             this.tbAddress.Size = new System.Drawing.Size(236, 26);
             this.tbAddress.TabIndex = 13;
             // 
@@ -333,7 +308,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbEmail.Location = new System.Drawing.Point(22, 341);
             this.tbEmail.Name = "tbEmail";
-            this.tbEmail.ReadOnly = true;
             this.tbEmail.Size = new System.Drawing.Size(236, 26);
             this.tbEmail.TabIndex = 11;
             // 
@@ -352,7 +326,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPhone.Location = new System.Drawing.Point(22, 287);
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.ReadOnly = true;
             this.tbPhone.Size = new System.Drawing.Size(236, 26);
             this.tbPhone.TabIndex = 9;
             // 
@@ -371,7 +344,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbTaxNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbTaxNumber.Location = new System.Drawing.Point(22, 234);
             this.tbTaxNumber.Name = "tbTaxNumber";
-            this.tbTaxNumber.ReadOnly = true;
             this.tbTaxNumber.Size = new System.Drawing.Size(236, 26);
             this.tbTaxNumber.TabIndex = 7;
             // 
@@ -390,7 +362,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbEMBR.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbEMBR.Location = new System.Drawing.Point(22, 177);
             this.tbEMBR.Name = "tbEMBR";
-            this.tbEMBR.ReadOnly = true;
             this.tbEMBR.Size = new System.Drawing.Size(236, 26);
             this.tbEMBR.TabIndex = 5;
             // 
@@ -409,7 +380,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbAuthorizedPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbAuthorizedPerson.Location = new System.Drawing.Point(22, 123);
             this.tbAuthorizedPerson.Name = "tbAuthorizedPerson";
-            this.tbAuthorizedPerson.ReadOnly = true;
             this.tbAuthorizedPerson.Size = new System.Drawing.Size(236, 26);
             this.tbAuthorizedPerson.TabIndex = 3;
             // 
@@ -428,7 +398,6 @@ namespace FloraWarehouseManagement.Forms
             this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbName.Location = new System.Drawing.Point(22, 70);
             this.tbName.Name = "tbName";
-            this.tbName.ReadOnly = true;
             this.tbName.Size = new System.Drawing.Size(236, 26);
             this.tbName.TabIndex = 1;
             // 
@@ -498,7 +467,6 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnSave;
     }
 }

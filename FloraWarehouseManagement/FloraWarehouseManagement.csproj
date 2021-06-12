@@ -78,14 +78,16 @@
     <Compile Include="Classes\CompanyInfo.cs" />
     <Compile Include="Classes\Customer.cs" />
     <Compile Include="Classes\Product.cs" />
-    <Compile Include="Classes\Utilities\CustomerFunctions.cs" />
+    <Compile Include="Classes\Utilities\Customer_DbCommunication.cs" />
+    <Compile Include="Classes\Utilities\DbCommunication.cs" />
     <Compile Include="Classes\Utilities\EnumeratorForControls.cs" />
     <Compile Include="Classes\Utilities\ImageFast.cs" />
-    <Compile Include="Classes\Utilities\InvoiceFunctions.cs" />
-    <Compile Include="Classes\Utilities\ProductFunctions.cs" />
+    <Compile Include="Classes\Utilities\Invoice_DbCommunication.cs" />
+    <Compile Include="Classes\Utilities\Product_DbCommunication.cs" />
     <Compile Include="Classes\Utilities\AddUser.cs" />
     <Compile Include="Classes\Utilities\AlignControls.cs" />
     <Compile Include="Classes\Utilities\CheckCredentials.cs" />
+    <Compile Include="Classes\Utilities\RegexFunctions.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -10,28 +10,11 @@ using System.IO;
 
 namespace FloraWarehouseManagement.Classes.Utilities
 {
-    public class CustomerFunctions
+    public class Customer_DbCommunication : DbCommunication
     {
-        private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-        SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
+        public Customer_DbCommunication() { }
 
-        public static CustomerFunctions Instance { get; } = new CustomerFunctions();
-
-        public CustomerFunctions() { }
-
-        // Dali ovaa funkcija treba nekade?
-        public void DisplayData()
-        {
-            SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
-            SQLiteCommand cmd = new SQLiteCommand("SELECT * from User", connection);
-            connection.Open();
-            DataTable dt = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-            adapter.Fill(dt);
-            connection.Close();
-        }
-
-        public void Add(string Name, string TaxNum, string EMBS, string BankNum1, string BankNum2, string Bank, string Address, string City, string ZipCode, string ContactPerson1, string ContactPerson2, string Phone1, string Phone2, string EMail, string Description)
+        public static void AddCustomer (string Name, string TaxNum, string EMBS, string BankNum1, string BankNum2, string Bank, string Address, string City, string ZipCode, string ContactPerson1, string ContactPerson2, string Phone1, string Phone2, string EMail, string Description)
         {
             SQLiteCommand command = new SQLiteCommand
                 (
@@ -91,34 +74,9 @@ namespace FloraWarehouseManagement.Classes.Utilities
             command.ExecuteNonQuery();
             connection.Close();
 
-            DisplayData();
         }
 
-        public int Exists(string TaxNum)
-        {
-            int productExists;
-            connection.Open();
-            string checkIfExistsQuery = "SELECT EXISTS(SELECT 1 FROM Customers WHERE Даночен_број=@TaxNum)";
-            SQLiteCommand command = new SQLiteCommand(checkIfExistsQuery, connection);
-            command.Parameters.AddWithValue("TaxNum", TaxNum);
-            productExists = Convert.ToInt32(command.ExecuteScalar());
-            connection.Close();
-            return productExists;
-        }
-
-        public void Delete(string TaxNum)
-        {
-            SQLiteCommand command = new SQLiteCommand("DELETE FROM Customers WHERE Даночен_број=@TaxNum", connection);
-            connection.Open();
-            command.Parameters.AddWithValue("TaxNum", TaxNum);
-            command.ExecuteNonQuery();
-            DataTable productTable = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-            adapter.Fill(productTable);
-            connection.Close();
-        }
-
-        public void Edit (string OldTaxNum, string Name, string TaxNumber, string EMBS, string MainBankNumber, string SecondaryBankNumber, string Bank, string Address, string City, string ZipCode, string ContactPerson1, string ContactPerson2, string Phone1, string Phone2, string Email, string Description)
+        public static void EditCustomer (string OldTaxNum, string Name, string TaxNumber, string EMBS, string MainBankNumber, string SecondaryBankNumber, string Bank, string Address, string City, string ZipCode, string ContactPerson1, string ContactPerson2, string Phone1, string Phone2, string Email, string Description)
         {
             SQLiteCommand command = new SQLiteCommand
                 (
@@ -142,8 +100,6 @@ namespace FloraWarehouseManagement.Classes.Utilities
                 connection
                 );
 
-            connection.Open();
-
             command.Parameters.AddWithValue("@Name", Name);
             command.Parameters.AddWithValue("@TaxNumber", TaxNumber);
             command.Parameters.AddWithValue("@EMBS", EMBS);
@@ -161,13 +117,13 @@ namespace FloraWarehouseManagement.Classes.Utilities
             command.Parameters.AddWithValue("@Description", Description);
             command.Parameters.AddWithValue("@OldTaxNum", OldTaxNum);
 
+            connection.Open();
             command.ExecuteNonQuery();
             connection.Close();
 
-            DisplayData();
         }
 
-        public DataTable FilterCustomers(string FilterType, string FilterProperty)
+        public static DataTable FilterCustomers(string FilterType, string FilterProperty)
         {
             SQLiteCommand cmd = new SQLiteCommand($"SELECT * FROM Customers WHERE {FilterType} = @FilterProperty", connection);
             cmd.Parameters.AddWithValue("FilterProperty", FilterProperty);
@@ -179,6 +135,20 @@ namespace FloraWarehouseManagement.Classes.Utilities
             connection.Close();
 
             return dt;
+        }
+
+        public static int GetCustomerDBID(string name)
+        {
+            int id;
+
+            SQLiteCommand cmd = new SQLiteCommand("SELECT ID FROM Customers WHERE Назив = @Name", connection);
+            cmd.Parameters.AddWithValue("Name", name);
+
+            connection.Open();
+            id = int.Parse(cmd.ExecuteScalar().ToString());
+            connection.Close();
+
+            return id;
         }
     }
 }

@@ -46,7 +46,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.label13 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tbPrice = new System.Windows.Forms.TextBox();
-            this.nudQuantity = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.tbUnit = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -60,14 +59,15 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvInvoiceItems = new System.Windows.Forms.DataGridView();
+            this.tbQuantity = new System.Windows.Forms.TextBox();
             this.pnlControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoiceItems)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlControls
             // 
             this.pnlControls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(135)))), ((int)(((byte)(186)))), ((int)(((byte)(65)))));
+            this.pnlControls.Controls.Add(this.tbQuantity);
             this.pnlControls.Controls.Add(this.btnDelete);
             this.pnlControls.Controls.Add(this.btnEdit);
             this.pnlControls.Controls.Add(this.btnSave);
@@ -80,7 +80,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.pnlControls.Controls.Add(this.label13);
             this.pnlControls.Controls.Add(this.label9);
             this.pnlControls.Controls.Add(this.tbPrice);
-            this.pnlControls.Controls.Add(this.nudQuantity);
             this.pnlControls.Controls.Add(this.label8);
             this.pnlControls.Controls.Add(this.tbUnit);
             this.pnlControls.Controls.Add(this.label7);
@@ -100,30 +99,40 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(335, 146);
+            this.btnDelete.BackColor = System.Drawing.Color.White;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(326, 158);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(84, 32);
             this.btnDelete.TabIndex = 32;
             this.btnDelete.Text = "Избриши";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(335, 117);
+            this.btnEdit.BackColor = System.Drawing.Color.White;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEdit.Location = new System.Drawing.Point(326, 119);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEdit.Size = new System.Drawing.Size(84, 33);
             this.btnEdit.TabIndex = 31;
             this.btnEdit.Text = "Промени";
-            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.UseVisualStyleBackColor = false;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(335, 88);
+            this.btnSave.BackColor = System.Drawing.Color.White;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(326, 82);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(84, 31);
             this.btnSave.TabIndex = 30;
             this.btnSave.Text = "Сними";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label14
@@ -216,31 +225,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.tbPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbPrice.TextChanged += new System.EventHandler(this.tbPrice_TextChanged);
             this.tbPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPrice_KeyPress);
-            // 
-            // nudQuantity
-            // 
-            this.nudQuantity.Location = new System.Drawing.Point(101, 94);
-            this.nudQuantity.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.nudQuantity.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudQuantity.Name = "nudQuantity";
-            this.nudQuantity.Size = new System.Drawing.Size(78, 20);
-            this.nudQuantity.TabIndex = 13;
-            this.nudQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.nudQuantity.ThousandsSeparator = true;
-            this.nudQuantity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.nudQuantity.ValueChanged += new System.EventHandler(this.nudQuantity_ValueChanged);
             // 
             // label8
             // 
@@ -402,6 +386,17 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.dgvInvoiceItems.Size = new System.Drawing.Size(975, 302);
             this.dgvInvoiceItems.TabIndex = 3;
             // 
+            // tbQuantity
+            // 
+            this.tbQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbQuantity.Location = new System.Drawing.Point(101, 91);
+            this.tbQuantity.Name = "tbQuantity";
+            this.tbQuantity.Size = new System.Drawing.Size(78, 22);
+            this.tbQuantity.TabIndex = 33;
+            this.tbQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbQuantity.TextChanged += new System.EventHandler(this.tbQuantity_TextChanged);
+            this.tbQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQuantity_KeyPress);
+            // 
             // InvoiceItems
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,7 +413,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.InvoiceItems_KeyUp);
             this.pnlControls.ResumeLayout(false);
             this.pnlControls.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoiceItems)).EndInit();
             this.ResumeLayout(false);
 
@@ -440,7 +434,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private System.Windows.Forms.TextBox tbTax;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown nudQuantity;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbPrice;
         private System.Windows.Forms.Button btnDelete;
@@ -453,5 +446,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private System.Windows.Forms.TextBox tbEdDDV;
         private System.Windows.Forms.TextBox tbEdCena;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox tbQuantity;
     }
 }

@@ -32,6 +32,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private void InvoiceItems_Load(object sender, EventArgs e)
         {
             DisplayData();
+            tbQuantity.Text = "1";
         }
 
         private void InvoiceItems_KeyUp(object sender, KeyEventArgs e)
@@ -58,11 +59,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             }
         }
 
-        private void nudQuantity_ValueChanged(object sender, EventArgs e)
-        {
-            item.Quantity = nudQuantity.Value;
-        }
-
         private void tbPrice_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(tbPrice.Text))
@@ -75,7 +71,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void tbPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ProductFunctions.Instance.AcceptNumbersOnly(sender, e);
+            RegexFunctions.AcceptNumbersOnly(sender, e);
         }
 
         private void UpdateTextBoxes()
@@ -86,18 +82,35 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            SQLiteCommand cmd = new SQLiteCommand("INSERT INTO InvoiceItems(Invoice_ID, Item_ID, Quantity, Price) VALUES(@Invoice_ID, @Item_ID, @Quantity, @Price)",connection);
-            cmd.Parameters.AddWithValue("Invoice_ID", OutgoingInvoices.GetInvoiceDBID());
-            cmd.Parameters.AddWithValue("Item_ID", item.Code);
-            cmd.Parameters.AddWithValue("Quantity", item.Quantity);
-            cmd.Parameters.AddWithValue("Price", item.Price);
+            decimal ItemTrueQuantity = Product_DbCommunication.GetProductQuantity(item.Code);
 
-            connection.Open();
-            cmd.ExecuteNonQuery();
-            connection.Close();
+            if (item.Quantity <= ItemTrueQuantity)
+            {
+                SQLiteCommand cmd = new SQLiteCommand("INSERT INTO InvoiceItems(Invoice_ID, Item_ID, Quantity, Price) VALUES(@Invoice_ID, @Item_ID, @Quantity, @Price)", connection);
 
-            DisplayData();
-            ClearTextBoxes();
+                cmd.Parameters.AddWithValue("Invoice_ID", OutgoingInvoices.InvoiceNumber);
+                cmd.Parameters.AddWithValue("Item_ID", item.Code);
+                cmd.Parameters.AddWithValue("Quantity", item.Quantity);
+                cmd.Parameters.AddWithValue("Price", item.Price);
+
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+
+                DisplayData();
+                ClearTextBoxes();
+                Product_DbCommunication.DecreaseQuantity(item.Quantity, item.Code);
+            }
+            else
+            {
+                MessageBox.Show
+                (
+                    "Нема доволно залиха.",
+                    "Грешка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
 
         private void InvoiceItems_SizeChanged(object sender, EventArgs e)
@@ -116,12 +129,13 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             tbEdCena.Text = "";
             tbEdDDV.Text = "";  
             tbTax.Text = "";
-            nudQuantity.Value = 1;
+            tbQuantity.Text = "1";
         }
 
         private void DisplayData()
         {
-            SQLiteCommand cmd = new SQLiteCommand($"SELECT Products.Артикл, Quantity, Price FROM InvoiceItems INNER JOIN Invoices ON Invoices.ID = InvoiceItems.Invoice_ID INNER JOIN Products ON Products.Шифра = InvoiceItems.Item_ID WHERE Invoice_ID = {OutgoingInvoices.InvoiceNumber}", connection);
+            SQLiteCommand cmd = new SQLiteCommand("SELECT Products.Артикл, Quantity, Price FROM InvoiceItems INNER JOIN Invoices ON Invoices.InvNumber = InvoiceItems.Invoice_ID INNER JOIN Products ON Products.Шифра = InvoiceItems.Item_ID WHERE Invoice_ID = @InvID", connection);
+            cmd.Parameters.AddWithValue("InvID", OutgoingInvoices.InvoiceNumber);
             connection.Open();
             DataTable dt = new DataTable();
             SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
@@ -130,5 +144,22 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             connection.Close();
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvInvoiceItems.SelectedCells.Count >= 1)
+            {
+                //TODO implement
+            }
+        }
+
+        private void tbQuantity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            RegexFunctions.AcceptNumbersOnly(sender, e);
+        }
+
+        private void tbQuantity_TextChanged(object sender, EventArgs e)
+        {
+            item.Quantity = decimal.Parse(tbQuantity.Text);
+        }
     }
 }

@@ -68,7 +68,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
                 if (dt.Rows[0].ItemArray[11].ToString() != "")  // Залихата на артиклот земена од база
                 {
-                    item.Quantity = decimal.Parse(dt.Rows[0].ItemArray[11].ToString());
+                    item.Quantity = 1;
                 }
                 
                 connection.Close();
@@ -98,7 +98,10 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         }
         private void tbSearch_KeyDown(object sender, KeyEventArgs e)
         {
-            Search();
+            if (e.KeyCode == Keys.Enter)
+            {
+                Search();
+            }
         }
 
         private void Search()
@@ -107,11 +110,11 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             {
                 if (rbtnCode.Checked)
                 {
-                    dgvProducts.DataSource = ProductFunctions.Instance.FilterProducts("Шифра", tbSearch.Text);
+                    dgvProducts.DataSource = Product_DbCommunication.FilterProducts("Шифра", tbSearch.Text);
                 }
                 else if (rbtnProduct.Checked)
                 {
-                    dgvProducts.DataSource = ProductFunctions.Instance.FilterProducts("Артикл", tbSearch.Text);
+                    dgvProducts.DataSource = Product_DbCommunication.FilterProducts("Артикл", tbSearch.Text);
                 }
                 else
                 {

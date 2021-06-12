@@ -32,7 +32,7 @@ namespace FloraWarehouseManagement.Forms.Sales
 
         private void btnPaymentOperations_Click(object sender, EventArgs e)
         {
-
+            // Unfinished feature, to come in version 2.0 :)
         }
 
     }

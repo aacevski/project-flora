@@ -25,7 +25,7 @@ namespace FloraWarehouseManagement.Forms
         {
             this.WindowState = FormWindowState.Maximized;
             AlignControls.CenterControl(pnlMenuButtons);
-            pnlMenuButtons.BackColor = Color.FromArgb(0, 88, 44, 55);
+            pnlMenuButtons.BackColor = Color.FromArgb(0, 88, 44, 55);   // Making the background of the menu buttons panel transparent
 
             Information.Open(); // Loading the company info
         }

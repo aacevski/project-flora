@@ -29,16 +29,17 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OutgoingInvoices));
             this.dgvInvoices = new System.Windows.Forms.DataGridView();
             this.pnlControls = new System.Windows.Forms.Panel();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
             this.gbInvoiceInfo = new System.Windows.Forms.GroupBox();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -62,9 +63,13 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.label2 = new System.Windows.Forms.Label();
             this.mtbInvoiceNum = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.errorProviderCustomer = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.tbInvCounter = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.pnlControls.SuspendLayout();
             this.gbInvoiceInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCustomer)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvInvoices
@@ -104,57 +109,12 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.pnlControls.Name = "pnlControls";
             this.pnlControls.Size = new System.Drawing.Size(974, 355);
             this.pnlControls.TabIndex = 2;
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.BackColor = System.Drawing.Color.White;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.Location = new System.Drawing.Point(655, 237);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(105, 45);
-            this.btnPrint.TabIndex = 4;
-            this.btnPrint.Text = "Печати";
-            this.btnPrint.UseVisualStyleBackColor = false;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.BackColor = System.Drawing.Color.White;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Location = new System.Drawing.Point(655, 133);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(105, 45);
-            this.btnEdit.TabIndex = 3;
-            this.btnEdit.Text = "Промени";
-            this.btnEdit.UseVisualStyleBackColor = false;
-            // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.White;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Location = new System.Drawing.Point(655, 82);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(105, 45);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Сними";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnNew
-            // 
-            this.btnNew.BackColor = System.Drawing.Color.White;
-            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNew.Location = new System.Drawing.Point(655, 31);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(105, 45);
-            this.btnNew.TabIndex = 1;
-            this.btnNew.Text = "Нова";
-            this.btnNew.UseVisualStyleBackColor = false;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.pnlControls.Click += new System.EventHandler(this.pnlControls_Click);
             // 
             // gbInvoiceInfo
             // 
+            this.gbInvoiceInfo.Controls.Add(this.tbInvCounter);
+            this.gbInvoiceInfo.Controls.Add(this.label14);
             this.gbInvoiceInfo.Controls.Add(this.btnNew);
             this.gbInvoiceInfo.Controls.Add(this.btnSave);
             this.gbInvoiceInfo.Controls.Add(this.btnEdit);
@@ -190,6 +150,54 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.gbInvoiceInfo.TabIndex = 0;
             this.gbInvoiceInfo.TabStop = false;
             this.gbInvoiceInfo.Text = "Податоци за документот";
+            // 
+            // btnNew
+            // 
+            this.btnNew.BackColor = System.Drawing.Color.White;
+            this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNew.Location = new System.Drawing.Point(655, 31);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(105, 45);
+            this.btnNew.TabIndex = 1;
+            this.btnNew.Text = "Нова";
+            this.btnNew.UseVisualStyleBackColor = false;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.White;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Location = new System.Drawing.Point(655, 82);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(105, 45);
+            this.btnSave.TabIndex = 2;
+            this.btnSave.Text = "Сними";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.Color.White;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Location = new System.Drawing.Point(655, 133);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(105, 45);
+            this.btnEdit.TabIndex = 3;
+            this.btnEdit.Text = "Промени";
+            this.btnEdit.UseVisualStyleBackColor = false;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.BackColor = System.Drawing.Color.White;
+            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrint.Location = new System.Drawing.Point(655, 237);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(105, 45);
+            this.btnPrint.TabIndex = 4;
+            this.btnPrint.Text = "Печати";
+            this.btnPrint.UseVisualStyleBackColor = false;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // label13
             // 
@@ -301,7 +309,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // tbValuta
             // 
             this.tbValuta.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbValuta.Location = new System.Drawing.Point(204, 57);
+            this.tbValuta.Location = new System.Drawing.Point(246, 57);
             this.tbValuta.Name = "tbValuta";
             this.tbValuta.Size = new System.Drawing.Size(78, 27);
             this.tbValuta.TabIndex = 11;
@@ -310,7 +318,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(201, 36);
+            this.label6.Location = new System.Drawing.Point(243, 31);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(61, 18);
             this.label6.TabIndex = 10;
@@ -424,6 +432,28 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.label1.TabIndex = 0;
             this.label1.Text = "Број на фактура:";
             // 
+            // errorProviderCustomer
+            // 
+            this.errorProviderCustomer.ContainerControl = this;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(156, 36);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(58, 18);
+            this.label14.TabIndex = 23;
+            this.label14.Text = "Бројач:";
+            // 
+            // tbInvCounter
+            // 
+            this.tbInvCounter.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbInvCounter.Location = new System.Drawing.Point(156, 57);
+            this.tbInvCounter.Name = "tbInvCounter";
+            this.tbInvCounter.Size = new System.Drawing.Size(58, 27);
+            this.tbInvCounter.TabIndex = 24;
+            // 
             // OutgoingInvoices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,6 +473,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.pnlControls.ResumeLayout(false);
             this.gbInvoiceInfo.ResumeLayout(false);
             this.gbInvoiceInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCustomer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -479,5 +510,8 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.ErrorProvider errorProviderCustomer;
+        private System.Windows.Forms.TextBox tbInvCounter;
+        private System.Windows.Forms.Label label14;
     }
 }

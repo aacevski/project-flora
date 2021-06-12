@@ -18,7 +18,7 @@ namespace FloraWarehouseManagement.Forms
 {
     public partial class Information : Form
     {
-        private IEnumerable<TextBox> textBoxes;
+        private IEnumerable<TextBox> textBoxes; // We use an enumerable of the text boxes on the form for when we need to update them
         public static CompanyInfo CompanyInfo;
         private static readonly string saveFolder = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\CompanyInfo\";
 
@@ -31,8 +31,6 @@ namespace FloraWarehouseManagement.Forms
         {
             this.WindowState = FormWindowState.Maximized;
             AlignControls.CenterControl(gbInfo);
-            btnEdit.BringToFront();
-            btnSave.SendToBack();
             textBoxes = EnumeratorForControls.GetChildControls<TextBox>(gbInfo);
             CompanyInfo = new CompanyInfo();
             Open();
@@ -50,37 +48,15 @@ namespace FloraWarehouseManagement.Forms
             }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            btnEdit.Enabled = false;
-            btnEdit.SendToBack();
-
-            btnSave.BringToFront();
-            btnSave.Enabled = true;
-
-            EnableOrDisableTextBoxes(false);
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
-            btnSave.Enabled = false;
-            btnSave.SendToBack();
-
-            btnEdit.Enabled = true;
-            btnEdit.BringToFront();
-
             CompanyInfo.SetInfo(textBoxes);
             Save();
 
-            EnableOrDisableTextBoxes(true);
-        }
-
-        private void EnableOrDisableTextBoxes (bool command)
-        {
-            foreach (TextBox tb in textBoxes)
-            {
-                tb.ReadOnly = command;
-            }
+            MessageBox.Show
+            (
+                "Информациите се ажурирани"
+            );
         }
 
         private void Save ()
