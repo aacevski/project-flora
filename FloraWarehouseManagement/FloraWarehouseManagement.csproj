@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Classes\CompanyInfo.cs" />
     <Compile Include="Classes\Customer.cs" />
+    <Compile Include="Classes\Employee.cs" />
     <Compile Include="Classes\Product.cs" />
     <Compile Include="Classes\Utilities\Customer_DbCommunication.cs" />
     <Compile Include="Classes\Utilities\DbCommunication.cs" />

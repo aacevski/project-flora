@@ -217,7 +217,6 @@ namespace FloraWarehouseManagement.Forms
             {
                 ClearTextBoxes();
             }
-
         }
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
