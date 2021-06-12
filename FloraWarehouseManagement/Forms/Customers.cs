@@ -153,7 +153,7 @@ namespace FloraWarehouseManagement.Forms
 
                 MessageBox.Show
                    (
-                       "Артиклот е успешно променет!",
+                       "Коминтентот е успешно променет!",
                        "Промени",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information

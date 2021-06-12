@@ -36,6 +36,8 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.dgvInvoices = new System.Windows.Forms.DataGridView();
             this.pnlControls = new System.Windows.Forms.Panel();
             this.gbInvoiceInfo = new System.Windows.Forms.GroupBox();
+            this.tbInvCounter = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -64,8 +66,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.mtbInvoiceNum = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProviderCustomer = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label14 = new System.Windows.Forms.Label();
-            this.tbInvCounter = new System.Windows.Forms.TextBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.pnlControls.SuspendLayout();
             this.gbInvoiceInfo.SuspendLayout();
@@ -113,6 +114,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // 
             // gbInvoiceInfo
             // 
+            this.gbInvoiceInfo.Controls.Add(this.btnDelete);
             this.gbInvoiceInfo.Controls.Add(this.tbInvCounter);
             this.gbInvoiceInfo.Controls.Add(this.label14);
             this.gbInvoiceInfo.Controls.Add(this.btnNew);
@@ -150,6 +152,24 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.gbInvoiceInfo.TabIndex = 0;
             this.gbInvoiceInfo.TabStop = false;
             this.gbInvoiceInfo.Text = "Податоци за документот";
+            // 
+            // tbInvCounter
+            // 
+            this.tbInvCounter.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbInvCounter.Location = new System.Drawing.Point(156, 57);
+            this.tbInvCounter.Name = "tbInvCounter";
+            this.tbInvCounter.Size = new System.Drawing.Size(58, 27);
+            this.tbInvCounter.TabIndex = 24;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(156, 36);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(58, 18);
+            this.label14.TabIndex = 23;
+            this.label14.Text = "Бројач:";
             // 
             // btnNew
             // 
@@ -191,7 +211,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.btnPrint.BackColor = System.Drawing.Color.White;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.Location = new System.Drawing.Point(655, 237);
+            this.btnPrint.Location = new System.Drawing.Point(655, 269);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(105, 45);
             this.btnPrint.TabIndex = 4;
@@ -436,23 +456,16 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // 
             this.errorProviderCustomer.ContainerControl = this;
             // 
-            // label14
+            // btnDelete
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(156, 36);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(58, 18);
-            this.label14.TabIndex = 23;
-            this.label14.Text = "Бројач:";
-            // 
-            // tbInvCounter
-            // 
-            this.tbInvCounter.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbInvCounter.Location = new System.Drawing.Point(156, 57);
-            this.tbInvCounter.Name = "tbInvCounter";
-            this.tbInvCounter.Size = new System.Drawing.Size(58, 27);
-            this.tbInvCounter.TabIndex = 24;
+            this.btnDelete.BackColor = System.Drawing.Color.White;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Location = new System.Drawing.Point(655, 184);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(105, 45);
+            this.btnDelete.TabIndex = 25;
+            this.btnDelete.Text = "Избриши";
+            this.btnDelete.UseVisualStyleBackColor = false;
             // 
             // OutgoingInvoices
             // 
@@ -513,5 +526,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private System.Windows.Forms.ErrorProvider errorProviderCustomer;
         private System.Windows.Forms.TextBox tbInvCounter;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
