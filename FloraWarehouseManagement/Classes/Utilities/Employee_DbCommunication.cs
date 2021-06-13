@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
@@ -105,6 +106,20 @@ namespace FloraWarehouseManagement.Classes.Utilities
 
             command.ExecuteNonQuery();
             connection.Close();
+        }
+
+        public static DataTable FilterEmployees(string FilterProperty)
+        {
+            SQLiteCommand cmd = new SQLiteCommand("SELECT Име, Презиме, ЕМБГ, Плата, Почеток, Адреса, Работно_место, Број_на_лична_карта, Телефон, Банка, Трансакциска_сметка, Забелешка FROM Employees WHERE Име = @FilterProperty", connection);
+            cmd.Parameters.AddWithValue("FilterProperty", FilterProperty);
+
+            connection.Open();
+            DataTable dt = new DataTable();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+            adapter.Fill(dt);
+            connection.Close();
+
+            return dt;
         }
     }
 }

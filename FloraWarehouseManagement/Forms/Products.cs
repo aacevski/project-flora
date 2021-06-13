@@ -94,6 +94,11 @@ namespace FloraWarehouseManagement.Forms
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information
                     );
+
+                    errorProviderCode.Clear();
+                    errorProviderProduct.Clear();
+                    errorProviderUnit.Clear();
+                    errorProviderTaxGroup.Clear();
                 }
                 else
                 {

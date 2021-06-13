@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,38 +49,55 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (DbCommunication.Exists("Employees", "ЕМБГ", tbEMBG.Text) < 1)
+            if (tbName.Text == "" || tbLastname.Text == "" ||  mtbEMBG.Text.Length < 13 || mtbPhone.Text.Length < 11 || tbIdNumber.Text.Length < 8)
             {
-                string Start = dtpStart.Value.ToString("HH:mm:ss - dd MMM, yyyy");
-                Employee_DbCommunication.AddEmployee(tbName.Text, tbLastname.Text, tbEMBG.Text, tbSalary.Text, Start, tbAddress.Text, tbPosition.Text, tbIdNumber.Text, tbPhone.Text, tbBank.Text, tbBankNumber.Text, rtbNote.Text);
-
-                UpdateTable();
-
-                MessageBox.Show
-                (
-                    "Вработениот е успешно додаден!",
-                    "Сними",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
+                errorProviderEMBG.SetError(mtbEMBG, "Полето за ЕМБГ е задолжително");
+                errorProviderName.SetError(tbName, "Полето за Име е задолжително");
+                errorProviderLastname.SetError(tbLastname, "Полето за Презиме е задолжително");
+                errorProviderPhone.SetError(mtbPhone, "Полето за Телефон е задолжително");
+                errorProviderIdNumber.SetError(tbIdNumber, "Полето за Број на Лична Карта е задолжително");
             }
             else
             {
-                MessageBox.Show
-                (
-                    "Тој вработен веќе постои!",
-                    "Грешка",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                if (DbCommunication.Exists("Employees", "ЕМБГ", mtbEMBG.Text) < 1)
+                {
+                    string Start = dtpStart.Value.ToString("HH:mm:ss - dd MMM, yyyy");
+                    Employee_DbCommunication.AddEmployee(tbName.Text, tbLastname.Text, mtbEMBG.Text, tbSalary.Text, Start, tbAddress.Text, tbPosition.Text, tbIdNumber.Text, mtbPhone.Text, tbBank.Text, mtbBankNumber.Text, rtbNote.Text);
+
+                    UpdateTable();
+
+                    MessageBox.Show
+                    (
+                        "Вработениот е успешно додаден!",
+                        "Сними",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    errorProviderEMBG.Clear();
+                    errorProviderName.Clear();
+                    errorProviderLastname.Clear();
+                    errorProviderPhone.Clear();
+                    errorProviderIdNumber.Clear();
+                }
+                else
+                {
+                    MessageBox.Show
+                    (
+                        "Тој вработен веќе постои!",
+                        "Грешка",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                }
             }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
             string Start = dtpStart.Value.ToString("HH:mm:ss - dd MMM, yyyy");
-            Employee_DbCommunication.EditEmployee(Employee.EMBG, tbName.Text, tbLastname.Text, tbEMBG.Text, tbSalary.Text, Start, tbAddress.Text, tbPosition.Text, tbIdNumber.Text, tbPhone.Text, tbBank.Text, tbBankNumber.Text, rtbNote.Text);
-            Employee.EMBG = tbEMBG.Text;
+            Employee_DbCommunication.EditEmployee(Employee.EMBG, tbName.Text, tbLastname.Text, mtbEMBG.Text, tbSalary.Text, Start, tbAddress.Text, tbPosition.Text, tbIdNumber.Text, mtbPhone.Text, tbBank.Text, mtbBankNumber.Text, rtbNote.Text);
+            Employee.EMBG = mtbEMBG.Text;
 
             MessageBox.Show
             (
@@ -94,10 +112,10 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (DbCommunication.Exists("Employees", "ЕМБГ", tbEMBG.Text) == 1)
+            if (DbCommunication.Exists("Employees", "ЕМБГ", mtbEMBG.Text) == 1)
             {
 
-                DbCommunication.Delete("Employees", "ЕМБГ", tbEMBG.Text);
+                DbCommunication.Delete("Employees", "ЕМБГ", mtbEMBG.Text);
                 UpdateTable();
 
                 MessageBox.Show
@@ -122,23 +140,56 @@ namespace FloraWarehouseManagement.Forms
 
         private void dgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string Start = dtpStart.Value.ToString("HH:mm:ss - dd MMM, yyyy");
+            if (e.RowIndex != -1 && e.RowIndex != dgvEmployees.Rows.Count - 1)
+            {
+                string Start = dtpStart.Value.ToString("HH:mm:ss - dd MMM, yyyy");
+                DataGridViewRow row = this.dgvEmployees.Rows[e.RowIndex];
+                tbName.Text = row.Cells[0].Value.ToString();
+                tbLastname.Text = row.Cells[1].Value.ToString();
+                mtbEMBG.Text = row.Cells[2].Value.ToString();
+                tbSalary.Text = row.Cells[3].Value.ToString();
+                dtpStart.Value = DateTime.ParseExact(row.Cells[4].Value.ToString(), "HH:mm:ss - dd MMM, yyyy", CultureInfo.InvariantCulture);
+                tbAddress.Text = row.Cells[5].Value.ToString();
+                tbPosition.Text = row.Cells[6].Value.ToString();
+                tbIdNumber.Text = row.Cells[7].Value.ToString();
+                mtbPhone.Text = row.Cells[8].Value.ToString();
+                tbBank.Text = row.Cells[9].Value.ToString();
+                mtbBankNumber.Text = row.Cells[10].Value.ToString();
+                rtbNote.Text = row.Cells[11].Value.ToString();
 
-            DataGridViewRow row = this.dgvEmployees.Rows[e.RowIndex];
-            tbName.Text = row.Cells[0].Value.ToString();
-            tbLastname.Text = row.Cells[1].Value.ToString();
-            tbEMBG.Text = row.Cells[2].Value.ToString();
-            tbSalary.Text = row.Cells[3].Value.ToString();
-            dtpStart.Value = Convert.ToDateTime(row.Cells[4].Value.ToString());
-            tbAddress.Text = row.Cells[5].Value.ToString();
-            tbPosition.Text = row.Cells[6].Value.ToString();
-            tbIdNumber.Text = row.Cells[7].Value.ToString();
-            tbPhone.Text = row.Cells[8].Value.ToString();
-            tbBank.Text = row.Cells[9].Value.ToString();
-            tbBankNumber.Text = row.Cells[10].Value.ToString();
-            rtbNote.Text = row.Cells[11].Value.ToString();
+                Employee.SetEmployee(tbName.Text, tbLastname.Text, mtbEMBG.Text, tbSalary.Text, Start, tbAddress.Text, tbPosition.Text, tbIdNumber.Text, mtbPhone.Text, tbBank.Text, mtbBankNumber.Text, rtbNote.Text);
+            }
 
-            Employee.SetEmployee(tbName.Text, tbLastname.Text, tbEMBG.Text, tbSalary.Text, Start, tbAddress.Text, tbPosition.Text, tbIdNumber.Text, tbPhone.Text, tbBank.Text, tbBankNumber.Text, rtbNote.Text);
+            else
+            {
+                ClearTextBoxes();
+            }
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (tbSearch.Text == "")
+            {
+                UpdateTable();
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            Search();
+        }
+
+        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            Search();
+        }
+
+        private void Search()
+        {
+            if (tbSearch.Text != "")
+            {
+                dgvEmployees.DataSource = Employee_DbCommunication.FilterEmployees(tbSearch.Text);    
+            }
         }
 
         private void Employees_KeyUp(object sender, KeyEventArgs e)
@@ -150,6 +201,37 @@ namespace FloraWarehouseManagement.Forms
                 mainMenu.Closed += (s, args) => this.Close();
                 mainMenu.Show();
             }
+        }
+
+        private void mtbEMBG_Click(object sender, EventArgs e)
+        {
+            AlignControls.PositionCursorInMaskedTextBox(this, mtbEMBG);
+        }
+
+        private void mtbPhone_Click(object sender, EventArgs e)
+        {
+            AlignControls.PositionCursorInMaskedTextBox(this, mtbPhone);
+        }
+
+        private void mtbBankNumber_Click(object sender, EventArgs e)
+        {
+            AlignControls.PositionCursorInMaskedTextBox(this, mtbBankNumber);
+        }
+
+        private void ClearTextBoxes()
+        {
+            tbName.Text = "";
+            tbLastname.Text = "";
+            mtbEMBG.Text = "";
+            tbSalary.Text = "";
+            dtpStart.Value = DateTime.Now;
+            tbAddress.Text = "";
+            tbPosition.Text = "";
+            tbIdNumber.Text = "";
+            mtbPhone.Text = "";
+            tbBank.Text = "";
+            mtbBankNumber.Text = "";
+            rtbNote.Text = "";
         }
     }
 }

@@ -29,13 +29,15 @@ namespace FloraWarehouseManagement.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Employees));
             this.dgvEmployees = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlControls = new System.Windows.Forms.Panel();
             this.gbButtons = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -43,14 +45,15 @@ namespace FloraWarehouseManagement.Forms
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.gbProductInfo = new System.Windows.Forms.GroupBox();
+            this.mtbPhone = new System.Windows.Forms.MaskedTextBox();
+            this.mtbBankNumber = new System.Windows.Forms.MaskedTextBox();
+            this.mtbEMBG = new System.Windows.Forms.MaskedTextBox();
             this.rtbNote = new System.Windows.Forms.RichTextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.tbBankNumber = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tbBank = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.tbPhone = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
@@ -62,14 +65,23 @@ namespace FloraWarehouseManagement.Forms
             this.label4 = new System.Windows.Forms.Label();
             this.tbSalary = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbEMBG = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbLastname = new System.Windows.Forms.TextBox();
             this.tbName = new System.Windows.Forms.TextBox();
+            this.errorProviderEMBG = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderName = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderLastname = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderPhone = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderIdNumber = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
             this.pnlControls.SuspendLayout();
             this.gbButtons.SuspendLayout();
             this.gbProductInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderEMBG)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderLastname)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderPhone)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderIdNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvEmployees
@@ -77,23 +89,23 @@ namespace FloraWarehouseManagement.Forms
             this.dgvEmployees.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEmployees.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvEmployees.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEmployees.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvEmployees.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvEmployees.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvEmployees.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvEmployees.Location = new System.Drawing.Point(0, 353);
             this.dgvEmployees.Name = "dgvEmployees";
             this.dgvEmployees.Size = new System.Drawing.Size(974, 330);
@@ -122,6 +134,7 @@ namespace FloraWarehouseManagement.Forms
             // 
             // gbButtons
             // 
+            this.gbButtons.Controls.Add(this.label14);
             this.gbButtons.Controls.Add(this.btnSearch);
             this.gbButtons.Controls.Add(this.tbSearch);
             this.gbButtons.Controls.Add(this.label11);
@@ -135,30 +148,43 @@ namespace FloraWarehouseManagement.Forms
             this.gbButtons.TabIndex = 26;
             this.gbButtons.TabStop = false;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label14.Location = new System.Drawing.Point(11, 303);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(297, 17);
+            this.label14.TabIndex = 29;
+            this.label14.Text = "Забелешка: Пребарувањето е само по Име";
+            // 
             // btnSearch
             // 
             this.btnSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearch.BackgroundImage")));
             this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Location = new System.Drawing.Point(237, 282);
+            this.btnSearch.Location = new System.Drawing.Point(237, 272);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(26, 26);
             this.btnSearch.TabIndex = 16;
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // tbSearch
             // 
             this.tbSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSearch.Location = new System.Drawing.Point(13, 282);
+            this.tbSearch.Location = new System.Drawing.Point(13, 272);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(218, 29);
             this.tbSearch.TabIndex = 14;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(9, 258);
+            this.label11.Location = new System.Drawing.Point(9, 248);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(124, 21);
             this.label11.TabIndex = 28;
@@ -205,14 +231,15 @@ namespace FloraWarehouseManagement.Forms
             // 
             // gbProductInfo
             // 
+            this.gbProductInfo.Controls.Add(this.mtbPhone);
+            this.gbProductInfo.Controls.Add(this.mtbBankNumber);
+            this.gbProductInfo.Controls.Add(this.mtbEMBG);
             this.gbProductInfo.Controls.Add(this.rtbNote);
             this.gbProductInfo.Controls.Add(this.label13);
             this.gbProductInfo.Controls.Add(this.label12);
-            this.gbProductInfo.Controls.Add(this.tbBankNumber);
             this.gbProductInfo.Controls.Add(this.label10);
             this.gbProductInfo.Controls.Add(this.tbBank);
             this.gbProductInfo.Controls.Add(this.label9);
-            this.gbProductInfo.Controls.Add(this.tbPhone);
             this.gbProductInfo.Controls.Add(this.label8);
             this.gbProductInfo.Controls.Add(this.dtpStart);
             this.gbProductInfo.Controls.Add(this.label7);
@@ -224,7 +251,6 @@ namespace FloraWarehouseManagement.Forms
             this.gbProductInfo.Controls.Add(this.label4);
             this.gbProductInfo.Controls.Add(this.tbSalary);
             this.gbProductInfo.Controls.Add(this.label3);
-            this.gbProductInfo.Controls.Add(this.tbEMBG);
             this.gbProductInfo.Controls.Add(this.label1);
             this.gbProductInfo.Controls.Add(this.tbLastname);
             this.gbProductInfo.Controls.Add(this.label2);
@@ -236,6 +262,36 @@ namespace FloraWarehouseManagement.Forms
             this.gbProductInfo.TabIndex = 25;
             this.gbProductInfo.TabStop = false;
             this.gbProductInfo.Text = "Податоци за вработен";
+            // 
+            // mtbPhone
+            // 
+            this.mtbPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.mtbPhone.Location = new System.Drawing.Point(236, 231);
+            this.mtbPhone.Mask = "000-000-000";
+            this.mtbPhone.Name = "mtbPhone";
+            this.mtbPhone.Size = new System.Drawing.Size(146, 22);
+            this.mtbPhone.TabIndex = 27;
+            this.mtbPhone.Click += new System.EventHandler(this.mtbPhone_Click);
+            // 
+            // mtbBankNumber
+            // 
+            this.mtbBankNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.mtbBankNumber.Location = new System.Drawing.Point(429, 117);
+            this.mtbBankNumber.Mask = "000000000000000";
+            this.mtbBankNumber.Name = "mtbBankNumber";
+            this.mtbBankNumber.Size = new System.Drawing.Size(146, 22);
+            this.mtbBankNumber.TabIndex = 26;
+            this.mtbBankNumber.Click += new System.EventHandler(this.mtbBankNumber_Click);
+            // 
+            // mtbEMBG
+            // 
+            this.mtbEMBG.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.mtbEMBG.Location = new System.Drawing.Point(23, 171);
+            this.mtbEMBG.Mask = "0000000000000";
+            this.mtbEMBG.Name = "mtbEMBG";
+            this.mtbEMBG.Size = new System.Drawing.Size(146, 22);
+            this.mtbEMBG.TabIndex = 1;
+            this.mtbEMBG.Click += new System.EventHandler(this.mtbEMBG_Click);
             // 
             // rtbNote
             // 
@@ -266,14 +322,6 @@ namespace FloraWarehouseManagement.Forms
             this.label12.TabIndex = 21;
             this.label12.Text = "Трансакциска сметка";
             // 
-            // tbBankNumber
-            // 
-            this.tbBankNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBankNumber.Location = new System.Drawing.Point(427, 113);
-            this.tbBankNumber.Name = "tbBankNumber";
-            this.tbBankNumber.Size = new System.Drawing.Size(145, 22);
-            this.tbBankNumber.TabIndex = 22;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -301,14 +349,6 @@ namespace FloraWarehouseManagement.Forms
             this.label9.Size = new System.Drawing.Size(79, 20);
             this.label9.TabIndex = 17;
             this.label9.Text = "Телефон";
-            // 
-            // tbPhone
-            // 
-            this.tbPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPhone.Location = new System.Drawing.Point(236, 231);
-            this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(145, 22);
-            this.tbPhone.TabIndex = 18;
             // 
             // label8
             // 
@@ -409,14 +449,6 @@ namespace FloraWarehouseManagement.Forms
             this.label3.TabIndex = 5;
             this.label3.Text = "ЕМБГ";
             // 
-            // tbEMBG
-            // 
-            this.tbEMBG.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbEMBG.Location = new System.Drawing.Point(25, 175);
-            this.tbEMBG.Name = "tbEMBG";
-            this.tbEMBG.Size = new System.Drawing.Size(145, 22);
-            this.tbEMBG.TabIndex = 6;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -443,6 +475,26 @@ namespace FloraWarehouseManagement.Forms
             this.tbName.Size = new System.Drawing.Size(145, 22);
             this.tbName.TabIndex = 2;
             // 
+            // errorProviderEMBG
+            // 
+            this.errorProviderEMBG.ContainerControl = this;
+            // 
+            // errorProviderName
+            // 
+            this.errorProviderName.ContainerControl = this;
+            // 
+            // errorProviderLastname
+            // 
+            this.errorProviderLastname.ContainerControl = this;
+            // 
+            // errorProviderPhone
+            // 
+            this.errorProviderPhone.ContainerControl = this;
+            // 
+            // errorProviderIdNumber
+            // 
+            this.errorProviderIdNumber.ContainerControl = this;
+            // 
             // Employees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -463,6 +515,11 @@ namespace FloraWarehouseManagement.Forms
             this.gbButtons.PerformLayout();
             this.gbProductInfo.ResumeLayout(false);
             this.gbProductInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderEMBG)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderLastname)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderPhone)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderIdNumber)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -483,7 +540,6 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tbBank;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox tbPhone;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.Label label7;
@@ -495,13 +551,20 @@ namespace FloraWarehouseManagement.Forms
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbSalary;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbEMBG;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbLastname;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.RichTextBox rtbNote;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox tbBankNumber;
+        private System.Windows.Forms.MaskedTextBox mtbEMBG;
+        private System.Windows.Forms.MaskedTextBox mtbPhone;
+        private System.Windows.Forms.MaskedTextBox mtbBankNumber;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ErrorProvider errorProviderEMBG;
+        private System.Windows.Forms.ErrorProvider errorProviderName;
+        private System.Windows.Forms.ErrorProvider errorProviderLastname;
+        private System.Windows.Forms.ErrorProvider errorProviderPhone;
+        private System.Windows.Forms.ErrorProvider errorProviderIdNumber;
     }
 }
