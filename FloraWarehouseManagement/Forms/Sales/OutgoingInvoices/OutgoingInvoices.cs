@@ -26,6 +26,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         public static int InvoiceNumber;
         public static int InvoiceCounter;
         private CustomerInfo selectedCustomer;
+        private static readonly string SearchQuery = $"SELECT Customers.Назив, Date AS Дата, PRINTF('%05d/%d',InvNumber, {DateTime.Now.Year}) AS 'Број на фактура', Valuta AS Валута, TypeOfDocument AS 'Вид на документ', Description AS Забелешка, Iznos AS Износ, DDV AS ДДВ, Vkupno AS Вкупно FROM Invoices INNER JOIN Customers ON Customers.ID = Invoices.Customer_ID";
 
         public OutgoingInvoices()
         {
@@ -38,10 +39,11 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             selectedCustomer = new CustomerInfo();
 
             InitDefaultSettings();
-            GetInvoiceNumber();
+            InvoiceNumber = Invoice_DbCommunication.GetInvoiceNumber();
+            InvoiceCounter = InvoiceNumber;
             SetInvoiceNumberTextBox();
 
-            DisplayData();
+            dgvInvoices.DataSource = DbCommunication.DisplayData(SearchQuery);
         }
 
         private void InitDefaultSettings()
@@ -90,40 +92,29 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             if (dgvInvoices.SelectedCells.Count == 1)
             {
                 Form invoiceItems = new InvoiceItems();
-                invoiceItems.Show();
+                if (invoiceItems.ShowDialog() == DialogResult.Cancel)
+                {
+                    SetPriceSumTextBoxes();
+                    Invoice_DbCommunication.SetPricesForInvoice(decimal.Parse(tbPriceWithoutTax.Text), decimal.Parse(tbTax.Text), decimal.Parse(tbTotalPrice.Text), InvoiceNumber);
+                    dgvInvoices.DataSource = DbCommunication.DisplayData(SearchQuery);
+                }       
             }
             else
             {
-                MessageBox.Show("Одберете фактура.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Одберете фактура.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void tbDescription_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            //TODO: dodadi gi ostanatite parametri od Invoices
             if (tbCustomer.Text != "")
             {
-                GetInvoiceNumber();
+                InvoiceNumber = Invoice_DbCommunication.GetInvoiceNumber();
                 InvoiceCounter++;
-                SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Invoices(Customer_ID, Date, InvNumber, Valuta, TypeOfDocument, Description) VALUES(@Customer_ID, @Date, @InvoiceNumber, @Valuta, @TypeOfDocument, @Description)", connection);
-                cmd.Parameters.AddWithValue("Customer_ID", Customer_DbCommunication.GetCustomerDBID(CustomerPick.selectecCustomerInfo.Name));
-                cmd.Parameters.AddWithValue("InvoiceNumber", InvoiceCounter);
-                cmd.Parameters.AddWithValue("Date", mtbDate.Text);
-                cmd.Parameters.AddWithValue("Valuta", tbValuta.Text);
-                cmd.Parameters.AddWithValue("TypeOfDocument", cbDocType.SelectedItem.ToString());
-                cmd.Parameters.AddWithValue("Description", tbDescription.Text);
+                // Proveri dali raboti
+                Invoice_DbCommunication.AddInvoice(Customer_DbCommunication.GetCustomerDBID(CustomerPick.selectecCustomerInfo.Name), InvoiceCounter, mtbDate.Text, tbValuta.Text, cbDocType.SelectedItem.ToString(), tbDescription.Text);
 
-
-                connection.Open();
-                cmd.ExecuteNonQuery();
-                connection.Close();   
-
-                DisplayData();
+                dgvInvoices.DataSource = DbCommunication.DisplayData(SearchQuery);
 
                 ResetBoxes();
                 SetInvoiceNumberTextBox();
@@ -140,7 +131,8 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             }
         }
 
-        public static int GetInvoiceDBID ()
+        // Moze nema da treba
+/*        public static int GetInvoiceDBID ()
         {
             int id;
 
@@ -151,7 +143,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             connection.Close();
 
             return id;
-        }
+        }*/
 
         private void ResetBoxes ()
         {
@@ -162,43 +154,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             InitDefaultSettings();
         }
 
-        private void GetInvoiceNumber ()
-        {
-            connection.Open();
-
-            SQLiteCommand cmd = new SQLiteCommand("SELECT InvNumber FROM Invoices ORDER BY ID DESC LIMIT 1", connection);
-            var num = cmd.ExecuteScalar();
-
-            object scalar = cmd.ExecuteScalar();
-
-            if (scalar != null && (!string.IsNullOrEmpty(scalar.ToString())))
-            {
-                InvoiceCounter = int.Parse(scalar.ToString());
-            }
-           else
-            {
-                InvoiceCounter = 0;
-            }
-
-            connection.Close();
-        }
-
-        public void DisplayData()
-        {
-            SQLiteCommand cmd = new SQLiteCommand($"SELECT Customers.Назив, Date AS Дата, PRINTF('%05d/%d',InvNumber, {DateTime.Now.Year}) AS 'Број на фактура', Valuta AS Валута, TypeOfDocument AS 'Вид на документ', Description AS Забелешка, Iznos AS Износ, DDV AS ДДВ, Vkupno AS Вкупно FROM Invoices INNER JOIN Customers ON Customers.ID = Invoices.Customer_ID", connection);
-            connection.Open();
-            DataTable dt = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-            adapter.Fill(dt);
-            dgvInvoices.DataSource = dt;
-            connection.Close();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void dgvInvoices_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != dgvInvoices.Rows.Count - 1 && e.RowIndex != -1)
@@ -206,15 +161,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
                 InvoiceNumber = int.Parse(dgvInvoices.Rows[e.RowIndex].Cells[2].Value.ToString().Substring(0,5));
                 string customerName = dgvInvoices.Rows[e.RowIndex].Cells[0].Value.ToString();
 
-                connection.Open();
-
-                SQLiteCommand cmd = new SQLiteCommand("SELECT Назив, Адреса, Град FROM Customers WHERE Назив = @Name", connection);
-                cmd.Parameters.AddWithValue("Name", customerName);
-                DataTable dt = new DataTable();
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-                adapter.Fill(dt);
-
-                connection.Close();
+                DataTable dt = Invoice_DbCommunication.DisplayCustomerData(customerName);
 
                 selectedCustomer.Name = dt.Rows[0].ItemArray[0].ToString();
                 selectedCustomer.Address = dt.Rows[0].ItemArray[1].ToString();
@@ -223,6 +170,8 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
                 tbCustomer.Text = selectedCustomer.Name;
 
                 SetInvoiceNumberTextBox();
+                SetPriceSumTextBoxes();
+                dgvInvoices.DataSource = DbCommunication.DisplayData(SearchQuery);
             }
         }
 
@@ -231,30 +180,32 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             if (dgvInvoices.SelectedCells.Count == 1)
             {
                 Invoice invoiceForPrinting = new Invoice(InvoiceNumber, selectedCustomer, tbValuta.Text, tbDescription.Text, mtbDate.Text, cbDocType.SelectedItem.ToString());
-                invoiceForPrinting.InvoiceItems = GetInvoiceItemsForInvoice();
+                invoiceForPrinting.InvoiceItems = Invoice_DbCommunication.GetInvoiceItemsForInvoice(InvoiceNumber);
 
                 Form print = new PrintForm(invoiceForPrinting);
                 print.ShowDialog();
             }
         }
 
-        private List<InvoiceItem> GetInvoiceItemsForInvoice()
+
+
+        private void SetPriceSumTextBoxes()
         {
-            SQLiteCommand cmd = new SQLiteCommand($"SELECT Products.Шифра, Products.Артикл, Products.Мерка, Products.Даночна_група, Quantity, Price FROM InvoiceItems INNER JOIN Products ON Products.Шифра = InvoiceItems.Item_ID WHERE Invoice_ID = {InvoiceNumber}", connection);
-            connection.Open();
-            DataTable dt = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-            adapter.Fill(dt);
-            connection.Close();
+            List<InvoiceItem> items = Invoice_DbCommunication.GetInvoiceItemsForInvoice(InvoiceNumber);
+            decimal totalPriceWithTax = 0.0m;
+            decimal totalPriceWithoutTax = 0.0m;
+            decimal totalTax = 0.0m;
 
-            List<InvoiceItem> items = new List<InvoiceItem>();
-
-            for (int i = 0; i < dt.Rows.Count; ++i)
+            foreach (InvoiceItem i in items)
             {
-                items.Add(new InvoiceItem(dt.Rows[i].ItemArray[0].ToString(), dt.Rows[i].ItemArray[1].ToString(), dt.Rows[i].ItemArray[2].ToString(), decimal.Parse(dt.Rows[i].ItemArray[3].ToString()), decimal.Parse(dt.Rows[i].ItemArray[4].ToString()), decimal.Parse(dt.Rows[i].ItemArray[5].ToString())));
+                totalPriceWithTax += i.GetTotalPrice();
+                totalPriceWithoutTax += i.GetTotalPriceWithoutTax();
+                totalTax += i.GetTax();
             }
 
-            return items;
+            tbTotalPrice.Text = totalPriceWithTax.ToString("N2");
+            tbPriceWithoutTax.Text = totalPriceWithoutTax.ToString("N2");
+            tbTax.Text = totalTax.ToString("N2");
         }
 
         private void pnlControls_Click(object sender, EventArgs e)

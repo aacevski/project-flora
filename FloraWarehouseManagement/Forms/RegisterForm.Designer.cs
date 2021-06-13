@@ -185,6 +185,7 @@ namespace FloraWarehouseManagement.Forms
             this.Controls.Add(this.pnlLogo);
             this.Controls.Add(this.gbRegister);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(424, 561);
             this.MinimumSize = new System.Drawing.Size(424, 561);
             this.Name = "RegisterForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

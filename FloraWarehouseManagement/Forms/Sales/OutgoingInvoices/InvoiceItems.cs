@@ -99,7 +99,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
                 DisplayData();
                 ClearTextBoxes();
-                Product_DbCommunication.DecreaseQuantity(item.Quantity, item.Code);
+                Product_DbCommunication.DecreaseQuantity(ItemTrueQuantity - item.Quantity, item.Code);
             }
             else
             {

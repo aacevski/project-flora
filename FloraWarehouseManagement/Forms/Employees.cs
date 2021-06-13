@@ -46,17 +46,6 @@ namespace FloraWarehouseManagement.Forms
             dgvEmployees.Width = this.Width;
         }
 
-        private void Products_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.Hide();
-                Form mainMenu = new MainMenu();
-                mainMenu.Closed += (s, args) => this.Close();
-                mainMenu.Show();
-            }
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (DbCommunication.Exists("Employees", "ЕМБГ", tbEMBG.Text) < 1)
@@ -123,7 +112,7 @@ namespace FloraWarehouseManagement.Forms
             {
                 MessageBox.Show
                     (
-                    "Тоа вработен не постои!",
+                    "Toj вработен не постои!",
                     "Грешка",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -150,6 +139,17 @@ namespace FloraWarehouseManagement.Forms
             rtbNote.Text = row.Cells[11].Value.ToString();
 
             Employee.SetEmployee(tbName.Text, tbLastname.Text, tbEMBG.Text, tbSalary.Text, Start, tbAddress.Text, tbPosition.Text, tbIdNumber.Text, tbPhone.Text, tbBank.Text, tbBankNumber.Text, rtbNote.Text);
+        }
+
+        private void Employees_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Hide();
+                Form mainMenu = new MainMenu();
+                mainMenu.Closed += (s, args) => this.Close();
+                mainMenu.Show();
+            }
         }
     }
 }

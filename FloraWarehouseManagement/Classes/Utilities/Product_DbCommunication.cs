@@ -84,8 +84,6 @@ namespace FloraWarehouseManagement.Classes.Utilities
                 connection
                 );
 
-            connection.Open();
-
             command.Parameters.AddWithValue("@Code", Code);
             command.Parameters.AddWithValue("@Product", Product);
             command.Parameters.AddWithValue("@Measurement", Measurement);
@@ -99,6 +97,7 @@ namespace FloraWarehouseManagement.Classes.Utilities
             command.Parameters.AddWithValue("@Quantity", Quantity);
             command.Parameters.AddWithValue("@OldCode", OldCode);
 
+            connection.Open();
             command.ExecuteNonQuery();
             connection.Close();
         }

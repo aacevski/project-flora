@@ -54,6 +54,10 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices.CrystalReport
             crptInvoices.SetParameterValue("pValuta", invoiceToPrint.Valuta);
             crptInvoices.SetParameterValue("pDate", invoiceToPrint.Date);
 
+            // Invoice footer
+            crptInvoices.SetParameterValue("pDescription", invoiceToPrint.Description);
+            crptInvoices.SetParameterValue("pAuthorizedPerson", CompanyInfo.AuthorizedPerson);
+
             crptViewer.ReportSource = crptInvoices;
             crptViewer.Refresh();
         }

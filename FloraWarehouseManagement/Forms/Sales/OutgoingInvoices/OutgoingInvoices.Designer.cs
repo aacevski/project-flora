@@ -36,10 +36,10 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.dgvInvoices = new System.Windows.Forms.DataGridView();
             this.pnlControls = new System.Windows.Forms.Panel();
             this.gbInvoiceInfo = new System.Windows.Forms.GroupBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.tbInvCounter = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -66,7 +66,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.mtbInvoiceNum = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProviderCustomer = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoices)).BeginInit();
             this.pnlControls.SuspendLayout();
             this.gbInvoiceInfo.SuspendLayout();
@@ -91,6 +90,8 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -118,7 +119,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.gbInvoiceInfo.Controls.Add(this.tbInvCounter);
             this.gbInvoiceInfo.Controls.Add(this.label14);
             this.gbInvoiceInfo.Controls.Add(this.btnNew);
-            this.gbInvoiceInfo.Controls.Add(this.btnSave);
             this.gbInvoiceInfo.Controls.Add(this.btnEdit);
             this.gbInvoiceInfo.Controls.Add(this.btnPrint);
             this.gbInvoiceInfo.Controls.Add(this.label13);
@@ -153,6 +153,17 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.gbInvoiceInfo.TabStop = false;
             this.gbInvoiceInfo.Text = "Податоци за документот";
             // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.White;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Location = new System.Drawing.Point(655, 133);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(105, 45);
+            this.btnDelete.TabIndex = 25;
+            this.btnDelete.Text = "Избриши";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            // 
             // tbInvCounter
             // 
             this.tbInvCounter.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -183,23 +194,11 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.White;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Location = new System.Drawing.Point(655, 82);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(105, 45);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Сними";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.Color.White;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Location = new System.Drawing.Point(655, 133);
+            this.btnEdit.Location = new System.Drawing.Point(655, 82);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(105, 45);
             this.btnEdit.TabIndex = 3;
@@ -211,7 +210,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.btnPrint.BackColor = System.Drawing.Color.White;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrint.Location = new System.Drawing.Point(655, 269);
+            this.btnPrint.Location = new System.Drawing.Point(655, 237);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(105, 45);
             this.btnPrint.TabIndex = 4;
@@ -257,6 +256,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.tbTotalPrice.ReadOnly = true;
             this.tbTotalPrice.Size = new System.Drawing.Size(140, 29);
             this.tbTotalPrice.TabIndex = 19;
+            this.tbTotalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbTax
             // 
@@ -266,6 +266,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.tbTax.ReadOnly = true;
             this.tbTax.Size = new System.Drawing.Size(140, 29);
             this.tbTax.TabIndex = 18;
+            this.tbTax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tbPriceWithoutTax
             // 
@@ -275,6 +276,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.tbPriceWithoutTax.ReadOnly = true;
             this.tbPriceWithoutTax.Size = new System.Drawing.Size(140, 29);
             this.tbPriceWithoutTax.TabIndex = 17;
+            this.tbPriceWithoutTax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label10
             // 
@@ -314,7 +316,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(341, 77);
             this.tbDescription.TabIndex = 13;
-            this.tbDescription.TextChanged += new System.EventHandler(this.tbDescription_TextChanged);
             // 
             // label7
             // 
@@ -456,17 +457,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // 
             this.errorProviderCustomer.ContainerControl = this;
             // 
-            // btnDelete
-            // 
-            this.btnDelete.BackColor = System.Drawing.Color.White;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(655, 184);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(105, 45);
-            this.btnDelete.TabIndex = 25;
-            this.btnDelete.Text = "Избриши";
-            this.btnDelete.UseVisualStyleBackColor = false;
-            // 
             // OutgoingInvoices
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -521,7 +511,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.ErrorProvider errorProviderCustomer;
         private System.Windows.Forms.TextBox tbInvCounter;

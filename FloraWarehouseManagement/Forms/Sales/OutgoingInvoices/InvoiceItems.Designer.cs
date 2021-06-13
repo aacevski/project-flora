@@ -34,6 +34,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InvoiceItems));
             this.pnlControls = new System.Windows.Forms.Panel();
+            this.tbQuantity = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -59,7 +60,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvInvoiceItems = new System.Windows.Forms.DataGridView();
-            this.tbQuantity = new System.Windows.Forms.TextBox();
             this.pnlControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvoiceItems)).BeginInit();
             this.SuspendLayout();
@@ -97,14 +97,25 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.pnlControls.Size = new System.Drawing.Size(975, 229);
             this.pnlControls.TabIndex = 4;
             // 
+            // tbQuantity
+            // 
+            this.tbQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbQuantity.Location = new System.Drawing.Point(101, 91);
+            this.tbQuantity.Name = "tbQuantity";
+            this.tbQuantity.Size = new System.Drawing.Size(78, 22);
+            this.tbQuantity.TabIndex = 33;
+            this.tbQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbQuantity.TextChanged += new System.EventHandler(this.tbQuantity_TextChanged);
+            this.tbQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQuantity_KeyPress);
+            // 
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.White;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(326, 158);
+            this.btnDelete.Location = new System.Drawing.Point(363, 158);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(84, 32);
+            this.btnDelete.Size = new System.Drawing.Size(90, 32);
             this.btnDelete.TabIndex = 32;
             this.btnDelete.Text = "Избриши";
             this.btnDelete.UseVisualStyleBackColor = false;
@@ -115,9 +126,9 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.btnEdit.BackColor = System.Drawing.Color.White;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(326, 119);
+            this.btnEdit.Location = new System.Drawing.Point(363, 119);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(84, 33);
+            this.btnEdit.Size = new System.Drawing.Size(90, 33);
             this.btnEdit.TabIndex = 31;
             this.btnEdit.Text = "Промени";
             this.btnEdit.UseVisualStyleBackColor = false;
@@ -127,9 +138,9 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.btnSave.BackColor = System.Drawing.Color.White;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(326, 82);
+            this.btnSave.Location = new System.Drawing.Point(363, 82);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(84, 31);
+            this.btnSave.Size = new System.Drawing.Size(90, 31);
             this.btnSave.TabIndex = 30;
             this.btnSave.Text = "Сними";
             this.btnSave.UseVisualStyleBackColor = false;
@@ -385,17 +396,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.dgvInvoiceItems.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvInvoiceItems.Size = new System.Drawing.Size(975, 302);
             this.dgvInvoiceItems.TabIndex = 3;
-            // 
-            // tbQuantity
-            // 
-            this.tbQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbQuantity.Location = new System.Drawing.Point(101, 91);
-            this.tbQuantity.Name = "tbQuantity";
-            this.tbQuantity.Size = new System.Drawing.Size(78, 22);
-            this.tbQuantity.TabIndex = 33;
-            this.tbQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.tbQuantity.TextChanged += new System.EventHandler(this.tbQuantity_TextChanged);
-            this.tbQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQuantity_KeyPress);
             // 
             // InvoiceItems
             // 
