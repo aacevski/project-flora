@@ -30,11 +30,6 @@ namespace FloraWarehouseManagement.Classes.Utilities
             connection.Close();
         }
 
-        public static void EditInvoice ()
-        {
-            // TODO
-        }
-
         public static void FilterInvoices ()
         {
             // TODO: in the next version we'll implement a search bar for outgoing invoices 

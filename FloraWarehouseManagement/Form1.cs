@@ -44,7 +44,7 @@ namespace FloraWarehouseManagement
             {
                 if
                 (
-                    MessageBox.Show
+                    System.Windows.Forms.MessageBox.Show
                     (
                         "Дали сакате да ја изгасите апликацијата?",
                         "Изгаси",

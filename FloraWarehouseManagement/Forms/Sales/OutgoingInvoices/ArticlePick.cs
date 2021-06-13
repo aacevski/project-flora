@@ -34,13 +34,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void DisplayData()
         {
-            SQLiteCommand cmd = new SQLiteCommand("SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Цена, Потекло, Забелешка, Залиха FROM Products", connection);
-            connection.Open();
-            DataTable dt = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-            adapter.Fill(dt);
-            dgvProducts.DataSource = dt;
-            connection.Close();
+            dgvProducts.DataSource = DbCommunication.DisplayData("SELECT Шифра, Артикл, Мерка, Даночна_група, Групна_шифра, Помошна_шифра, Цена, Потекло, Забелешка, Залиха FROM Products");
         }
 
         private void dgvProducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -48,13 +42,13 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             if (e.RowIndex != -1)
             {
                 string Code = dgvProducts.Rows[e.RowIndex].Cells[0].Value.ToString();
-                SQLiteCommand cmd = new SQLiteCommand($"SELECT * FROM Products WHERE Шифра='{Code}'", connection);
-
-                connection.Open();
+                //SQLiteCommand cmd = new SQLiteCommand($"SELECT * FROM Products WHERE Шифра='{Code}'", connection);
+                DataTable dt = DbCommunication.DisplayData($"SELECT * FROM Products WHERE Шифра='{Code}'");
+/*                connection.Open();
 
                 DataTable dt = new DataTable();
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-                adapter.Fill(dt);
+                adapter.Fill(dt);*/
 
                 item.Code = dt.Rows[0].ItemArray[1].ToString();
                 item.Name = dt.Rows[0].ItemArray[2].ToString();
@@ -71,7 +65,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
                     item.Quantity = 1;
                 }
                 
-                connection.Close();
+                //connection.Close();
 
                 this.Close();
             }

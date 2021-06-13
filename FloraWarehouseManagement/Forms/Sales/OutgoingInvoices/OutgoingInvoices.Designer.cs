@@ -40,7 +40,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.tbInvCounter = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -119,7 +118,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.gbInvoiceInfo.Controls.Add(this.tbInvCounter);
             this.gbInvoiceInfo.Controls.Add(this.label14);
             this.gbInvoiceInfo.Controls.Add(this.btnNew);
-            this.gbInvoiceInfo.Controls.Add(this.btnEdit);
             this.gbInvoiceInfo.Controls.Add(this.btnPrint);
             this.gbInvoiceInfo.Controls.Add(this.label13);
             this.gbInvoiceInfo.Controls.Add(this.label12);
@@ -148,7 +146,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.gbInvoiceInfo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbInvoiceInfo.Location = new System.Drawing.Point(12, 14);
             this.gbInvoiceInfo.Name = "gbInvoiceInfo";
-            this.gbInvoiceInfo.Size = new System.Drawing.Size(802, 335);
+            this.gbInvoiceInfo.Size = new System.Drawing.Size(805, 335);
             this.gbInvoiceInfo.TabIndex = 0;
             this.gbInvoiceInfo.TabStop = false;
             this.gbInvoiceInfo.Text = "Податоци за документот";
@@ -157,12 +155,13 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             // 
             this.btnDelete.BackColor = System.Drawing.Color.White;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(655, 133);
+            this.btnDelete.Location = new System.Drawing.Point(655, 82);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(105, 45);
             this.btnDelete.TabIndex = 25;
             this.btnDelete.Text = "Избриши";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // tbInvCounter
             // 
@@ -193,17 +192,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.btnNew.Text = "Нова";
             this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.BackColor = System.Drawing.Color.White;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Location = new System.Drawing.Point(655, 82);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(105, 45);
-            this.btnEdit.TabIndex = 3;
-            this.btnEdit.Text = "Промени";
-            this.btnEdit.UseVisualStyleBackColor = false;
             // 
             // btnPrint
             // 
@@ -510,7 +498,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.ErrorProvider errorProviderCustomer;
         private System.Windows.Forms.TextBox tbInvCounter;

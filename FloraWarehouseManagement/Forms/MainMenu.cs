@@ -27,6 +27,11 @@ namespace FloraWarehouseManagement.Forms
             AlignControls.CenterControl(pnlMenuButtons);
             pnlMenuButtons.BackColor = Color.FromArgb(0, 88, 44, 55);   // Making the background of the menu buttons panel transparent
 
+            if (Properties.Settings.Default.DontShow)
+            {
+                new MessageForm().ShowDialog();
+            }
+
             Information.Open(); // Loading the company info
         }
 

@@ -34,7 +34,6 @@ namespace FloraWarehouseManagement.Forms
             Product = new Product();
 
             UpdateTable();
-            SetColumnsWidth();
         }
 
         private void Products_SizeChanged(object sender, EventArgs e)
@@ -42,17 +41,6 @@ namespace FloraWarehouseManagement.Forms
             pnlControls.Width = this.Width;
             dgvProducts.Height = this.Height;
             dgvProducts.Width = this.Width;
-        }
-
-        private void SetColumnsWidth()
-        {
-            dgvProducts.Columns[0].Width = 85;
-            dgvProducts.Columns[1].Width = 300;
-            dgvProducts.Columns[2].Width = 75;
-            dgvProducts.Columns[3].Width = 75;
-            dgvProducts.Columns[4].Width = 130;
-            dgvProducts.Columns[5].Width = 160;
-            dgvProducts.Columns[6].Width = 75;
         }
 
         private void mtbCode_Click(object sender, EventArgs e)
@@ -155,18 +143,21 @@ namespace FloraWarehouseManagement.Forms
 
         private void btnEdit_Click(object sender, EventArgs e)
         {   
-            Product_DbCommunication.EditProduct(Product.Code, mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbPrice.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0, tbQuantity.Text);
-            Product.Code = mtbCode.Text;
+            if (dgvProducts.SelectedCells.Count == 1)
+            {
+                Product_DbCommunication.EditProduct(Product.Code, mtbCode.Text, tbProductName.Text, cbUnit.GetItemText(cbUnit.SelectedItem), cbTaxGroup.GetItemText(cbTaxGroup.SelectedItem), mtbGroupCode.Text, mtbHelpCode.Text, tbPrice.Text, tbOrigin.Text, tbDescription.Text, cbDDV.Checked == true ? 1 : 0, tbQuantity.Text);
+                Product.Code = mtbCode.Text;
 
-            MessageBox.Show
-            (
-                "Артиклот е успешно променет!",
-                "Промени",
-                 MessageBoxButtons.OK,
-                 MessageBoxIcon.Information
-            );
+                MessageBox.Show
+                (
+                    "Артиклот е успешно променет!",
+                    "Промени",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Information
+                );
 
-            UpdateTable();
+                UpdateTable();
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -189,7 +180,7 @@ namespace FloraWarehouseManagement.Forms
             {
                 MessageBox.Show
                     (
-                    "Тоа артикл не постои!", 
+                    "Тој артикл не постои!", 
                     "Грешка", 
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Error

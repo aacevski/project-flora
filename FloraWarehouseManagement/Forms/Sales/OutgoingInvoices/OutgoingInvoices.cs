@@ -111,7 +111,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             {
                 InvoiceNumber = Invoice_DbCommunication.GetInvoiceNumber();
                 InvoiceCounter++;
-                // Proveri dali raboti
+
                 Invoice_DbCommunication.AddInvoice(Customer_DbCommunication.GetCustomerDBID(CustomerPick.selectecCustomerInfo.Name), InvoiceCounter, mtbDate.Text, tbValuta.Text, cbDocType.SelectedItem.ToString(), tbDescription.Text);
 
                 dgvInvoices.DataSource = DbCommunication.DisplayData(SearchQuery);
@@ -130,20 +130,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
                 );
             }
         }
-
-        // Moze nema da treba
-/*        public static int GetInvoiceDBID ()
-        {
-            int id;
-
-            SQLiteCommand cmd = new SQLiteCommand($"SELECT ID FROM Invoices WHERE InvNumber = {InvoiceNumber}", connection);
-
-            connection.Open();
-            id = int.Parse(cmd.ExecuteScalar().ToString());
-            connection.Close();
-
-            return id;
-        }*/
 
         private void ResetBoxes ()
         {
@@ -212,6 +198,43 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         {
             ResetBoxes();
             SetInvoiceNumberTextBox();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if ((DbCommunication.Exists("Invoices", "InvNumber", InvoiceNumber.ToString()) == 1) && (InvoiceNumber == InvoiceCounter))
+            {
+
+                DbCommunication.Delete("Invoices", "InvNumber", InvoiceNumber.ToString());
+                DbCommunication.Delete("InvoiceItems", "Invoice_ID", InvoiceNumber.ToString());
+
+                dgvInvoices.DataSource = DbCommunication.DisplayData(SearchQuery);
+                InvoiceNumber = Invoice_DbCommunication.GetInvoiceNumber();
+                InvoiceCounter = InvoiceNumber;
+
+                MessageBox.Show
+                (
+                    "Фактурата е успешно избришана!",
+                    "Избриши",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Information
+                );
+            }
+            else
+            {
+                MessageBox.Show
+                    (
+                    "Таа фактура не може да се избрише!",
+                    "Грешка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+            }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

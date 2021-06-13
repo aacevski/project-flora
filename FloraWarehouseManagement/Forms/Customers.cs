@@ -54,7 +54,7 @@ namespace FloraWarehouseManagement.Forms
             else
             {
                 errorProviderTaxNum.SetError(tbTaxNum, null);
-                //DbCommunication.Exists("Customers", "Даночен_број", tbTaxNum.Text)
+
                 if (DbCommunication.Exists("Customers", "Даночен_број", tbTaxNum.Text) < 1)
                 {
                     Customer_DbCommunication.AddCustomer

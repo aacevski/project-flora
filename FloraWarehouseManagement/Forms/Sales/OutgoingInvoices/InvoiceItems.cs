@@ -18,10 +18,9 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 {
     public partial class InvoiceItems : Form
     {       
-        private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-        SQLiteConnection connection = new SQLiteConnection(@"data source=" + projectDirectory + @"\Database\db.db");
-
         private InvoiceItem item;
+        private int selectedItemID;
+        private readonly string SearchQuery = $"SELECT Invoice_ID AS Број_на_фактура, Products.Шифра, Products.Артикл, Quantity AS Количина, Price AS Цена FROM InvoiceItems INNER JOIN Invoices ON Invoices.InvNumber = InvoiceItems.Invoice_ID INNER JOIN Products ON Products.Шифра = InvoiceItems.Item_ID WHERE Invoice_ID = {OutgoingInvoices.InvoiceNumber}";
 
         public InvoiceItems()
         {
@@ -31,7 +30,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
         private void InvoiceItems_Load(object sender, EventArgs e)
         {
-            DisplayData();
+            dgvInvoiceItems.DataSource = DbCommunication.DisplayData(SearchQuery);
             tbQuantity.Text = "1";
         }
 
@@ -86,20 +85,24 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
 
             if (item.Quantity <= ItemTrueQuantity)
             {
-                SQLiteCommand cmd = new SQLiteCommand("INSERT INTO InvoiceItems(Invoice_ID, Item_ID, Quantity, Price) VALUES(@Invoice_ID, @Item_ID, @Quantity, @Price)", connection);
+                if (!DuplicateItem(item.Code))
+                {
+                    InvoiceItems_DbCommunication.AddInvoiceItem(OutgoingInvoices.InvoiceNumber, item.Code, item.Quantity, item.Price);
 
-                cmd.Parameters.AddWithValue("Invoice_ID", OutgoingInvoices.InvoiceNumber);
-                cmd.Parameters.AddWithValue("Item_ID", item.Code);
-                cmd.Parameters.AddWithValue("Quantity", item.Quantity);
-                cmd.Parameters.AddWithValue("Price", item.Price);
-
-                connection.Open();
-                cmd.ExecuteNonQuery();
-                connection.Close();
-
-                DisplayData();
-                ClearTextBoxes();
-                Product_DbCommunication.DecreaseQuantity(ItemTrueQuantity - item.Quantity, item.Code);
+                    dgvInvoiceItems.DataSource = DbCommunication.DisplayData(SearchQuery);
+                    ClearTextBoxes();
+                    Product_DbCommunication.DecreaseQuantity(ItemTrueQuantity - item.Quantity, item.Code);
+                }
+                else
+                {
+                    MessageBox.Show
+                    (
+                        "Ставката веќе постои.",
+                        "Грешка",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+                }
             }
             else
             {
@@ -111,6 +114,20 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
                     MessageBoxIcon.Error
                 );
             }
+        }
+
+        private bool DuplicateItem(string Code)
+        {
+
+            foreach (DataGridViewRow dr in dgvInvoiceItems.Rows)
+            {
+                if (Code == dr.Cells[1].Value.ToString())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void InvoiceItems_SizeChanged(object sender, EventArgs e)
@@ -132,23 +149,18 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             tbQuantity.Text = "1";
         }
 
-        private void DisplayData()
-        {
-            SQLiteCommand cmd = new SQLiteCommand("SELECT Products.Артикл, Quantity, Price FROM InvoiceItems INNER JOIN Invoices ON Invoices.InvNumber = InvoiceItems.Invoice_ID INNER JOIN Products ON Products.Шифра = InvoiceItems.Item_ID WHERE Invoice_ID = @InvID", connection);
-            cmd.Parameters.AddWithValue("InvID", OutgoingInvoices.InvoiceNumber);
-            connection.Open();
-            DataTable dt = new DataTable();
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-            adapter.Fill(dt);
-            dgvInvoiceItems.DataSource = dt;
-            connection.Close();
-        }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvInvoiceItems.SelectedCells.Count >= 1)
+            if (dgvInvoiceItems.SelectedCells.Count == 1)
             {
-                //TODO implement
+                if (InvoiceItems_DbCommunication.Exists("Invoice_ID", selectedItemID, "Item_ID", tbCode.Text) == 1)
+                {
+                    InvoiceItems_DbCommunication.Delete("Invoice_ID", selectedItemID, "Item_ID", tbCode.Text);
+                    dgvInvoiceItems.DataSource = DbCommunication.DisplayData(SearchQuery);
+
+                    ClearTextBoxes();
+                }
+
             }
         }
 
@@ -160,6 +172,50 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
         private void tbQuantity_TextChanged(object sender, EventArgs e)
         {
             item.Quantity = decimal.Parse(tbQuantity.Text);
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvInvoiceItems.SelectedCells.Count == 1)
+            {
+                InvoiceItems_DbCommunication.EditInvoiceItem(OutgoingInvoices.InvoiceNumber, tbCode.Text, decimal.Parse(tbQuantity.Text), decimal.Parse(tbPrice.Text));
+
+                MessageBox.Show
+                (
+                    "Артиклот е успешно променет!",
+                    "Промени",
+                     MessageBoxButtons.OK,
+                     MessageBoxIcon.Information
+                );
+
+                dgvInvoiceItems.DataSource = DbCommunication.DisplayData(SearchQuery);
+            }
+        }
+
+        private void dgvInvoiceItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1 && e.RowIndex != dgvInvoiceItems.Rows.Count - 1)
+            {
+                selectedItemID = int.Parse(dgvInvoiceItems.Rows[e.RowIndex].Cells[0].Value.ToString());
+                string Code = dgvInvoiceItems.Rows[e.RowIndex].Cells[1].Value.ToString();
+                InvoiceItem i = InvoiceItems_DbCommunication.GetItem(Code);
+
+                tbCode.Text = i.Code;
+                tbName.Text = i.Name;
+                tbTax.Text = i.Tax.ToString();
+                tbUnit.Text = i.Unit;
+                tbPrice.Text = dgvInvoiceItems.Rows[e.RowIndex].Cells[4].Value.ToString();
+                tbQuantity.Text = dgvInvoiceItems.Rows[e.RowIndex].Cells[3].Value.ToString();
+            }
+            else
+            {
+                ClearTextBoxes();
+            }
+        }
+
+        private void pnlControls_Click(object sender, EventArgs e)
+        {
+            ClearTextBoxes();
         }
     }
 }

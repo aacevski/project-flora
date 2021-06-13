@@ -16,7 +16,6 @@ namespace FloraWarehouseManagement.Classes.Utilities
     public class AddUser
     {
         private static readonly string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-        //public static AddUserSingleton Instance { get; } = new AddUserSingleton();
 
         public AddUser() { }
 

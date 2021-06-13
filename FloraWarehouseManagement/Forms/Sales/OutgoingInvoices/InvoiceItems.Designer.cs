@@ -96,6 +96,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.pnlControls.Name = "pnlControls";
             this.pnlControls.Size = new System.Drawing.Size(975, 229);
             this.pnlControls.TabIndex = 4;
+            this.pnlControls.Click += new System.EventHandler(this.pnlControls_Click);
             // 
             // tbQuantity
             // 
@@ -132,6 +133,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.btnEdit.TabIndex = 31;
             this.btnEdit.Text = "Промени";
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnSave
             // 
@@ -377,7 +379,6 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.Format = "N2";
             dataGridViewCellStyle2.NullValue = null;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -396,6 +397,7 @@ namespace FloraWarehouseManagement.Forms.Sales.OutgoingInvoices
             this.dgvInvoiceItems.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvInvoiceItems.Size = new System.Drawing.Size(975, 302);
             this.dgvInvoiceItems.TabIndex = 3;
+            this.dgvInvoiceItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInvoiceItems_CellClick);
             // 
             // InvoiceItems
             // 
